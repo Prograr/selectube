@@ -1,0 +1,156 @@
+/* 
+    Document   : selectube
+    Created on : 31 mars 2013, 14:08:10
+    Author     : Florian Ajir <florianajir@gmail.com>
+*/
+
+root { 
+    display: block;
+}
+
+body{
+    padding-top: 40px;
+    /*background-color: #ccc;*/
+    /*background-image: url("../img/bg-black-linen.png");*/
+}
+
+.input-prepend input.add-on, .input-append input.add-on {
+    background-color: white;
+    text-align: left;
+}
+
+.input-append, .input-prepend {
+    display: block;
+}
+div.input-prepend input.add-on, div.input-append input.add-on{
+    /*padding: 14px;*/
+}
+
+.input-prepend label.add-on i, .input-append label.add-on i {
+    padding-top: 3px;
+    display: inline-block;
+}
+
+.navbar-search #bouton_recherche{
+    text-decoration: none; 
+    position:absolute; 
+    right: -5px; 
+    top: -6px; 
+    color: black;
+}
+div#content-wrapper.span9 {
+    position:relative;
+    padding-bottom:32px;
+    overflow:hidden;
+  }
+#content{
+    display: block;
+    /*overflow: auto;*/
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    padding: 20px;
+    padding-top: 10px;
+    /*position:absolute;*/
+    width:90%;
+    /*height:95%;*/
+    /*max-height: 500px;*/
+}
+#content h2{
+    margin-top: 0px;
+}
+#sidebar{
+    display: block;
+    /*position: absolute;*/
+}
+p.media-footer{
+    border-top: 1px solid #ccc;
+    font-style: italic;
+    color: #aaa;
+    font-size: 0.8em;
+}
+#content input{
+    min-height: 30px;
+}
+#inputUrlYoutube{
+    min-width: 340px;
+    font-family: monospace;
+    font-size: 12px;
+}
+#MusiqueAddForm{
+    
+}
+#MusiqueAddForm div.input{
+    margin: 10px;
+}
+.video {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+}
+
+.video iframe,  
+.video object,  
+.video embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.container {
+	/*width: 800px;*/
+	max-width: 90%;
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+@media \0screen {
+  img { 
+  	width: auto; /* for ie 8 */
+  }
+}
+input[type='submit']{
+    margin: 20px;
+}
+.users.form .input{
+    margin-bottom : 20px;
+    margin-left: 20px;
+}
+td{
+    vertical-align: top;
+}
+#UserRememberme{
+    margin-top: -4px; 
+}
+.modal input.add-on{
+    padding: 14px;
+}
+#playerYoutube{
+/*    text-align: center;
+    margin-bottom: 20px;*/
+}
+#playerYoutubeTitre{
+    /*text-align: center;*/
+}
+
+.fb_iframe_widget{
+    text-align: center;
+    display: block;
+}
+
+#divMiniatureYoutube{
+    float:right;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    display: none;
+}
+#champsLienYoutube{
+    float:left;
+    margin-top: 10px;
+}
+table#champsRelies{
+    margin-left: 0;
+}
