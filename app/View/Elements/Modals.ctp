@@ -4,7 +4,7 @@
 <div class="modal hide fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="users form">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <a class="close" data-dismiss="modal" aria-hidden="true">×</a>
             <h3 id="loginModalLabel"><?php echo __('Connexion'); ?></h3>
         </div>
         <div class="modal-body">
@@ -17,7 +17,7 @@
             ?>
         </div>
         <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <a class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
             <?php
             echo $this->Form->button("<i class='icon-unlock'></i> " . __('Connexion'), array('type' => 'submit', 'class' => 'btn btn-primary'));
             echo $this->Form->end();
@@ -30,7 +30,7 @@
 <div class="modal hide fade" id="inscriptionModal" tabindex="-1" role="dialog" aria-labelledby="inscriptionModalLabel" aria-hidden="true">
     <div class="users form">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <a type="button" class="close" data-dismiss="modal" aria-hidden="true">×</a>
             <h3 id="usersModalLabel"><?php echo __('Inscription'); ?></h3>
         </div>
         <div class="modal-body">
@@ -61,7 +61,7 @@
             Vous devez vous connecter ou vous inscrire si vous n'avez pas encore de compte pour accéder à cette fonctionnalité
         </div>
         <div class="modal-footer">
-            <button class="btn pull-left btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
+            <a class="btn pull-left btn" data-dismiss="modal" aria-hidden="true">Fermer</a>
             <a href='/users/inscription' class="btn btn-success" aria-hidden="true"><i class="icon-signin"></i> M'inscrire</a>
             <a href='/users/login' class="btn btn-primary" aria-hidden="true"><i class="icon-unlock"></i> Me connecter</a>
         </div>
