@@ -2,13 +2,13 @@
 <?php echo $this->Html->script("youtube"); ?>
 <div class="musiques form">
 
-    <?php echo $this->Form->create('Musique', array('controller' => 'musiques', 'action' => 'add', 'inputDefaults' => array('label' => false), 'class' => 'form form-horizontal')); ?>
+    <?php echo $this->Form->create('Musique', array('controller' => 'musiques', 'action' => 'partager', 'inputDefaults' => array('label' => false), 'class' => 'form form-horizontal')); ?>
 <!--    <h2><?php echo __('Partager une musique Youtube'); ?></h2>-->
 
     <?php echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $this->Session->read('Auth.User.id'))); ?>
 
     <fieldset id="fieldset-lien-musique">
-        <legend><?php echo __('Partager une musique Youtube'); ?></legend>
+        <h2><?php echo __('Partager une musique Youtube'); ?></h2>
         <div id="champsLienYoutube">
             <?php echo $this->Form->label('url', "Adresse du lien"); ?>
             <div class="input-prepend input-append">

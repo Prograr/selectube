@@ -4,9 +4,9 @@
     });
 </script>
 <div class="users form">
-    <?php echo $this->Form->create('User', array('class' => 'form form-horizontal', 'action' => 'add')); ?>
+    <?php echo $this->Form->create('User', array('class' => 'form form-horizontal', 'action' => 'creer')); ?>
     <fieldset>
-        <!--<h2><?php echo __('Inscription phase 2'); ?></h2>-->
+        <!--<h2><?php echo __('Inscription'); ?></h2>-->
         <legend>Informations supplémentaires</legend>
         <table> 
             <tr>
@@ -34,7 +34,7 @@
 
 
     <?php echo $this->Form->end(); ?>
-    
+<!--    
     <div id="inscriptionFacebook">    
         <iframe src="https://www.facebook.com/plugins/registration?
              client_id=448385471909603&
@@ -48,5 +48,5 @@
         width="100%"
         height="330">
 </iframe>
-    </div>
+    </div>-->
 </div>

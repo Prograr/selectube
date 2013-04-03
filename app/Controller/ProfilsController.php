@@ -13,8 +13,8 @@ class ProfilsController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Profil->recursive = 0;
-		$this->set('profils', $this->paginate());
+//		$this->Profil->recursive = 0;
+//		$this->set('profils', $this->paginate());
 	}
 
 /**
@@ -24,7 +24,7 @@ class ProfilsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function voir($id = null) {
 		if (!$this->Profil->exists($id)) {
 			throw new NotFoundException(__('Invalid profil'));
 		}
@@ -68,19 +68,19 @@ class ProfilsController extends AppController {
  *
  * @return void
  */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Profil->create();
-			if ($this->Profil->save($this->request->data)) {
-				$this->Session->setFlash(__('The profil has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The profil could not be saved. Please, try again.'));
-			}
-		}
-		$users = $this->Profil->User->find('list');
-		$this->set(compact('users'));
-	}
+//	public function add() {
+//		if ($this->request->is('post')) {
+//			$this->Profil->create();
+//			if ($this->Profil->save($this->request->data)) {
+//				$this->Session->setFlash(__('The profil has been saved'));
+//				$this->redirect(array('action' => 'index'));
+//			} else {
+//				$this->Session->setFlash(__('The profil could not be saved. Please, try again.'));
+//			}
+//		}
+//		$users = $this->Profil->User->find('list');
+//		$this->set(compact('users'));
+//	}
 
 /**
  * edit method
@@ -89,16 +89,16 @@ class ProfilsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function editer($id = null) {
 		if (!$this->Profil->exists($id)) {
-			throw new NotFoundException(__('Invalid profil'));
+			throw new NotFoundException(__('Profil introuvable'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Profil->save($this->request->data)) {
-				$this->Session->setFlash(__('The profil has been saved'));
+				$this->Session->setFlash(__('Le profil a été sauvegardé'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The profil could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Une erreur a eu lieu pendant la sauvegarde'));
 			}
 		} else {
 			$options = array('conditions' => array('Profil.' . $this->Profil->primaryKey => $id));

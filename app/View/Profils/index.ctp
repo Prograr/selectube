@@ -26,8 +26,8 @@
 											<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 											<th><?php echo $this->Paginator->sort('public'); ?></th>
 											<th><?php echo $this->Paginator->sort('avatar'); ?></th>
-											<th><?php echo $this->Paginator->sort('creation'); ?></th>
-											<th><?php echo $this->Paginator->sort('modification'); ?></th>
+											<th><?php echo $this->Paginator->sort('created'); ?></th>
+											<th><?php echo $this->Paginator->sort('modified'); ?></th>
 											<th class="actions"><?php echo __('Actions'); ?></th>
 				</tr>
 				<?php
@@ -39,8 +39,8 @@
 		</td>
 		<td><?php echo h($profil['Profil']['public']); ?>&nbsp;</td>
 		<td><?php echo h($profil['Profil']['avatar']); ?>&nbsp;</td>
-		<td><?php echo h($profil['Profil']['creation']); ?>&nbsp;</td>
-		<td><?php echo h($profil['Profil']['modification']); ?>&nbsp;</td>
+		<td><?php echo h($profil['Profil']['created']); ?>&nbsp;</td>
+		<td><?php echo h($profil['Profil']['modified']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $profil['Profil']['id']), array('class' => 'btn btn-mini')); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $profil['Profil']['id']), array('class' => 'btn btn-mini')); ?>

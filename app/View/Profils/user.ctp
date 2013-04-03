@@ -48,12 +48,12 @@
 		</td>
 </tr><tr>		<td><strong><?php echo __('Creation'); ?></strong></td>
 		<td>
-			<?php echo h($profil['Profil']['creation']); ?>
+			<?php echo h($profil['Profil']['created']); ?>
 			&nbsp;
 		</td>
 </tr><tr>		<td><strong><?php echo __('Modification'); ?></strong></td>
 		<td>
-			<?php echo h($profil['Profil']['modification']); ?>
+			<?php echo h($profil['Profil']['modified']); ?>
 			&nbsp;
 		</td>
 </tr>			</table><!-- .table table-striped table-bordered -->

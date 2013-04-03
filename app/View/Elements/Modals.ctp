@@ -1,6 +1,6 @@
 <!--Fenêtres modales-->
 <!--Login modal-->
-<?php if (!($this->params['controller'] == "users" && $this->params['action']== "login")){ ?> 
+<?php if (!($this->params['controller'] == "users" && $this->params['action']== "connexion")){ ?> 
 <div class="modal hide fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="users form">
         <div class="modal-header">
@@ -9,9 +9,9 @@
         </div>
         <div class="modal-body">
             
-            <?php echo $this->Form->create('User', array('action' => 'login')); ?>
+            <?php echo $this->Form->create('User', array('action' => 'connexion')); ?>
             <?php
-            echo $this->Html2->login();
+            echo $this->Html2->email();
             echo $this->Html2->password();
             echo $this->Form->input('rememberme', array('label' => 'Se souvenir de moi', 'type' => 'checkbox'));
             ?>
@@ -25,7 +25,7 @@
         </div>
     </div>
 </div>
-<?php } if (!($this->params['controller'] == "users" && ($this->params['action']== "inscription" || $this->params['action'] == "add"))){ ?> 
+<?php } if (!($this->params['controller'] == "users" && ($this->params['action']== "inscription" || $this->params['action'] == "creer"))){ ?> 
 <!--inscription modal-->
 <div class="modal hide fade" id="inscriptionModal" tabindex="-1" role="dialog" aria-labelledby="inscriptionModalLabel" aria-hidden="true">
     <div class="users form">
@@ -61,9 +61,25 @@
             Vous devez vous connecter ou vous inscrire si vous n'avez pas encore de compte pour accéder à cette fonctionnalité
         </div>
         <div class="modal-footer">
-            <a class="btn pull-left btn" data-dismiss="modal" aria-hidden="true">Fermer</a>
-            <a href='/users/inscription' class="btn btn-success" aria-hidden="true"><i class="icon-signin"></i> M'inscrire</a>
-            <a href='/users/login' class="btn btn-primary" aria-hidden="true"><i class="icon-unlock"></i> Me connecter</a>
+            <a class="btn pull-left" data-dismiss="modal" aria-hidden="true">Fermer</a>
+            <a href='/selecteur/inscription' class="btn btn-success" aria-hidden="true"><i class="icon-signin"></i> M'inscrire</a>
+            <a href='/selecteur/connexion' class="btn btn-primary" aria-hidden="true"><i class="icon-unlock"></i> Me connecter</a>
         </div>
     </div>
+</div>
+<!--En travaux-->
+<div class="modal hide fade" id="blockedModal" tabindex="-1" role="dialog" aria-labelledby="blockedModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="blockedModalLabel"><i class='icon-lock'></i> <?php echo __('Accès Vérouillé'); ?></h3>
+        </div>
+        <div class="modal-body">
+            <p>
+            Cet endroid est bien trop sélect. Désolé<br>
+            Vous ne pouvez pas encore accèder à cette partie du site, un jour peut-être...
+            </p>
+        </div>
+        <div class="modal-footer">
+            <a class="btn" data-dismiss="modal" aria-hidden="true">Fermer</a>
+        </div>
 </div>

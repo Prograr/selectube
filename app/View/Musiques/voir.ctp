@@ -27,9 +27,9 @@
     </div>
     <div id="playerYoutubeDate">
                 <?php 
-                echo "<i class=\"icon-share-alt\"></i> Partagé le ".h($this->Html2->print_date($musique['Musique']['creation']));
-                if ($musique['Musique']['creation'] !== $musique['Musique']['modification'])
-                    echo ", Modifié le ".h($this->Html2->print_date($musique['Musique']['modification'])); 
+                echo "<i class=\"icon-share-alt\"></i> Partagé le ".h($this->Html2->print_date($musique['Musique']['created']));
+                if ($musique['Musique']['created'] !== $musique['Musique']['modified'])
+                    echo ", Modifié le ".h($this->Html2->print_date($musique['Musique']['modified'])); 
                 ?>
     </div>
     

@@ -5,17 +5,17 @@
     <div class="container-fluid" id='boutons-accueil'>
         <div class="row-fluid">
             <div class="span4">
-                <a href="/musiques" class="btn btn-link bouton-home" id="bouton-musique" data-toggle="popover" data-content="Musiques">
+                <a href="/musiques" class='lien-accueil' id="lien-musique">
                     <i class='icon-music icone-home'></i>
                 </a>
             </div>
             <div class="span4">
-                <a href="/videos" class="btn btn-link bouton-home" id="bouton-video" data-toggle="popover" data-content="Vidéos">
+                <a href="#/videos" class='lien-accueil' id="lien-video" data-toggle="popover" data-content="(bientôt disponible)">
                     <i class='icon-film icone-home'></i>
                 </a>
             </div>
             <div class="span4">
-                <a href="/sites" class="btn btn-link bouton-home" id="bouton-site" data-toggle="popover" data-content="Sites web">
+                <a href="#/sites" class='lien-accueil' id="lien-site" data-toggle="popover" data-content="(bientôt disponible)">
                     <i class='icon-globe icone-home'></i>
                 </a>
             </div>

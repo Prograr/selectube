@@ -44,16 +44,16 @@ $cakeDescription = __d('cake_dev', 'Selectube : Amitié-Partage');
         echo $this->fetch('meta');
 
         echo $this->Html->css('bootstrap.min');
-        echo $this->Html->css('home');
         echo $this->Html->css('bootstrap-responsive.min');
         echo $this->Html->css('font-awesome.min');
         echo $this->Html->css('core');
+        echo $this->Html->css('home');
 
         echo $this->fetch('css');
 
         echo $this->Html->script('jquery-1.9.1.min');
         echo $this->Html->script('bootstrap.min');
-        echo $this->Html->script('init-app');
+        echo $this->Html->script('init-home');
 
         echo $this->fetch('script');
         ?>

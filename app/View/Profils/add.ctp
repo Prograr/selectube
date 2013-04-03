@@ -44,16 +44,16 @@
 </div><!-- .control-group -->
 
 <div class="control-group">
-	<?php echo $this->Form->label('creation', 'creation', array('class' => 'control-label'));?>
+	<?php echo $this->Form->label('created', 'creation', array('class' => 'control-label'));?>
 	<div class="controls">
-		<?php echo $this->Form->input('creation', array('class' => 'span12')); ?>
+		<?php echo $this->Form->input('created', array('class' => 'span12')); ?>
 	</div><!-- .controls -->
 </div><!-- .control-group -->
 
 <div class="control-group">
-	<?php echo $this->Form->label('modification', 'modification', array('class' => 'control-label'));?>
+	<?php echo $this->Form->label('modified', 'modification', array('class' => 'control-label'));?>
 	<div class="controls">
-		<?php echo $this->Form->input('modification', array('class' => 'span12')); ?>
+		<?php echo $this->Form->input('modified', array('class' => 'span12')); ?>
 	</div><!-- .controls -->
 </div><!-- .control-group -->
 

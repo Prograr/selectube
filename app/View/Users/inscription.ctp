@@ -9,7 +9,7 @@
         ?>
     </fieldset>
     <?php
-    echo $this->Form->button("<i class='icon-signin'></i> ".__('Inscription'), array('type' => 'submit', 'class' => 'btn btn-primary'));
+    echo $this->Form->button("<i class='icon-signin'></i> ".__('Valider'), array('type' => 'submit', 'class' => 'btn btn-primary'));
     echo $this->Form->end();
     ?>
     </div>

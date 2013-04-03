@@ -10,7 +10,7 @@
             </td>
         </tr><tr>		<td><strong><?php echo __('User'); ?></strong></td>
             <td>
-                <?php echo $this->Html->link($profil['User']['pseudo'], array('controller' => 'users', 'action' => 'view', $profil['User']['id']), array('class' => '')); ?>
+                <?php echo $this->Html->link($profil['User']['pseudo'], array('controller' => 'users', 'action' => 'voir', $profil['User']['id']), array('class' => '')); ?>
                 &nbsp;
             </td>
         </tr><tr>		<td><strong><?php echo __('Public'); ?></strong></td>
@@ -25,12 +25,12 @@
             </td>
         </tr><tr>		<td><strong><?php echo __('Creation'); ?></strong></td>
             <td>
-                <?php echo h($profil['Profil']['creation']); ?>
+                <?php echo h($profil['Profil']['created']); ?>
                 &nbsp;
             </td>
         </tr><tr>		<td><strong><?php echo __('Modification'); ?></strong></td>
             <td>
-                <?php echo h($profil['Profil']['modification']); ?>
+                <?php echo h($profil['Profil']['modified']); ?>
                 &nbsp;
             </td>
         </tr>			</table><!-- .table table-striped table-bordered -->

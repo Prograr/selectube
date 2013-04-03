@@ -27,6 +27,17 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+	Router::connect('/musiques', array('controller' => 'musiques', 'action' => 'accueil'));
+        Router::connect(
+                        '/musiques',
+                            array('controller' => 'products', 'action' => 'display', 5)
+                        );
+        Router::connect(
+            '/selecteur/:action/*', array('controller' => 'users')
+        );
+        Router::connect(
+            '/profil/:action/*', array('controller' => 'profils')
+        );
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */

@@ -1,39 +1,51 @@
 <div class="users view">
-    <h2><?php echo __('User'); ?></h2>
+    <h2><?php echo h(ucfirst($user['User']['prenom']))." ".h(ucfirst($user['User']['nom'])); ?></h2>
     <table class="table table-striped table-bordered">
-        <tr>		<td><strong><?php echo __('Id'); ?></strong></td>
+<!--        <tr>		<td><strong><?php echo __('Id'); ?></strong></td>
             <td>
                 <?php echo h($user['User']['id']); ?>
                 &nbsp;
             </td>
-        </tr><tr>		<td><strong><?php echo __('Nom'); ?></strong></td>
-            <td>
-                <?php echo h($user['User']['nom']); ?>
-                &nbsp;
-            </td>
-        </tr><tr>		<td><strong><?php echo __('Prenom'); ?></strong></td>
-            <td>
-                <?php echo h($user['User']['prenom']); ?>
-                &nbsp;
-            </td>
-        </tr><tr>		<td><strong><?php echo __('Pseudo'); ?></strong></td>
+        </tr>-->
+        <tr>		<td><strong><?php echo __('Pseudo'); ?></strong></td>
             <td>
                 <?php echo h($user['User']['pseudo']); ?>
                 &nbsp;
             </td>
-        </tr><tr>		<td><strong><?php echo __('Email'); ?></strong></td>
+        </tr>
+        <?php if ($user['User']['nom']!=""): ?>
+        <tr>		<td><strong><?php echo __('Nom'); ?></strong></td>
+            <td>
+                <?php echo h($user['User']['nom']); ?>
+                &nbsp;
+            </td>
+        </tr>
+        <?php endif; ?>
+        
+        <?php if ($user['User']['prenom']!=""): ?>
+        <tr>		<td><strong><?php echo __('Prenom'); ?></strong></td>
+            <td>
+                <?php echo h($user['User']['prenom']); ?>
+                &nbsp;
+            </td>
+        </tr>
+        <?php endif; ?>
+        
+        <tr>		<td><strong><?php echo __('Email'); ?></strong></td>
             <td>
                 <?php echo h($user['User']['email']); ?>
                 &nbsp;
             </td>
         </tr>
-        <tr>		<td><strong><?php echo __('Score'); ?></strong></td>
+        <tr>		
+            <td><strong><?php echo __('Score'); ?></strong></td>
             <td>
                 <?php echo h($user['User']['score']); ?>
                 &nbsp;
             </td>
         </tr>
-        <tr>		<td><strong><?php echo __('Role'); ?></strong></td>
+        <tr>		
+            <td><strong><?php echo __('Role'); ?></strong></td>
             <td>
                 <?php echo h($user['User']['role']); ?>
                 &nbsp;
@@ -41,7 +53,7 @@
         </tr>
         <tr>		<td><strong><?php echo __('Inscription'); ?></strong></td>
             <td>
-                <?php echo h($user['User']['inscription']); ?>
+                <?php echo h($user['User']['created']); ?>
                 &nbsp;
             </td>
         </tr>
@@ -66,16 +78,16 @@
                         &nbsp;</strong></td>
             </tr>
             <tr>		<td><strong><?php echo __('Creation'); ?></strong></td>
-                <td><strong><?php echo $user['Profil']['creation']; ?>
+                <td><strong><?php echo $user['Profil']['created']; ?>
                         &nbsp;</strong></td>
             </tr>
             <tr>		<td><strong><?php echo __('Modification'); ?></strong></td>
-                <td><strong><?php echo $user['Profil']['modification']; ?>
+                <td><strong><?php echo $user['Profil']['modified']; ?>
                         &nbsp;</strong></td>
             </tr>						</table><!-- .table table-striped table-bordered -->
     <?php endif; ?>
     <div class="actions">
-        <li><?php echo $this->Html->link(__('<i class="icon-pencil icon-white"></i> Edit Profil'), array('controller' => 'profils', 'action' => 'edit', $user['Profil']['id']), array('class' => 'btn btn-primary', 'escape' => false)); ?>
+        <?php echo $this->Html->link(__('<i class="icon-pencil icon-white"></i> Modifier'), array('controller' => 'profil', 'action' => 'editer', $user['Profil']['id']), array('class' => 'btn btn-primary', 'escape' => false)); ?>
     </div><!-- .actions -->
 </div><!-- .related -->
 
@@ -84,8 +96,8 @@
 
     <h3><?php echo __('Musiques partagées'); ?></h3>
 
-<?php if (!empty($user['Musique'])): ?>
 
+<?php if (!empty($user['Musique'])): ?>
         <table class="table table-striped table-bordered">
             <tr>
                 <th><?php echo __('Titre'); ?></th>
@@ -109,26 +121,24 @@
                     <td><?php echo $musique['url']; ?></td>
                     <td><?php echo $musique['tags']; ?></td>
 <!--                    <td><?php echo $musique['categorie_id']; ?></td>-->
-                    <td><?php echo $musique['creation']; ?></td>
-                    <td><?php echo $musique['modification']; ?></td>
+                    <td><?php echo $musique['created']; ?></td>
+                    <td><?php echo $musique['modified']; ?></td>
                     <td class="actions">
-            <?php echo $this->Html->link(__('View'), array('controller' => 'musiques', 'action' => 'view', $musique['id']), array('class' => 'btn btn-mini')); ?>
-        <?php echo $this->Html->link(__('Edit'), array('controller' => 'musiques', 'action' => 'edit', $musique['id']), array('class' => 'btn btn-mini')); ?>
-        <?php echo $this->Form->postLink(__('Delete'), array('controller' => 'musiques', 'action' => 'delete', $musique['id']), array('class' => 'btn btn-mini'), __('Are you sure you want to delete # %s?', $musique['id'])); ?>
+            <?php echo $this->Html->link(__('Voir'), array('controller' => 'musiques', 'action' => 'voir', $musique['id']), array('class' => 'btn btn-mini')); ?>
+        <?php echo $this->Html->link(__('Editer'), array('controller' => 'musiques', 'action' => 'editer', $musique['id']), array('class' => 'btn btn-mini')); ?>
+        <?php echo $this->Form->postLink(__('Supprimer'), array('controller' => 'musiques', 'action' => 'supprimer', $musique['id']), array('class' => 'btn btn-mini'), __('Are you sure you want to delete # %s?', $musique['id'])); ?>
                     </td>
                 </tr>
     <?php endforeach; ?>
         </table><!-- .table table-striped table-bordered -->
 
+<?php else: ?>
+        <em>Cet utilisateur n'a partagé aucune musique.</em>
 <?php endif; ?>
-
-
-    <div class="actions">
-    <?php echo $this->Html->link('<i class="icon-plus icon-white"></i> ' . __('New Musique'), array('controller' => 'musiques', 'action' => 'add'), array('class' => 'btn btn-primary', 'escape' => false)); ?>				</div><!-- .actions -->
 
 </div><!-- .related -->
 
-
+<!--
 <div class="related">
 
     <h3><?php echo __('Sites partagés'); ?></h3>
@@ -156,8 +166,8 @@
                     <td><?php echo $site['lien']; ?></td>
                     <td><?php echo $site['miniature']; ?></td>
                     <td><?php echo $site['categorie_id']; ?></td>
-                    <td><?php echo $site['creation']; ?></td>
-                    <td><?php echo $site['modification']; ?></td>
+                    <td><?php echo $site['created']; ?></td>
+                    <td><?php echo $site['modified']; ?></td>
                     <td class="actions">
         <?php echo $this->Html->link(__('View'), array('controller' => 'sites', 'action' => 'view', $site['id']), array('class' => 'btn btn-mini')); ?>
                 <?php echo $this->Html->link(__('Edit'), array('controller' => 'sites', 'action' => 'edit', $site['id']), array('class' => 'btn btn-mini')); ?>
@@ -165,15 +175,10 @@
                     </td>
                 </tr>
     <?php endforeach; ?>
-        </table><!-- .table table-striped table-bordered -->
+        </table> .table table-striped table-bordered 
 
 <?php endif; ?>
-
-
-    <div class="actions">
-<?php echo $this->Html->link('<i class="icon-plus icon-white"></i> ' . __('New Site'), array('controller' => 'sites', 'action' => 'add'), array('class' => 'btn btn-primary', 'escape' => false)); ?>				</div><!-- .actions -->
-
-</div><!-- .related -->
+</div> .related 
 
 
 <div class="related">
@@ -203,8 +208,8 @@
                     <td><?php echo $video['url']; ?></td>
                     <td><?php echo $video['tags']; ?></td>
                     <td><?php echo $video['categorie_id']; ?></td>
-                    <td><?php echo $video['creation']; ?></td>
-                    <td><?php echo $video['modification']; ?></td>
+                    <td><?php echo $video['created']; ?></td>
+                    <td><?php echo $video['modified']; ?></td>
                     <td class="actions">
                 <?php echo $this->Html->link(__('View'), array('controller' => 'videos', 'action' => 'view', $video['id']), array('class' => 'btn btn-mini')); ?>
                 <?php echo $this->Html->link(__('Edit'), array('controller' => 'videos', 'action' => 'edit', $video['id']), array('class' => 'btn btn-mini')); ?>
@@ -212,20 +217,16 @@
                     </td>
                 </tr>
     <?php endforeach; ?>
-        </table><!-- .table table-striped table-bordered -->
+        </table> .table table-striped table-bordered 
 
 <?php endif; ?>
 
-
-    <div class="actions">
-<?php echo $this->Html->link('<i class="icon-plus icon-white"></i> ' . __('New Video'), array('controller' => 'videos', 'action' => 'add'), array('class' => 'btn btn-primary', 'escape' => false)); ?>				</div><!-- .actions -->
-
-</div><!-- .related -->
+</div> .related 
 
 
 <div class="related">
 
-    <h3><?php echo __('Related Categories'); ?></h3>
+    <h3><?php echo __('Categories créées'); ?></h3>
 
 <?php if (!empty($user['Category'])): ?>
 
@@ -250,8 +251,8 @@
                     <td><?php echo $category['url']; ?></td>
                     <td><?php echo $category['tags']; ?></td>
                     <td><?php echo $category['miniature']; ?></td>
-                    <td><?php echo $category['creation']; ?></td>
-                    <td><?php echo $category['modification']; ?></td>
+                    <td><?php echo $category['created']; ?></td>
+                    <td><?php echo $category['modified']; ?></td>
                     <td class="actions">
         <?php echo $this->Html->link(__('View'), array('controller' => 'categories', 'action' => 'view', $category['id']), array('class' => 'btn btn-mini')); ?>
                 <?php echo $this->Html->link(__('Edit'), array('controller' => 'categories', 'action' => 'edit', $category['id']), array('class' => 'btn btn-mini')); ?>
@@ -259,15 +260,15 @@
                     </td>
                 </tr>
         <?php endforeach; ?>
-        </table><!-- .table table-striped table-bordered -->
+        </table> .table table-striped table-bordered 
 
         <?php endif; ?>
 
 
     <div class="actions">
-<?php echo $this->Html->link('<i class="icon-plus icon-white"></i> ' . __('New Category'), array('controller' => 'categories', 'action' => 'add'), array('class' => 'btn btn-primary', 'escape' => false)); ?>				</div><!-- .actions -->
+<?php echo $this->Html->link('<i class="icon-plus icon-white"></i> ' . __('New Category'), array('controller' => 'categories', 'action' => 'add'), array('class' => 'btn btn-primary', 'escape' => false)); ?>				</div> .actions 
 
-</div><!-- .related -->
+</div> .related 
 
 
 <div class="related">
@@ -301,8 +302,8 @@
                     <td><?php echo $album['jaquette']; ?></td>
                     <td><?php echo $album['categorie_id']; ?></td>
                     <td><?php echo $album['user_id']; ?></td>
-                    <td><?php echo $album['creation']; ?></td>
-                    <td><?php echo $album['modification']; ?></td>
+                    <td><?php echo $album['created']; ?></td>
+                    <td><?php echo $album['modified']; ?></td>
                     <td class="actions">
                         <?php echo $this->Html->link(__('View'), array('controller' => 'albums', 'action' => 'view', $album['id']), array('class' => 'btn btn-mini')); ?>
                         <?php echo $this->Html->link(__('Edit'), array('controller' => 'albums', 'action' => 'edit', $album['id']), array('class' => 'btn btn-mini')); ?>
@@ -310,12 +311,12 @@
                     </td>
                 </tr>
     <?php endforeach; ?>
-        </table><!-- .table table-striped table-bordered -->
+        </table> .table table-striped table-bordered 
 
 <?php endif; ?>
 
 
-</div><!-- .related -->
+</div> .related 
 
 
 <div class="related">
@@ -349,8 +350,8 @@
                     <td><?php echo $artiste['bio']; ?></td>
                     <td><?php echo $artiste['photo']; ?></td>
                     <td><?php echo $artiste['categorie_id']; ?></td>
-                    <td><?php echo $artiste['creation']; ?></td>
-                    <td><?php echo $artiste['modification']; ?></td>
+                    <td><?php echo $artiste['created']; ?></td>
+                    <td><?php echo $artiste['modified']; ?></td>
                     <td class="actions">
                         <?php echo $this->Html->link(__('View'), array('controller' => 'artistes', 'action' => 'view', $artiste['id']), array('class' => 'btn btn-mini')); ?>
         <?php echo $this->Html->link(__('Edit'), array('controller' => 'artistes', 'action' => 'edit', $artiste['id']), array('class' => 'btn btn-mini')); ?>
@@ -358,11 +359,11 @@
                     </td>
                 </tr>
         <?php endforeach; ?>
-        </table><!-- .table table-striped table-bordered -->
+        </table> .table table-striped table-bordered 
 
 <?php endif; ?>
 
-</div><!-- .related -->
+</div> .related 
 
 <div class="related">
 
@@ -386,18 +387,18 @@
                     <td><?php echo $commentaire['commentaire']; ?></td>
                     <td><?php echo $commentaire['target_id']; ?></td>
                     <td><?php echo $commentaire['target_type']; ?></td>
-                    <td><?php echo $commentaire['creation']; ?></td>
+                    <td><?php echo $commentaire['created']; ?></td>
                     <td class="actions">
                 <?php echo $this->Html->link(__('Edit'), array('controller' => 'commentaires', 'action' => 'edit', $commentaire['id']), array('class' => 'btn btn-mini')); ?>
         <?php echo $this->Form->postLink(__('Delete'), array('controller' => 'commentaires', 'action' => 'delete', $commentaire['id']), array('class' => 'btn btn-mini'), __('Are you sure you want to delete # %s?', $commentaire['id'])); ?>
                     </td>
                 </tr>
     <?php endforeach; ?>
-        </table><!-- .table table-striped table-bordered -->
+        </table> .table table-striped table-bordered 
 
         <?php endif; ?>
 
-</div><!-- .related -->
+</div> .related 
 
 
 <div class="related">
@@ -422,7 +423,7 @@
                     <td><?php echo $favori['user_id']; ?></td>
                     <td><?php echo $favori['target_id']; ?></td>
                     <td><?php echo $favori['type']; ?></td>
-                    <td><?php echo $favori['creation']; ?></td>
+                    <td><?php echo $favori['created']; ?></td>
                     <td class="actions">
                 <?php echo $this->Html->link(__('View'), array('controller' => 'favoris', 'action' => 'view', $favori['id']), array('class' => 'btn btn-mini')); ?>
         <?php echo $this->Html->link(__('Edit'), array('controller' => 'favoris', 'action' => 'edit', $favori['id']), array('class' => 'btn btn-mini')); ?>
@@ -430,13 +431,13 @@
                     </td>
                 </tr>
     <?php endforeach; ?>
-        </table><!-- .table table-striped table-bordered -->
+        </table> .table table-striped table-bordered 
 
 <?php endif; ?>
 
-</div><!-- .related -->
+</div> .related 
 
-<!--
+
 <div class="related">
 
     <h3><?php echo __('Messages'); ?></h3>
@@ -463,7 +464,7 @@
                     <td><?php echo $message['destinataire_id']; ?></td>
                     <td><?php echo $message['pj_id']; ?></td>
                     <td><?php echo $message['pj_type']; ?></td>
-                    <td><?php echo $message['creation']; ?></td>
+                    <td><?php echo $message['created']; ?></td>
                     <td class="actions">
         <?php echo $this->Html->link(__('View'), array('controller' => 'messages', 'action' => 'view', $message['id']), array('class' => 'btn btn-mini')); ?>
             <?php echo $this->Html->link(__('Edit'), array('controller' => 'messages', 'action' => 'edit', $message['id']), array('class' => 'btn btn-mini')); ?>
@@ -480,7 +481,7 @@
 <?php echo $this->Html->link('<i class="icon-plus icon-white"></i> ' . __('New Message'), array('controller' => 'messages', 'action' => 'add'), array('class' => 'btn btn-primary', 'escape' => false)); ?>				</div> .actions 
 
 </div> .related 
--->
+
 
 <div class="related">
 
@@ -507,8 +508,8 @@
                     <td><?php echo $moderation['user_id']; ?></td>
                     <td><?php echo $moderation['target_id']; ?></td>
                     <td><?php echo $moderation['type']; ?></td>
-                    <td><?php echo $moderation['creation']; ?></td>
-                    <td><?php echo $moderation['modification']; ?></td>
+                    <td><?php echo $moderation['created']; ?></td>
+                    <td><?php echo $moderation['modified']; ?></td>
                     <td class="actions">
             <?php echo $this->Html->link(__('View'), array('controller' => 'moderations', 'action' => 'view', $moderation['id']), array('class' => 'btn btn-mini')); ?>
             <?php echo $this->Html->link(__('Edit'), array('controller' => 'moderations', 'action' => 'edit', $moderation['id']), array('class' => 'btn btn-mini')); ?>
@@ -516,12 +517,12 @@
                     </td>
                 </tr>
             <?php endforeach; ?>
-        </table><!-- .table table-striped table-bordered -->
+        </table> .table table-striped table-bordered 
 
 <?php endif; ?>
 
 
-</div><!-- .related -->
+</div> .related 
 
 
 <div class="related">
@@ -547,8 +548,8 @@
                     <td><?php echo $note['note']; ?></td>
                     <td><?php echo $note['target_id']; ?></td>
                     <td><?php echo $note['type']; ?></td>
-                    <td><?php echo $note['creation']; ?></td>
-                    <td><?php echo $note['modification']; ?></td>
+                    <td><?php echo $note['created']; ?></td>
+                    <td><?php echo $note['modified']; ?></td>
                     <td class="actions">
         <?php echo $this->Html->link(__('View'), array('controller' => 'notes', 'action' => 'view', $note['id']), array('class' => 'btn btn-mini')); ?>
         <?php echo $this->Html->link(__('Edit'), array('controller' => 'notes', 'action' => 'edit', $note['id']), array('class' => 'btn btn-mini')); ?>
@@ -556,8 +557,8 @@
                     </td>
                 </tr>
     <?php endforeach; ?>
-        </table><!-- .table table-striped table-bordered -->
+        </table> .table table-striped table-bordered 
 
 <?php endif; ?>
 
-</div><!-- .related -->
+</div> .related -->

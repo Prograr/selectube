@@ -37,34 +37,34 @@
             <th><?php echo $this->Paginator->sort('tags'); ?></th>
             <th><?php echo $this->Paginator->sort('miniature'); ?></th>
             <th><?php echo $this->Paginator->sort('categorie_id'); ?></th>
-            <th><?php echo $this->Paginator->sort('creation'); ?></th>
-            <th><?php echo $this->Paginator->sort('modification'); ?></th>
+            <th><?php echo $this->Paginator->sort('created'); ?></th>
+            <th><?php echo $this->Paginator->sort('modified'); ?></th>
             <th class="actions"><?php echo __('Actions'); ?></th>
         </tr>
             <tr>
                 <td><?php echo h($musique['Musique']['id']); ?>&nbsp;</td>
                 <td>
-                    <?php echo $this->Html->link($musique['User']['pseudo'], array('controller' => 'users', 'action' => 'view', $musique['User']['id'])); ?>
+                    <?php echo $this->Html->link($musique['User']['pseudo'], array('controller' => 'users', 'action' => 'voir', $musique['User']['id'])); ?>
                 </td>
                 <td><?php echo h($musique['Musique']['titre']); ?>&nbsp;</td>
                 <td>
-                    <?php echo $this->Html->link($musique['Artiste']['nom'], array('controller' => 'artistes', 'action' => 'view', $musique['Artiste']['id'])); ?>
+                    <?php echo $this->Html->link($musique['Artiste']['nom'], array('controller' => 'artistes', 'action' => 'voir', $musique['Artiste']['id'])); ?>
                 </td>
                 <td>
-                    <?php echo $this->Html->link($musique['Album']['titre'], array('controller' => 'albums', 'action' => 'view', $musique['Album']['id'])); ?>
+                    <?php echo $this->Html->link($musique['Album']['titre'], array('controller' => 'albums', 'action' => 'voir', $musique['Album']['id'])); ?>
                 </td>
                 <td><?php echo h($musique['Musique']['url']); ?>&nbsp;</td>
                 <td><?php echo h($musique['Musique']['tags']); ?>&nbsp;</td>
                 <td><?php echo h($musique['Musique']['miniature']); ?>&nbsp;</td>
                 <td>
-                    <?php echo $this->Html->link($musique['Categorie']['id'], array('controller' => 'categories', 'action' => 'view', $musique['Categorie']['id'])); ?>
+                    <?php echo $this->Html->link($musique['Categorie']['id'], array('controller' => 'categories', 'action' => 'voir', $musique['Categorie']['id'])); ?>
                 </td>
-                <td><?php echo h($musique['Musique']['creation']); ?>&nbsp;</td>
-                <td><?php echo h($musique['Musique']['modification']); ?>&nbsp;</td>
+                <td><?php echo h($musique['Musique']['created']); ?>&nbsp;</td>
+                <td><?php echo h($musique['Musique']['modified']); ?>&nbsp;</td>
                 <td class="actions">
-                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $musique['Musique']['id']), array('class' => 'btn btn-mini')); ?>
-                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $musique['Musique']['id']), array('class' => 'btn btn-mini')); ?>
-                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $musique['Musique']['id']), array('class' => 'btn btn-mini'), __('Are you sure you want to delete # %s?', $musique['Musique']['id'])); ?>
+                    <?php echo $this->Html->link(__('Voir'), array('action' => 'voir', $musique['Musique']['id']), array('class' => 'btn btn-mini')); ?>
+                    <?php echo $this->Html->link(__('Modifier'), array('action' => 'modifier', $musique['Musique']['id']), array('class' => 'btn btn-mini')); ?>
+                    <?php echo $this->Form->postLink(__('Supprimer'), array('action' => 'supprimer', $musique['Musique']['id']), array('class' => 'btn btn-mini'), __('Are you sure you want to delete # %s?', $musique['Musique']['id'])); ?>
                 </td>
             </tr>
         <?php // endforeach; ?>

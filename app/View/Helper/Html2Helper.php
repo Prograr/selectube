@@ -12,20 +12,20 @@ class Html2Helper extends AppHelper {
         $block = $this->Html->tag('div', null, array('class' => 'media'));
             $block .= $this->Html->link(
                     $this->Youtube->thumbnail($media['url'], 'thumb',array('class' => 'media-object', 'data-src' => $media['url'])),
-                    "/musiques/view/".$media['id'], 
+                    "/musiques/voir/".$media['id'], 
                     array('class' => 'pull-left', 'escape'=>false));
             $block .= $this->Html->tag('div', null, array('class' => 'media-body'));
             
                  $block .=   $this->Html->tag('h4', $this->Html->link(
                          $media['titre'],
-                    "/musiques/view/".$media['id'], 
+                    "/musiques/voir/".$media['id'], 
                     array( 'escape'=>false)), array('class' => 'media-heading'));
                  
                 $block .= "<p>".$infosSup."</p>";
                 $block .= "<p class='media-footer'><i class='icon-info-sign'></i> Sélectionné par : ". $this->Html->link(
                     "<i class='icon-user'></i> ".$creator,
                     "/profil/pseudo/".$creator, 
-                    array('escape'=>false))." le ". date_format(new DateTime($media['creation']), "d/m/Y") .".</p>";
+                    array('escape'=>false))." le ". date_format(new DateTime($media['created']), "d/m/Y") .".</p>";
                 if ($child != null){
                     $block .= $child;
                 }

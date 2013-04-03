@@ -50,20 +50,6 @@
                     </div><!-- .controls -->
                 </div><!-- .control-group -->
 
-                <div class="control-group">
-                    <?php echo $this->Form->label('creation', 'creation', array('class' => 'control-label')); ?>
-                    <div class="controls">
-                        <?php echo $this->Form->input('creation', array('class' => 'span12')); ?>
-                    </div><!-- .controls -->
-                </div><!-- .control-group -->
-
-                <div class="control-group">
-                    <?php echo $this->Form->label('modification', 'modification', array('class' => 'control-label')); ?>
-                    <div class="controls">
-                        <?php echo $this->Form->input('modification', array('class' => 'span12')); ?>
-                    </div><!-- .controls -->
-                </div><!-- .control-group -->
-
             </fieldset>
             <?php echo $this->Form->submit('Submit', array('class' => 'btn btn-large btn-primary')); ?>
             <?php echo $this->Form->end(); ?>

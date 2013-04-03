@@ -12,7 +12,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('inscription', 'add', 'facebook');
+        $this->Auth->allow('inscription', 'creer', 'facebook');
     }
 
     /**
@@ -20,7 +20,7 @@ class UsersController extends AppController {
      *
      * @return void
      */
-    public function index() {
+    public function liste() {
         $this->User->recursive = 0;
         $this->set('users', $this->paginate());
     }
@@ -32,7 +32,7 @@ class UsersController extends AppController {
      * @param string $id
      * @return void
      */
-    public function view($id = null) {
+    public function voir($id = null) {
         if (!$this->User->exists($id)) {
             throw new NotFoundException(__('Invalid user'));
         }
@@ -45,7 +45,7 @@ class UsersController extends AppController {
      *
      * @return void
      */
-    public function add() {
+    public function creer() {
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
@@ -56,8 +56,8 @@ class UsersController extends AppController {
                     "user_id" => $this->User->id,
                     "public" => true
                 ));
-                
-                $this->redirect(array('action' => 'index'));
+                $this->User->Profil->save();
+                $this->redirect("/profil/pseudo/".$this->Auth->user('pseudo'));
             } else {
                 $this->Session->setFlash(__('Erreur lors de l\'inscription'), 'flash/error');
             }
@@ -73,7 +73,7 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
             $this->set('User.email', $this->request->data('User.email'));
             $this->set('User.password', $this->request->data('User.password'));
-            $this->render('add');
+            $this->render('creer');
         }
     }
 
@@ -84,7 +84,7 @@ class UsersController extends AppController {
      * @param string $id
      * @return void
      */
-    public function edit($id = null) {
+    public function editer($id = null) {
         if (!$this->User->exists($id)) {
             throw new NotFoundException(__('Utilisateur introuvable'));
         }
@@ -109,7 +109,7 @@ class UsersController extends AppController {
      * @param string $id
      * @return void
      */
-    public function delete($id = null) {
+    public function desinscrire($id = null) {
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Utilisateur introuvable'));
@@ -117,24 +117,24 @@ class UsersController extends AppController {
         $this->request->onlyAllow('post', 'delete');
         if ($this->User->delete()) {
             $this->Session->setFlash(__('Utilisateur supprimé'), "flash/success");
-            $this->redirect(array('action' => 'index'));
+            $this->redirect(array('action' => 'liste'));
         }
         $this->Session->setFlash(__('l\'Utilisateur n\'a pas été supprimé'), "flash/error");
         $this->redirect(array('action' => 'index'));
     }
 
-    public function login() {
+    public function connexion() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
 //                $this->Session->setFlash(__('Bienvenue')." ". $this->Auth->user('pseudo'), 'flash/success');
-                $this->redirect($this->Auth->redirect("/profils/pseudo/".$this->Auth->user('pseudo')));
+                $this->redirect($this->Auth->redirect("/profil/pseudo/".$this->Auth->user('pseudo')));
             } else {
                 $this->Session->setFlash(__('Pseudo ou mot de passe invalide, réessayez'), 'flash/error');
             }
         }
     }
 
-    public function logout() {
+    public function deconnexion() {
         $this->redirect($this->Auth->logout());
     }
     

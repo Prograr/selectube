@@ -15,10 +15,12 @@
                     <a href="/musiques"><i class="icon-music"></i> Musique</a>
                 </li>
                 <li>
-                    <a href="/videos"><i class="icon-film"></i> Vidéo</a>
+                    <a href='#' data-toggle="modal" data-target="#blockedModal"><i class="icon-film"></i> Vidéo</a>
+                    <!--<a href="#/videos"><i class="icon-film"></i> Vidéo</a>-->
                 </li>
                 <li>
-                    <a href="/sites"><i class="icon-globe"></i> Sites</a>
+                    <a href='#' data-toggle="modal" data-target="#blockedModal"><i class="icon-globe"></i> Sites</a>
+                    <!--<a href="#/sites"><i class="icon-globe"></i> Sites</a>-->
                 </li>
                 
             </ul>
@@ -48,12 +50,12 @@
                         if (!$this->Session->read('Auth.User')){ //SI NON CONNECTE
                         ?>
                         <li><a href='#' data-toggle="modal" data-target="#loginModal"><i class="icon-unlock"></i> Connexion</a></li>
-                        <li><a href='/users/inscription'><i class="icon-signin"></i> Inscription</a></li>
+                        <li><a href='/selecteur/inscription'><i class="icon-signin"></i> Inscription</a></li>
                         <?php 
                         }else{ // SI CONNECTE
                         ?>
-                        <li><a href='/profils/pseudo/<?php echo $this->Session->read('Auth.User.pseudo') ?>'><i class="icon-edit"></i> Mon profil</a></li>
-                        <li><a href='/users/logout'><i class="icon-signout"></i> Déconnexion</a></li>
+                        <li><a href='/profil/pseudo/<?php echo $this->Session->read('Auth.User.pseudo') ?>'><i class="icon-edit"></i> Mon profil</a></li>
+                        <li><a href='/selecteur/deconnexion'><i class="icon-signout"></i> Déconnexion</a></li>
                         <?php
                         }
                         ?>

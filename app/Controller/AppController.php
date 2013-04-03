@@ -45,7 +45,7 @@ class AppController extends Controller {
             ),
             'loginAction' => array(
                 'controller' => 'users',
-                'action' => 'login'
+                'action' => 'connexion'
             ),
             'authError' => "Cette fonctionnalité est reservée aux utilisateurs inscrits.",
             'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
@@ -53,7 +53,7 @@ class AppController extends Controller {
     );
 
     public function beforeFilter() {
-        $this->Auth->allow('index', 'view', 'display');
+        $this->Auth->allow('index', 'voir', 'display', 'accueil');
 //        $this->Auth->authorize("display");
     }
     
