@@ -1,6 +1,13 @@
 <div class="musiques index">
 
-    <h2><?php echo __('Musiques'); ?></h2>
+    <?php 
+    
+    if ($this->Session->read('Auth.User.id') != null) //Si connecter : charger le formulaire de partage
+        echo $this->element("YoutubeUpload", array());
+
+    ?>
+    
+    <h2><?php echo __('Musiques les plus récentes'); ?></h2>
     
         <?php foreach($musiques as $musique){
             $description = "";
