@@ -19,4 +19,4 @@
 ?>
 <?php echo $this->fetch('content'); ?>
 
-Cet email a été envoyé du site Selectube, http://selectube
+Cet email a été envoyé du site Selectube, http://selectube.org

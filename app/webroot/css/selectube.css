@@ -22,6 +22,7 @@ body{
 .input-append, .input-prepend {
     display: block;
 }
+
 div.input-prepend input.add-on, div.input-append input.add-on{
     /*padding: 14px;*/
 }
@@ -31,6 +32,13 @@ div.input-prepend input.add-on, div.input-append input.add-on{
     display: inline-block;
 }
 
+label{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.add-on label{
+    margin-top: 0px;
+}
 .navbar-search #bouton_recherche{
     text-decoration: none; 
     position:absolute; 
@@ -163,4 +171,17 @@ td{
 }
 table#champsRelies{
     margin-left: 0;
+}
+#fb_page_like {
+    /*margin-right: 10px;*/
+}
+.form-error{
+    border-color: red !important;
+}
+.error-message{
+    color: red;
+    font-size: 12px;
+}
+#bouton_partager{
+    margin-top: 10px;
 }

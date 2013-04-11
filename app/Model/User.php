@@ -42,11 +42,27 @@ class User extends AppModel {
             //'last' => false, // Stop validation after this rule
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
+            'isUnique' => array(
+                'rule' => array('isUnique'),
+                'message' => 'Ce pseudo est déjà utilisé par un utilisateur du site',
+            //'allowEmpty' => false,
+            //'required' => false,
+            //'last' => false, // Stop validation after this rule
+            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            ),
+            'minLength' => array(
+                'rule'    => array('minLength', '4'),
+                'message' => 'Le pseudo doit contenir 4 caractères minimum'
+            //'allowEmpty' => false,
+            //'required' => false,
+            //'last' => false, // Stop validation after this rule
+            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            ),
         ),
         'email' => array(
             'email' => array(
                 'rule' => array('email'),
-            //'message' => 'Your custom message here',
+                'message' => 'Veuillez saisir une adresse email correcte',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -54,7 +70,15 @@ class User extends AppModel {
             ),
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
+                'message' => 'Veuillez saisir une adresse email',
+            //'allowEmpty' => false,
+            //'required' => false,
+            //'last' => false, // Stop validation after this rule
+            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            ),
+            'isUnique' => array(
+                'rule' => array('isUnique'),
+                'message' => 'Cet adresse mail est déjà enregistrée sur le site',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -65,6 +89,14 @@ class User extends AppModel {
             'notempty' => array(
                 'rule' => array('notempty'),
                 'message' => 'Un mot de passe est requis',
+            //'allowEmpty' => false,
+            //'required' => false,
+            //'last' => false, // Stop validation after this rule
+            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            ),
+            'minLength' => array(
+                'rule'    => array('minLength', '4'),
+                'message' => 'Le mot de passe doit contenir 4 caractères minimum'
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule

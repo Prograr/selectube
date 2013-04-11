@@ -1,5 +1,7 @@
 <?php
+
 App::uses('AppController', 'Controller');
+
 /**
  * Videos Controller
  *
@@ -7,97 +9,114 @@ App::uses('AppController', 'Controller');
  */
 class VideosController extends AppController {
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->Video->recursive = 0;
-		$this->set('videos', $this->paginate());
-	}
+    public $components = array(
+        'Essence.Essence' => array(
+            'providers' => array(
+                'OEmbed/Dailymotion',
+                'OEmbed/Vimeo',
+                'OEmbed/Youtube',
+                'OpenGraph/Ted'
+            )
+        )
+    );
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->Video->exists($id)) {
-			throw new NotFoundException(__('Invalid video'));
-		}
-		$options = array('conditions' => array('Video.' . $this->Video->primaryKey => $id));
-		$this->set('video', $this->Video->find('first', $options));
-	}
+    public function embed($url) {
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Video->create();
-			if ($this->Video->save($this->request->data)) {
-				$this->Session->setFlash(__('The video has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The video could not be saved. Please, try again.'));
-			}
-		}
-		$users = $this->Video->User->find('list');
-		$categories = $this->Video->Categorie->find('list');
-		$this->set(compact('users', 'categories'));
-	}
+        $this->set('media', $this->Essence->embed($url));
+    }
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
-		if (!$this->Video->exists($id)) {
-			throw new NotFoundException(__('Invalid video'));
-		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Video->save($this->request->data)) {
-				$this->Session->setFlash(__('The video has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The video could not be saved. Please, try again.'));
-			}
-		} else {
-			$options = array('conditions' => array('Video.' . $this->Video->primaryKey => $id));
-			$this->request->data = $this->Video->find('first', $options);
-		}
-		$users = $this->Video->User->find('list');
-		$categories = $this->Video->Categorie->find('list');
-		$this->set(compact('users', 'categories'));
-	}
+    /**
+     * index method
+     *
+     * @return void
+     */
+    public function index() {
+        $this->Video->recursive = 0;
+        $this->set('videos', $this->paginate());
+    }
 
-/**
- * delete method
- *
- * @throws NotFoundException
- * @throws MethodNotAllowedException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->Video->id = $id;
-		if (!$this->Video->exists()) {
-			throw new NotFoundException(__('Invalid video'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Video->delete()) {
-			$this->Session->setFlash(__('Video deleted'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Video was not deleted'));
-		$this->redirect(array('action' => 'index'));
-	}
+    /**
+     * view method
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function view($id = null) {
+        if (!$this->Video->exists($id)) {
+            throw new NotFoundException(__('Invalid video'));
+        }
+        $options = array('conditions' => array('Video.' . $this->Video->primaryKey => $id));
+        $this->set('video', $this->Video->find('first', $options));
+    }
+
+    /**
+     * add method
+     *
+     * @return void
+     */
+    public function add() {
+        if ($this->request->is('post')) {
+            $this->Video->create();
+            if ($this->Video->save($this->request->data)) {
+                $this->Session->setFlash(__('The video has been saved'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The video could not be saved. Please, try again.'));
+            }
+        }
+        $users = $this->Video->User->find('list');
+        $categories = $this->Video->Categorie->find('list');
+        $this->set(compact('users', 'categories'));
+    }
+
+    /**
+     * edit method
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function edit($id = null) {
+        if (!$this->Video->exists($id)) {
+            throw new NotFoundException(__('Invalid video'));
+        }
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if ($this->Video->save($this->request->data)) {
+                $this->Session->setFlash(__('The video has been saved'));
+                $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The video could not be saved. Please, try again.'));
+            }
+        } else {
+            $options = array('conditions' => array('Video.' . $this->Video->primaryKey => $id));
+            $this->request->data = $this->Video->find('first', $options);
+        }
+        $users = $this->Video->User->find('list');
+        $categories = $this->Video->Categorie->find('list');
+        $this->set(compact('users', 'categories'));
+    }
+
+    /**
+     * delete method
+     *
+     * @throws NotFoundException
+     * @throws MethodNotAllowedException
+     * @param string $id
+     * @return void
+     */
+    public function delete($id = null) {
+        $this->Video->id = $id;
+        if (!$this->Video->exists()) {
+            throw new NotFoundException(__('Invalid video'));
+        }
+        $this->request->onlyAllow('post', 'delete');
+        if ($this->Video->delete()) {
+            $this->Session->setFlash(__('Video deleted'));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Session->setFlash(__('Video was not deleted'));
+        $this->redirect(array('action' => 'index'));
+    }
+
 }

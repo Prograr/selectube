@@ -25,6 +25,6 @@
 <body>
 	<?php echo $this->fetch('content'); ?>
 
-	<p>Cet email a été envoyé du site <a href="http://selectube/">Selectube</a></p>
+	<p>Cet email a été envoyé du site <a href="http://selectube.org/">Selectube</a></p>
 </body>
 </html>

@@ -32,7 +32,7 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    public $theme = "Cakestrap";
+//    public $theme = "Cakestrap";
     public $helpers = array('Html', 'Form', 'Html2');
     public $components = array(
         'DebugKit.Toolbar',
@@ -40,7 +40,7 @@ class AppController extends Controller {
         'Auth' => array(
             'authenticate' => array(
                 'Form' => array(
-                    'fields' => array('username' => 'pseudo')
+                    'fields' => array('username' => 'email')
                 )
             ),
             'loginAction' => array(

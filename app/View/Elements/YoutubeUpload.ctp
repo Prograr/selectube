@@ -3,7 +3,6 @@
 <div class="musiques form">
 
     <?php echo $this->Form->create('Musique', array('controller' => 'musiques', 'action' => 'partager', 'inputDefaults' => array('label' => false), 'class' => 'form form-horizontal')); ?>
-<!--    <h2><?php echo __('Partager une musique Youtube'); ?></h2>-->
 
     <?php echo $this->Form->input('user_id', array('type' => 'hidden', 'value' => $this->Session->read('Auth.User.id'))); ?>
 
@@ -44,7 +43,7 @@
 
         <?php echo $this->Form->input('tags', array('class' => 'span12', 'label' => '<i class="icon-tags"></i> Mots-clés (séparer par des virgules)')); ?>
 
-        <?php echo $this->Form->button('<i class="icon-ok-sign"></i> Partager', array('class' => 'btn btn-large btn-primary pull-right', 'type' => 'submit')); ?>
+        <?php echo $this->Form->button('<i class="icon-ok-sign"></i> Partager', array('class' => 'btn btn-large btn-primary pull-right', 'id'=>'bouton_partager', 'type' => 'submit')); ?>
         <?php echo $this->Form->end(); ?>
 
     </fieldset>

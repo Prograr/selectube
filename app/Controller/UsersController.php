@@ -9,7 +9,6 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
-
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('inscription', 'creer', 'facebook');
@@ -57,13 +56,13 @@ class UsersController extends AppController {
                     "public" => true
                 ));
                 $this->User->Profil->save();
-                $this->redirect("/profil/pseudo/".$this->Auth->user('pseudo'));
+                $this->redirect("/profil/pseudo/" . $this->Auth->user('pseudo'));
             } else {
                 $this->Session->setFlash(__('Erreur lors de l\'inscription'), 'flash/error');
             }
         }
     }
-    
+
     /**
      * methode inscription
      *
@@ -71,9 +70,17 @@ class UsersController extends AppController {
      */
     public function inscription() {
         if ($this->request->is('post')) {
-            $this->set('User.email', $this->request->data('User.email'));
-            $this->set('User.password', $this->request->data('User.password'));
-            $this->render('creer');
+            $this->User->set($this->request->data);
+            if ($this->User->validates()) {
+                // La logique est validée
+                $this->set('User.email', $this->request->data('User.email'));
+                $this->set('User.password', $this->request->data('User.password'));
+                $this->render('creer');
+            } else {
+                // La logique n'est pas validée
+//                $error = $this->User->validationErrors["email"][0];
+//                $this->Session->setFlash($error, 'flash/error');
+            }
         }
     }
 
@@ -126,9 +133,15 @@ class UsersController extends AppController {
     public function connexion() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
+                debug("grant");
+
 //                $this->Session->setFlash(__('Bienvenue')." ". $this->Auth->user('pseudo'), 'flash/success');
-                $this->redirect($this->Auth->redirect("/profil/pseudo/".$this->Auth->user('pseudo')));
+                $this->redirect($this->Auth->redirect("/profil/pseudo/" . $this->Auth->user('pseudo')));
             } else {
+                debug($this->request->data);
+
+                debug($this->User->findByEmail($this->request->data["User"]["email"]));
+                debug("fail");
                 $this->Session->setFlash(__('Pseudo ou mot de passe invalide, réessayez'), 'flash/error');
             }
         }
@@ -137,17 +150,17 @@ class UsersController extends AppController {
     public function deconnexion() {
         $this->redirect($this->Auth->logout());
     }
-    
-    public function facebook(){
-        
-        require APPLIBS.'Facebook'.DS.'facebook.php';
+
+    public function facebook() {
+
+        require APPLIBS . 'Facebook' . DS . 'facebook.php';
         $facebook = new Facebook(array(
             'appId' => '448385471909603',
             'secret' => '1fa9d5b6cf8dc5a22a7a8c4936768431'
         ));
         $user = $facebook->getUser();
         debug($user);
-        
+
         die('Heho');
     }
 
