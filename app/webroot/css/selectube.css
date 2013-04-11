@@ -36,7 +36,7 @@ label{
     margin-bottom: 5px;
     margin-top: 5px;
 }
-.add-on label{
+.add-on label, label.add-on{
     margin-top: 0px;
 }
 .navbar-search #bouton_recherche{
