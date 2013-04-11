@@ -35,7 +35,6 @@ class AppController extends Controller {
 //    public $theme = "Cakestrap";
     public $helpers = array('Html', 'Form', 'Html2');
     public $components = array(
-        'DebugKit.Toolbar',
         'Session',
         'Auth' => array(
             'authenticate' => array(
