@@ -18,7 +18,6 @@
 $cakeDescription = __d('cake_dev', 'Selectube: Amitié-Partage');
 $connecte = ($this->Session->read('Auth.User.id') != null);
 
-
 ?>
 <html lang="fr">
     <head>
@@ -42,7 +41,7 @@ $connecte = ($this->Session->read('Auth.User.id') != null);
         echo $this->Html->meta(array("name" => "og:type",
             "content" => "website"));
         echo $this->Html->meta(array("name" => "og:url",
-            "content" => "http://selectube.org"));
+            "content" => $this->Html->url( null, true )));
         echo $this->Html->meta(array("name" => "og:locale",
             "content" => "fr_FR"));
         echo $this->Html->meta(array("name" => "og:site_name",
@@ -55,8 +54,8 @@ $connecte = ($this->Session->read('Auth.User.id') != null);
 //            "content" => "180"));
 //        echo $this->Html->meta(array("name" => "og:image:height",
 //            "content" => "180"));
-//        echo $this->Html->meta(array("name" => "fb:admins",
-//            "content" => "100004761990545"));
+        echo $this->Html->meta(array("name" => "fb:admins",
+            "content" => "448385471909603"));
         echo $this->Html->meta(array("name" => "twitter:card",
             "content" => "summary"));
 //        echo $this->Html->meta(array("name" => "twitter:site",
