@@ -7,7 +7,6 @@
     <!--<div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>-->
     <!--COMMENTAIRE - FACEBOOK-->
     <div class="fb-comments" data-width="624" data-num-posts="10"></div>
-    <div class="fb-like" data-send="true" data-width="624" data-show-faces="true"></div>
 
     <div id="playerYoutubeDescription"><?php echo $musique['Musique']['description']; ?></div>
     <div id="playerYoutubeUrl"><i class="icon-link"></i> Lien direct : <?php echo $this->Html->link($musique['Musique']['url'], $musique['Musique']['url']); ?></div>
@@ -33,4 +32,5 @@
                 ?>
     </div>
     
+    <div class="fb-like" data-send="true" data-width="624" data-show-faces="true"></div>
 </div><!-- .view -->
