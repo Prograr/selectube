@@ -42,19 +42,68 @@ class MusiquesController extends AppController {
     }
 
     /**
-     * add method
+     * partager method
      *
      * @return void
      */
     public function partager() {
         if ($this->request->is('post')) {
+            
             $this->Musique->create();
+            
+            if (isset($this->request->data['Musique']['categorie'])){
+                $categorie = $this->Musique->Categorie->findByTitre($this->request->data['Musique']['categorie']);
+                if ($categorie == null){
+                    $this->Musique->Categorie->create(array(
+                        "user_id" => $this->Session->read("Auth.User.id"),
+                        "titre" => $this->request->data['Musique']['categorie']
+                    ));
+                    
+                    $this->Musique->Categorie->save();
+                    $categorieId = $this->Musique->Categorie->id;
+                }else{
+                    $categorieId = $categorie['Categorie']['id'];
+                }
+                $this->request->data['Musique']['categorie_id'] = $categorieId;
+            }
+            
+            if (isset($this->request->data['Musique']['artiste'])){
+                $artiste = $this->Musique->Artiste->findByNom($this->request->data['Musique']['artiste']);
+                if ($artiste == null){
+                    $this->Musique->Artiste->create(array(
+                        "user_id" => $this->Session->read("Auth.User.id"),
+                        "nom" => $this->request->data['Musique']['artiste']
+                    ));
+                    $this->Musique->Artiste->save();
+                    $artisteId = $this->Musique->Artiste->id;
+                }else{
+                    $artisteId = $artiste['Artiste']['id'];
+                }
+                $this->request->data['Musique']['artiste_id'] = $artisteId;
+            }
+            
+            if (isset($this->request->data['Musique']['album'])){
+                $album = $this->Musique->Album->findByTitre($this->request->data['Musique']['album']);
+                if ($album == null){
+                    $this->Musique->Album->create(array(
+                        "user_id" => $this->Session->read("Auth.User.id"),
+                        "titre" => $this->request->data['Musique']['album']
+                    ));
+                    $this->Musique->Album->save();
+                    $albumId = $this->Musique->Album->id;
+                }else{
+                    $albumId = $album['Album']['id'];
+                }
+                $this->request->data['Musique']['album_id'] = $albumId;
+            }
+            
             if ($this->Musique->save($this->request->data)) {
-//				$this->Session->setFlash(__('Merci'), 'flash/success');
-                $this->redirect(array('action' => 'index'));
+                $this->Session->setFlash(__('Merci de votre contribution'), 'flash/success');
+                $this->redirect(array('action' => 'voir', $this->Musique->id));
             } else {
                 $this->Session->setFlash(__('Un bug est survenu'));
             }
+            
         }
         $users = $this->Musique->User->find('list');
         $artistes = $this->Musique->Artiste->find('list');
