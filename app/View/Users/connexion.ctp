@@ -6,7 +6,7 @@
 
     <?php $this->Session->flash('auth'); ?>
 
-    <div id="connexion" class='span8'>
+    <div id="connexion" class='span10'>
         <?php echo $this->Form->create('User'); ?>
         <fieldset>
             <legend><?php echo "<i class='icon-key'></i> " . __('Connexion'); ?></legend>
@@ -20,13 +20,12 @@
                 echo $this->Form->end();
                 ?>
                 <a href='/users/inscription' class="btn btn-success btn-block">Créer un compte</a>
-                <div class="clearfix"></div>
             </div>
             
-            <div class="span2" style="margin-top: 60px; text-align: center;">
-                OU
+            <div class="span4" style="margin-top: 30px; text-align: center;">
+                <i class="icon-hand-right icon-2x"></i>
             </div>
-            <div class="span2" style="margin-top: 40px;">
+            <div class="span2" style="margin-top: 30px;">
                 <?php
                 echo $this->Facebook->login(array(
                     'perms' => 'email,read_stream,publish_stream',
