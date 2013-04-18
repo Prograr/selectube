@@ -1,32 +1,17 @@
 <div class="musiques index">
 
-    <?php 
-    
+    <?php
     if ($this->Session->read('Auth.User.id') != null) //Si connecter : charger le formulaire de partage
         echo $this->element("YoutubeUpload", array());
-
     ?>
-    
+
     <h2><?php echo __('Musiques les plus récentes'); ?></h2>
-    
-        <?php foreach($musiques as $musique){
-            $description = "";
-            if ($musique['Artiste']['nom'] != '')
-                $description .= "Artiste : ". $musique['Artiste']['nom'].".<br>";
-            if ($musique['Album']['titre'] != '')
-                $description .= "Album : ". $musique['Album']['titre'] .".<br>";
-            if ($musique['Musique']['tags'] != ''){
-                $tags="";
-                foreach (explode(",", $musique['Musique']['tags']) as $tag) {
-                    $tags .= '<span class="label label-info">'.trim($tag).'</span> ';
-                }
-                $description .= "<p class='tags'><i class='icon-tags'></i> Tags : ". $tags ."</p>";
-            }
-            echo $this->Html2->media($musique['Musique'], $musique['User']['pseudo'], $description);
-        echo "<hr>";
-        
-                }
-        ?>
+
+    <?php
+    foreach ($musiques as $musique) {
+        echo $this->Html2->media($musique);
+    }
+    ?>
     <p><small>
             <?php
             echo $this->Paginator->counter(array(

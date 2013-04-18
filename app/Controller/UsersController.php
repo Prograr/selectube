@@ -37,6 +37,9 @@ class UsersController extends AppController {
         }
         $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
         $this->set('user', $this->User->find('first', $options));
+        App::import('Model', 'Musique');
+        $Musique = new Musique;
+        $this->set('musiques', $Musique->find('all', array("conditions" => array('Musique.user_id' => $id))));
     }
 
     /**

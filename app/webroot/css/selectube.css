@@ -50,7 +50,7 @@ div#content-wrapper.span9 {
     position:relative;
     padding-bottom:32px;
     overflow:hidden;
-  }
+}
 #content{
     /*height: 100%;*/
     display: inline-block;
@@ -64,18 +64,18 @@ div#content-wrapper.span9 {
     /*height:95%;*/
     /*max-height: 500px;*/
 }
-#content h2{
+#content h2, #content h3{
     margin-top: 0px;
     display: block;
-width: 100%;
-padding: 0;
-margin-bottom: 20px;
-font-size: 21px;
-line-height: 40px;
-color: #333;
-border: 0;
-border-bottom: 1px solid #e5e5e5;
-font-weight: normal;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 40px;
+    color: #333;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+    font-weight: normal;
 }
 #sidebar{
     display: block;
@@ -99,39 +99,39 @@ p.media-footer{
     font-size: 12px;
 }
 #MusiqueAddForm{
-    
+
 }
 #MusiqueAddForm div.input{
     margin: 10px;
 }
 .video {
-	position: relative;
-	padding-bottom: 56.25%;
-	height: 0;
-	overflow: hidden;
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
 }
 
 .video iframe,  
 .video object,  
 .video embed {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 .container {
-	/*width: 800px;*/
-	max-width: 90%;
+    /*width: 800px;*/
+    max-width: 90%;
 }
 img {
-	max-width: 100%;
-	height: auto;
+    max-width: 100%;
+    height: auto;
 }
 @media \0screen {
-  img { 
-  	width: auto; /* for ie 8 */
-  }
+    img { 
+        width: auto; /* for ie 8 */
+    }
 }
 input[type='submit']{
     margin: 20px;
@@ -150,8 +150,8 @@ td{
     padding: 14px;
 }
 #playerYoutube{
-/*    text-align: center;
-    margin-bottom: 20px;*/
+    /*    text-align: center;
+        margin-bottom: 20px;*/
 }
 #playerYoutubeTitre{
     /*text-align: center;*/

@@ -30,7 +30,6 @@ CREATE TABLE IF NOT EXISTS categories (
     user_id INT UNSIGNED,
     titre VARCHAR(64) NOT NULL,
     parent_id INT UNSIGNED,
-    url VARCHAR(255) NOT NULL,
     tags VARCHAR(100),
     miniature VARCHAR(255),
     created DATETIME DEFAULT NULL,
@@ -199,16 +198,4 @@ CREATE TABLE IF NOT EXISTS messages (
     FOREIGN KEY (user_id) REFERENCES users(id),
     INDEX (destinataire_id),
     FOREIGN KEY (destinataire_id) REFERENCES users(id)
-)ENGINE = INNODB;
-
-CREATE TABLE IF NOT EXISTS commentaires (
-    id INT UNSIGNED AUTO_INCREMENT,
-    commentaire TEXT NOT NULL,
-    user_id INT UNSIGNED NOT NULL,
-    target_id INT UNSIGNED DEFAULT NULL,
-    target_type VARCHAR(20) DEFAULT NULL,
-    created DATETIME DEFAULT NULL,
-    PRIMARY KEY (id),
-    INDEX (user_id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
 )ENGINE = INNODB;

@@ -106,7 +106,7 @@ class AppController extends Controller {
 
     function beforeFacebookLogin($user) {
         //Logic to happen before a facebook login
-//        debug($user);
+        $this->log($user);
     }
 
     function afterFacebookLogin() {

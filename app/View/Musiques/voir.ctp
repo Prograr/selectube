@@ -1,4 +1,4 @@
-<div class="musiques view" id="player">
+<div class="musiques voir" id="player">
 
     <h2 id="playerYoutubeTitre"><?php echo $musique['Musique']['titre']; ?></h2>
 
@@ -21,17 +21,17 @@
     
     <div id="playerYoutubeCategorie">
         <strong><i class="icon-folder-open"></i> Catégorie : </strong>
-                <?php echo $this->Html->link($musique['Categorie']['titre'], array('controller' => 'categories', 'action' => 'view', $musique['Categorie']['id']), array('class' => '')); ?>
+                <?php echo $this->Html->link($musique['Categorie']['titre'], array('controller' => 'categories', 'action' => 'voir', $musique['Categorie']['id']), array('class' => '')); ?>
     </div>
     
     <div id="playerYoutubeArtiste">
         <strong><i class="icon-star"></i> Artiste : </strong>
-        <?php echo $this->Html->link($musique['Artiste']['nom'], array('controller' => 'artistes', 'action' => 'view', $musique['Artiste']['id']), array('class' => '')); ?>
+        <?php echo $this->Html->link($musique['Artiste']['nom'], array('controller' => 'artistes', 'action' => 'voir', $musique['Artiste']['id']), array('class' => '')); ?>
     </div>
     
     <div id="playerYoutubeAlbum">
         <strong><i class="icon-headphones"></i> Album : </strong>
-        <?php echo $this->Html->link($musique['Album']['titre'], array('controller' => 'albums', 'action' => 'view', $musique['Album']['id']), array('class' => '')); ?>
+        <?php echo $this->Html->link($musique['Album']['titre'], array('controller' => 'albums', 'action' => 'voir', $musique['Album']['id']), array('class' => '')); ?>
     </div>
     
     <div id="playerYoutubeTags">
@@ -54,4 +54,4 @@
                     echo ", Modifié le ".h($this->Html2->print_date($musique['Musique']['modified'])); 
                 ?>
     </div>
-</div><!-- .view -->
+</div><!-- .voir -->

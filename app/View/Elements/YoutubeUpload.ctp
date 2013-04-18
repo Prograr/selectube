@@ -30,13 +30,13 @@
         <table class="span12" id="champsRelies">
             <tr>
                 <td>
-                    <?php echo $this->Form->input('categorie', array('class' => 'span12', 'label' => '<i class="icon-flag"></i> Catégorie', 'type' => 'text', 'data-provide' => "typeahead", 'autocomplete' => 'off')); ?>
+                    <?php echo $this->Form->input('categorie', array('class' => 'span12', 'label' => '<i class="icon-flag"></i> Catégorie', 'type' => 'text', 'autocomplete' => 'off')); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->input('artiste', array('class' => 'span12', 'label' => '<i class="icon-star"></i> Artiste / Groupe', 'type' => 'text', 'data-provide' => "typeahead", 'autocomplete' => 'off')); ?>
+                    <?php echo $this->Form->input('artiste', array('class' => 'span12', 'label' => '<i class="icon-star"></i> Artiste / Groupe', 'type' => 'text', 'autocomplete' => 'off')); ?>
                 </td>
                 <td>
-                    <?php echo $this->Form->input('album', array('class' => 'span12', 'label' => '<i class="icon-headphones"></i> Album', 'type' => 'text', 'data-provide' => "typeahead", 'autocomplete' => 'off')); ?>
+                    <?php echo $this->Form->input('album', array('class' => 'span12', 'label' => '<i class="icon-headphones"></i> Album', 'type' => 'text', 'autocomplete' => 'off')); ?>
                 </td>
             </tr>
         </table>

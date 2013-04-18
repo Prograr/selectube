@@ -72,7 +72,8 @@ class MusiquesController extends AppController {
                 if ($artiste == null){
                     $this->Musique->Artiste->create(array(
                         "user_id" => $this->Session->read("Auth.User.id"),
-                        "nom" => $this->request->data['Musique']['artiste']
+                        "nom" => $this->request->data['Musique']['artiste'],
+                        "categorie_id" => $categorieId
                     ));
                     $this->Musique->Artiste->save();
                     $artisteId = $this->Musique->Artiste->id;
@@ -87,7 +88,9 @@ class MusiquesController extends AppController {
                 if ($album == null){
                     $this->Musique->Album->create(array(
                         "user_id" => $this->Session->read("Auth.User.id"),
-                        "titre" => $this->request->data['Musique']['album']
+                        "titre" => $this->request->data['Musique']['album'],
+                        "categorie_id" => $categorieId,
+                        "artiste_id" => $artisteId
                     ));
                     $this->Musique->Album->save();
                     $albumId = $this->Musique->Album->id;
