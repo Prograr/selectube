@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
     pseudo VARCHAR(32) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password CHAR(40) NOT NULL,
+    facebook_id  BIGINT(20) UNSIGNED,
     score SMALLINT,
     `role` VARCHAR(20) NOT NULL DEFAULT 'normal',
     created DATETIME DEFAULT NULL,
