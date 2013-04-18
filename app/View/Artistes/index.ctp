@@ -13,8 +13,8 @@
             <th><?php echo $this->Paginator->sort('photo'); ?></th>
             <th><?php echo $this->Paginator->sort('categorie_id'); ?></th>
             <th><?php echo $this->Paginator->sort('user_id'); ?></th>
-            <th><?php echo $this->Paginator->sort('creation'); ?></th>
-            <th><?php echo $this->Paginator->sort('modification'); ?></th>
+            <th><?php echo $this->Paginator->sort('created'); ?></th>
+            <th><?php echo $this->Paginator->sort('modified'); ?></th>
             <th class="actions"><?php echo __('Actions'); ?></th>
         </tr>
         <?php foreach ($artistes as $artiste): ?>
@@ -30,10 +30,10 @@
                     <?php echo $this->Html->link($artiste['Categorie']['id'], array('controller' => 'categories', 'action' => 'view', $artiste['Categorie']['id'])); ?>
                 </td>
                 <td>
-                    <?php echo $this->Html->link($artiste['User']['pseudo'], array('controller' => 'users', 'action' => 'view', $artiste['User']['id'])); ?>
+                    <?php echo $this->Html->link($artiste['User']['pseudo'], array('controller' => 'users', 'action' => 'voir', $artiste['User']['id'])); ?>
                 </td>
-                <td><?php echo h($artiste['Artiste']['creation']); ?>&nbsp;</td>
-                <td><?php echo h($artiste['Artiste']['modification']); ?>&nbsp;</td>
+                <td><?php echo h($artiste['Artiste']['created']); ?>&nbsp;</td>
+                <td><?php echo h($artiste['Artiste']['modified']); ?>&nbsp;</td>
                 <td class="actions">
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $artiste['Artiste']['id']), array('class' => 'btn btn-mini')); ?>
                     <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $artiste['Artiste']['id']), array('class' => 'btn btn-mini')); ?>
