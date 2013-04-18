@@ -17,8 +17,8 @@
                 <td><?php echo $this->Form->input('pseudo', array('class' => '', 'label' => 'Pseudo')); ?> </td>
             </tr>
             <tr>
-                <td><?php echo $this->Form->input('prenom', array('class' => '', 'label' => 'Prenom')); ?></td>
-                <td><?php echo $this->Form->input('nom', array('class' => '', 'label' => 'Nom'));?> </td>
+                <td><?php echo $this->Form->input('prenom', array('class' => '', 'label' => 'Prenom', 'value' => $facebook_prenom)); ?></td>
+                <td><?php echo $this->Form->input('nom', array('class' => '', 'label' => 'Nom', 'value' => $facebook_nom));?> </td>
             </tr>
                
         </table>     
@@ -34,19 +34,4 @@
 
 
     <?php echo $this->Form->end(); ?>
-<!--    
-    <div id="inscriptionFacebook">    
-        <iframe src="https://www.facebook.com/plugins/registration?
-             client_id=448385471909603&
-             redirect_uri=http%3A%2F%2Fselectube.org/users/login
-             fb_register=true
-             fields=first_name,last_name,password,email,captcha"
-        scrolling="auto"
-        frameborder="no"
-        style="border:none"
-        allowTransparency="true"
-        width="100%"
-        height="330">
-</iframe>
-    </div>-->
 </div>
