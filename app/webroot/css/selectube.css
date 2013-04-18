@@ -192,3 +192,9 @@ table#champsRelies{
 .fbFeedbackContent {
     min-height: 160px;
 }
+.musiques.view div{
+    margin-bottom: 10px;
+}
+.musiques.view div#playerYoutube{
+    margin-bottom: 0px;
+}
