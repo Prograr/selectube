@@ -5,13 +5,14 @@
     <div id="playerYoutube"><?php echo $this->Youtube->video($musique['Musique']['url']); ?></div>
     
     <?php echo $this->Facebook->comments(array('width' => '624', 'numposts' => 5, "class" => "fb-comments", 'href'=> $this->Html->url(null, true))); ?>
-    <br>
-    <?php 
+    <div id="playerYoutubeSocial">
+    <?php  echo $this->Facebook->sendButton(); ?>
+    
+    <?php
     echo $this->Facebook->like( array("show_faces" => false, 'layout' => 'button_count'));
-    echo $this->Facebook->sendButton(); 
 //    echo $this->Facebook->share(); 
     ?>
-    <br>
+    </div>
     <div id="playerYoutubeDescription"><?php echo $musique['Musique']['description']; ?></div>
     <!--<div id="playerYoutubeUrl"><i class="icon-link"></i> Lien direct : <?php echo $this->Html->link($musique['Musique']['url'], $musique['Musique']['url']); ?></div>-->
     
