@@ -13,22 +13,40 @@
 //    echo $this->Facebook->share(); 
     ?>
     </div>
-    <div id="playerYoutubeDescription"><?php echo $musique['Musique']['description']; ?></div>
+    <div id="playerYoutubeDescription">
+        <strong><i class="icon-edit"></i> Description : </strong>
+        <p><?php echo $musique['Musique']['description']; ?></p>
+    </div>
     <!--<div id="playerYoutubeUrl"><i class="icon-link"></i> Lien direct : <?php echo $this->Html->link($musique['Musique']['url'], $musique['Musique']['url']); ?></div>-->
     
-    <div id="playerYoutubeTags"><i class="icon-tags"></i> Mots-clés : <?php echo h($musique['Musique']['tags']); ?></div>
+    <div id="playerYoutubeCategorie">
+        <strong><i class="icon-folder-open"></i> Catégorie : </strong>
+                <?php echo $this->Html->link($musique['Categorie']['titre'], array('controller' => 'categories', 'action' => 'view', $musique['Categorie']['id']), array('class' => '')); ?>
+    </div>
     
     <div id="playerYoutubeArtiste">
+        <strong><i class="icon-star"></i> Artiste : </strong>
         <?php echo $this->Html->link($musique['Artiste']['nom'], array('controller' => 'artistes', 'action' => 'view', $musique['Artiste']['id']), array('class' => '')); ?>
     </div>
     
     <div id="playerYoutubeAlbum">
+        <strong><i class="icon-headphones"></i> Album : </strong>
         <?php echo $this->Html->link($musique['Album']['titre'], array('controller' => 'albums', 'action' => 'view', $musique['Album']['id']), array('class' => '')); ?>
     </div>
     
-    <div id="playerYoutubeCategorie">
-                <?php echo $this->Html->link($musique['Categorie']['id'], array('controller' => 'categories', 'action' => 'view', $musique['Categorie']['id']), array('class' => '')); ?>
+    <div id="playerYoutubeTags">
+        <strong><i class="icon-tags"></i> Mots-clés : </strong>
+        <?php 
+            if ($musique['Musique']['tags'] != ''){
+                $tags="";
+                foreach (explode(",", $musique['Musique']['tags']) as $tag) {
+                    $tags .= '<span class="label label-info">'.trim($tag).'</span> ';
+                }
+            }
+            echo $tags; 
+        ?>
     </div>
+    
     <div id="playerYoutubeDate">
                 <?php 
                 echo "<i class=\"icon-share-alt\"></i> Partagé le ".h($this->Html2->print_date($musique['Musique']['created']));
