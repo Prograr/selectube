@@ -4,12 +4,16 @@
 
     <div id="playerYoutube"><?php echo $this->Youtube->video($musique['Musique']['url']); ?></div>
     
-    <!--<div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>-->
-    <!--COMMENTAIRE - FACEBOOK-->
-    <div class="fb-comments" data-width="624" data-num-posts="10"></div>
-
+    <?php echo $this->Facebook->comments(array('width' => '624', 'height' => '500', 'numposts' => 5, "class" => "fb-comments")); ?>
+    
+    <?php 
+    echo $this->Facebook->like();
+    echo $this->Facebook->share(); 
+    echo $this->Facebook->sendButton(); 
+    ?>
+    
     <div id="playerYoutubeDescription"><?php echo $musique['Musique']['description']; ?></div>
-    <div id="playerYoutubeUrl"><i class="icon-link"></i> Lien direct : <?php echo $this->Html->link($musique['Musique']['url'], $musique['Musique']['url']); ?></div>
+    <!--<div id="playerYoutubeUrl"><i class="icon-link"></i> Lien direct : <?php echo $this->Html->link($musique['Musique']['url'], $musique['Musique']['url']); ?></div>-->
     
     <div id="playerYoutubeTags"><i class="icon-tags"></i> Mots-clés : <?php echo h($musique['Musique']['tags']); ?></div>
     
@@ -31,6 +35,4 @@
                     echo ", Modifié le ".h($this->Html2->print_date($musique['Musique']['modified'])); 
                 ?>
     </div>
-    
-    <div class="fb-like" data-send="true" data-width="624" data-show-faces="true"></div>
 </div><!-- .view -->
