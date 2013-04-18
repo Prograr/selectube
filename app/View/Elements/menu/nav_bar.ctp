@@ -6,7 +6,7 @@
         <li><?php echo $this->Html->link("<i class='icon-list'></i> " . __('Lister les Videos'), array('controller' => 'videos', 'action' => 'index'), array('class' => '', 'escape' => false)); ?></li> 
         <li><?php echo $this->Html->link("<i class='icon-list'></i> " . __('Lister les Sites'), array('controller' => 'sites', 'action' => 'index'), array('class' => '', 'escape' => false)); ?></li> 
         <li><?php echo $this->Html->link("<i class='icon-list'></i> " . __('Lister les Categories'), array('controller' => 'categories', 'action' => 'index'), array('class' => '', 'escape' => false)); ?></li> -->
-        <li><?php echo $this->Html->link("<i class='icon-list'></i> " . __('Lister les Sélecteurs'), array('controller' => 'users', 'action' => 'index'), array('class' => '', 'escape' => false)); ?></li> 
+        <li><?php echo $this->Html->link("<i class='icon-list'></i> " . __('Lister les Sélecteurs'), array('controller' => 'users', 'action' => 'liste'), array('class' => '', 'escape' => false)); ?></li> 
         <!--Menu Partager-->
         <li><?php echo $this->Html->link("<i class='icon-share'></i> " . __('Partager une Musique'), array('controller' => 'musiques', 'action' => 'partager'), array('class' => 'restricted', 'escape' => false)); ?></li>				
 <!--        <li><?php echo $this->Html->link("<i class='icon-share'></i> " . __('Partager une Vidéo'), array('controller' => 'videos', 'action' => 'partager'), array('class' => 'restricted', 'escape' => false)); ?></li>	
