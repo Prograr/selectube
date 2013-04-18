@@ -52,7 +52,8 @@ div#content-wrapper.span9 {
     overflow:hidden;
   }
 #content{
-    display: block;
+    /*height: 100%;*/
+    display: inline-block;
     /*overflow: auto;*/
     border: 1px solid #e5e5e5;
     border-radius: 5px;
@@ -88,6 +89,9 @@ p.media-footer{
 }
 #content input{
     min-height: 30px;
+}
+#content input[type='checkbox']{
+    min-height: 0px;
 }
 #inputUrlYoutube{
     min-width: 340px;
