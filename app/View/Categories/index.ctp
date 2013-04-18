@@ -11,8 +11,8 @@
             <th><?php echo $this->Paginator->sort('url'); ?></th>
             <th><?php echo $this->Paginator->sort('tags'); ?></th>
             <th><?php echo $this->Paginator->sort('miniature'); ?></th>
-            <th><?php echo $this->Paginator->sort('creation'); ?></th>
-            <th><?php echo $this->Paginator->sort('modification'); ?></th>
+            <th><?php echo $this->Paginator->sort('created'); ?></th>
+            <th><?php echo $this->Paginator->sort('modified'); ?></th>
             <th class="actions"><?php echo __('Actions'); ?></th>
         </tr>
         <?php foreach ($categories as $category): ?>
@@ -28,8 +28,8 @@
                 <td><?php echo h($category['Category']['url']); ?>&nbsp;</td>
                 <td><?php echo h($category['Category']['tags']); ?>&nbsp;</td>
                 <td><?php echo h($category['Category']['miniature']); ?>&nbsp;</td>
-                <td><?php echo h($category['Category']['creation']); ?>&nbsp;</td>
-                <td><?php echo h($category['Category']['modification']); ?>&nbsp;</td>
+                <td><?php echo h($category['Category']['created']); ?>&nbsp;</td>
+                <td><?php echo h($category['Category']['modified']); ?>&nbsp;</td>
                 <td class="actions">
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $category['Category']['id']), array('class' => 'btn btn-mini')); ?>
                     <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $category['Category']['id']), array('class' => 'btn btn-mini')); ?>
