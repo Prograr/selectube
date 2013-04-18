@@ -126,7 +126,7 @@
                     <td class="actions">
             <?php echo $this->Html->link(__('Voir'), array('controller' => 'musiques', 'action' => 'voir', $musique['id']), array('class' => 'btn btn-mini')); ?>
         <?php echo $this->Html->link(__('Editer'), array('controller' => 'musiques', 'action' => 'editer', $musique['id']), array('class' => 'btn btn-mini')); ?>
-        <?php echo $this->Form->postLink(__('Supprimer'), array('controller' => 'musiques', 'action' => 'supprimer', $musique['id']), array('class' => 'btn btn-mini'), __('Are you sure you want to delete # %s?', $musique['id'])); ?>
+        <?php echo $this->Form->postLink(__('Supprimer'), array('controller' => 'musiques', 'action' => 'supprimer', $musique['id']), array('class' => 'btn btn-mini'), __('Confirmer la suppression de %s?', $musique['titre'])); ?>
                     </td>
                 </tr>
     <?php endforeach; ?>
