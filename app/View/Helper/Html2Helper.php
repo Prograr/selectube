@@ -34,45 +34,51 @@ class Html2Helper extends AppHelper {
         return $block;
     }
     
-//    public function link($label='Adresse du lien', $fieldName='url', $id='url'){
-//        $input = $this->Html->tag("div", null, array('class' => 'input-prepend'));
-//        
-//        $input .= $this->Html->tag("label", $label, array('for' => $id));
-//        $input .= $this->Html->tag("label", '<i class="icon-link"></i>&nbsp;', array('class' => 'add-on', 'for' => $id));
-//        $input .= $this->Form->input($fieldName, array('id' => $id, 'class' => 'add-on', "placeholder" => $label, 'label'=> false, 'div' => false));
-//        $input .= $this->Html->tag("/div", null);
-//
-//        return $input;
-//    }
-
-    public function email($label='Adresse e-mail', $fieldName='email', $id='email'){
-        $input = $this->Html->tag("div", null, array('class' => 'input-prepend'));
+    public function email($options = array()){
+        $default_options=array(
+            'label'=>'Adresse e-mail',
+            'fieldName'=>'email',
+            'id'=>'email',
+            'value'=>'');
         
-        $input .= $this->Html->tag("label", $label, array('for' => $id));
-        $input .= $this->Html->tag("label", '@', array('class' => 'add-on', 'for' => $id));
-        $input .= $this->Form->input($fieldName, array('id' => $id, 'class' => 'add-on', "placeholder" => $label, 'label'=> false, 'div' => false));
+        $options = array_merge($default_options,$options);
+        
+        $input = $this->Html->tag("div", null, array('class' => 'input-prepend'));
+        $input .= $this->Html->tag("label", $options['label'], array('for' => $options['id']));
+        $input .= $this->Html->tag("label", '@', array('class' => 'add-on', 'for' => $options['id']));
+        $input .= $this->Form->input($options['fieldName'], array('id' => $options['id'], 'class' => 'add-on', "placeholder" => $options['label'], 'value'=>$options['value'], 'label'=> false, 'div' => false));
         $input .= $this->Html->tag("/div", null);
 
         return $input;
     }
     
-    public function password($label='Mot de passe', $fieldName='password', $id='password'){
-        $input = $this->Html->tag("div", null, array('class' => 'input-prepend'));
+    public function password($options = array()){
+        $default_options=array(
+            'label'=>'Mot de passe',
+            'fieldName'=>'password',
+            'id'=>'password');
+        $options = array_merge($default_options,$options);
         
-        $input .= $this->Html->tag("label", $label, array('for' => $id));
-        $input .= $this->Html->tag("label", '<i class="icon-lock"></i> ', array('class' => 'add-on', 'for' => $id));
-        $input .= $this->Form->input($fieldName, array('id' => $id, 'class' => 'add-on', "placeholder" => $label, 'label'=> false, 'div' => false));
+        $input = $this->Html->tag("div", null, array('class' => 'input-prepend'));
+        $input .= $this->Html->tag("label", $options['label'], array('for' => $options['id']));
+        $input .= $this->Html->tag("label", '<i class="icon-lock"></i> ', array('class' => 'add-on', 'for' => $options['id']));
+        $input .= $this->Form->input($options['fieldName'], array('id' => $options['id'], 'class' => 'add-on', "placeholder" => $options['label'], 'label'=> false, 'div' => false));
         $input .= $this->Html->tag("/div", null);
 
         return $input;
     }
     
-    public function login($label='Identifiant', $fieldName='pseudo', $id='pseudo'){
-        $input = $this->Html->tag("div", null, array('class' => 'input-prepend'));
+    public function login($options = array()){
+        $default_options=array(
+            'label'=>'Identifiant',
+            'fieldName'=>'pseudo',
+            'id'=>'pseudo');
+        $options = array_merge($default_options,$options);
         
-        $input .= $this->Html->tag("label", $label, array('for' => $id));
-        $input .= $this->Html->tag("label", '<i class="icon-user"></i> ', array('class' => 'add-on', 'for' => $id));
-        $input .= $this->Form->input($fieldName, array('id' => $id, 'class' => 'add-on', "placeholder" => $label, 'label'=> false, 'div' => false));
+        $input = $this->Html->tag("div", null, array('class' => 'input-prepend'));
+        $input .= $this->Html->tag("label", $options['label'], array('for' => $options['id']));
+        $input .= $this->Html->tag("label", '<i class="icon-user"></i> ', array('class' => 'add-on', 'for' => $options['id']));
+        $input .= $this->Form->input($options['fieldName'], array('id' => $options['id'], 'class' => 'add-on', "placeholder" => $options['label'], 'label'=> false, 'div' => false));
         $input .= $this->Html->tag("/div", null);
 
         return $input;
