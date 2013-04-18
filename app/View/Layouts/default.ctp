@@ -19,7 +19,7 @@ $cakeDescription = __d('cake_dev', 'Selectube: Amitié-Partage');
 $connecte = ($this->Session->read('Auth.User.id') != null);
 
 ?>
-<html lang="fr">
+<?= $this->Facebook->html(); ?>
     <head>
         <?php echo $this->Html->charset(); ?>
         <title>
@@ -56,6 +56,8 @@ $connecte = ($this->Session->read('Auth.User.id') != null);
 //            "content" => "180"));
         echo $this->Html->meta(array("name" => "fb:admins",
             "content" => "448385471909603"));
+        echo $this->Html->meta(array("name" => "fb:app_id",
+            "content" => "448385471909603"));
         echo $this->Html->meta(array("name" => "twitter:card",
             "content" => "summary"));
 //        echo $this->Html->meta(array("name" => "twitter:site",
@@ -82,6 +84,7 @@ $connecte = ($this->Session->read('Auth.User.id') != null);
         echo $this->Html->script('swfobject');
         echo $this->Html->script('youtube');
         echo $this->Html->script('jquery.pnotify.min');
+//        echo $this->Html->script('facebook');
         echo $this->Html->script('app-helper');
         echo $this->Html->script('init-app');
         if (!$connecte) 
@@ -125,6 +128,7 @@ $connecte = ($this->Session->read('Auth.User.id') != null);
                     <div class="span3" id="sidebar" >
                         <!--Sidebar content-->
                         <?php echo $this->element('menu/nav_bar'); ?>
+                        <?php // echo $this->Facebook->fanbox(array('stream' => true, 'logobar' => true, 'connections' => true)); ?>
                     </div>
                     
                     <div class="span9" id="content-wrapper">
@@ -146,8 +150,7 @@ $connecte = ($this->Session->read('Auth.User.id') != null);
         </div><!-- #main-container -->
 
         <?php echo $this->element('Modals'); ?>
-        <div id="fb-root"></div>
+        <?= $this->Facebook->init(); ?>
     </body>
 
-<?php echo $this->Html->script('facebook'); ?>
 </html>
