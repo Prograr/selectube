@@ -4,10 +4,10 @@
 
     <div id="playerYoutube"><?php echo $this->Youtube->video($musique['Musique']['url']); ?></div>
     
-    <?php echo $this->Facebook->comments(array('width' => '624', 'height' => '500', 'numposts' => 5, "class" => "fb-comments")); ?>
+    <?php echo $this->Facebook->comments(array('width' => '624', 'numposts' => 5, "class" => "fb-comments")); ?>
     
     <?php 
-    echo $this->Facebook->like();
+    echo $this->Facebook->like( array("show_faces" => false, 'layout' => 'button_count'));
     echo $this->Facebook->share(); 
     echo $this->Facebook->sendButton(); 
     ?>
