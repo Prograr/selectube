@@ -60,7 +60,7 @@ class UsersController extends AppController {
             } else {
                 $this->Session->setFlash(__('Erreur lors de l\'inscription'), 'flash/error');
             }
-        }
+        } 
     }
 
     /**
@@ -133,35 +133,20 @@ class UsersController extends AppController {
     public function connexion() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                debug("grant");
-
 //                $this->Session->setFlash(__('Bienvenue')." ". $this->Auth->user('pseudo'), 'flash/success');
                 $this->redirect($this->Auth->redirect("/profil/pseudo/" . $this->Auth->user('pseudo')));
             } else {
-                debug($this->request->data);
-
-                debug($this->User->findByEmail($this->request->data["User"]["email"]));
-                debug("fail");
                 $this->Session->setFlash(__('Pseudo ou mot de passe invalide, réessayez'), 'flash/error');
             }
         }
     }
 
     public function deconnexion() {
+        if ($this->Connect->FB->getUser() !== 0) {
+            $this->Connect->FB->destroysession();
+            session_destroy();
+        }
         $this->redirect($this->Auth->logout());
-    }
-
-    public function facebook() {
-
-        require APPLIBS . 'Facebook' . DS . 'facebook.php';
-        $facebook = new Facebook(array(
-            'appId' => '448385471909603',
-            'secret' => '1fa9d5b6cf8dc5a22a7a8c4936768431'
-        ));
-        $user = $facebook->getUser();
-        debug($user);
-
-        die('Heho');
     }
 
 }
