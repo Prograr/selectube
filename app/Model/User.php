@@ -51,7 +51,7 @@ class User extends AppModel {
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
             'minLength' => array(
-                'rule'    => array('minLength', '4'),
+                'rule' => array('minLength', '4'),
                 'message' => 'Le pseudo doit contenir 4 caractères minimum'
             //'allowEmpty' => false,
             //'required' => false,
@@ -95,7 +95,7 @@ class User extends AppModel {
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
             'minLength' => array(
-                'rule'    => array('minLength', '4'),
+                'rule' => array('minLength', '4'),
                 'message' => 'Le mot de passe doit contenir 4 caractères minimum'
             //'allowEmpty' => false,
             //'required' => false,
@@ -109,7 +109,17 @@ class User extends AppModel {
                 'message' => 'Merci de rentrer un rôle valide',
                 'allowEmpty' => false
             )
-        )
+        ),
+        'facebook_id' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+            //'message' => 'Your custom message here',
+            //'allowEmpty' => false,
+            //'required' => false,
+            //'last' => false, // Stop validation after this rule
+            //'on' => 'create', // Limit validation to 'create' or 'update' operations
+            ),
+        ),
     );
 
     //The Associations below have been created with all possible keys, those that are not needed can be removed
