@@ -189,3 +189,6 @@ table#champsRelies{
 #bouton_partager{
     margin-top: 10px;
 }
+.fbFeedbackContent {
+    min-height: 160px;
+}
