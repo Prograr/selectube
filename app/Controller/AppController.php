@@ -55,7 +55,7 @@ class AppController extends Controller {
     );
 
     public function beforeFilter() {
-        $this->Auth->allow('index', 'voir', 'display', 'accueil');
+        $this->Auth->allow('index', 'voir', 'display', 'accueil', 'liste');
 //        $this->Auth->authorize("display");
         //Get all the details on the facebook user
         $this->set('facebookUser', $this->Connect->user());
