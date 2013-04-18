@@ -1,7 +1,7 @@
 <div class="hero-unit" id="home">
-    <h1><i class="icon-group"></i> Selectube <i class="icon-group"></i> </h1>
-    <p>Les meilleurs musiques et vidéos youtube sélectionné par un groupe très selecte de fins mélomans.</p>
-    <p>Appréciez le catalogue selectube et rejoignez l'équipe pour partager vos découvertes à vos amis ou aux autre sélécteurs.
+    <h1>Selectube</h1>
+    <p>Les meilleures musiques et vidéos youtube sélectionnées par un groupe très sélect de fins mélomans.</p>
+    <p>Appréciez le catalogue selectube et rejoignez l'équipe pour partager vos découvertes à vos amis et à la communauté.
     <div class="container-fluid" id='boutons-accueil'>
         <div class="row-fluid">
             <div class="span4">
