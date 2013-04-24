@@ -39,9 +39,9 @@
                 <li>
                     <span style="width: 90px;">
                      <?php
-                        if (!$this->Session->read('Auth.User') && !isset($facebook_id)){ //SI NON CONNECTE
-                            echo $this->Facebook->login(array('perms' => 'email','show-faces'=> false, "max-rows"=> 0,'size' => 'small','style'=> 'margin-top: 10px;'));
-                        }
+//                        if (!$this->Session->read('Auth.User') && !isset($facebook_id)){ //SI NON CONNECTE
+//                            echo $this->Facebook->login(array('perms' => 'email','show-faces'=> false, "max-rows"=> 0,'size' => 'small','style'=> 'margin-top: 10px;'));
+//                        }
                     ?>
                     </span>
                 </li>
