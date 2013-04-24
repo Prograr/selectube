@@ -1,17 +1,23 @@
 <div class="users form">
+    <h2>Rejoindre la communauté</h2>
+    <div id='inscriptionFacebook'>
+        <h3>Inscription via Facebook</h3>
+        <?php
+            echo $this->Facebook->registration(array(
+                'fields' => 'name,email,location',
+                'width' => 300,
+                'redirect-uri' => 'http://selectube.org/users/creer'
+            )); 
+        ?>
+    </div>
+    <!--<div class="span1"></div>-->
     <div id="inscriptionClassique">
+        <h3>Inscription normale</h3>
         <?php echo $this->Form->create(); ?>
         <fieldset>
-            <legend><?php echo __('Inscription'); ?></legend>
             <?php
-            echo $this->Html2->email(array('value' => $facebook_email));
+            echo $this->Html2->email();
             echo $this->Html2->password();
-            ?>
-            <?php
-//            $this->Facebook->registration(array(
-//                'fields' => 'name,email,location,gender,favorite_team',
-//                'width' => '500'
-//            ));
             ?>
         </fieldset>
         <?php

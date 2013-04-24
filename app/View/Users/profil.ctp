@@ -1,4 +1,4 @@
-<div class="users view">
+<div class="profil users view">
     <h2><?php echo h(ucfirst($user['User']['pseudo'])); ?></h2>
     <table class="table table-striped table-bordered">
         <?php if ($user['User']['nom'] != ""): ?>

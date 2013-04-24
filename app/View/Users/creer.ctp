@@ -16,10 +16,10 @@
             <tr>
                 <td><?php echo $this->Form->input('pseudo', array('class' => '', 'label' => 'Pseudo')); ?> </td>
             </tr>
-            <tr>
+<!--            <tr>
                 <td><?php echo $this->Form->input('prenom', array('class' => '', 'label' => 'Prenom', 'value' => $facebook_prenom)); ?></td>
                 <td><?php echo $this->Form->input('nom', array('class' => '', 'label' => 'Nom', 'value' => $facebook_nom));?> </td>
-            </tr>
+            </tr>-->
                
         </table>     
         <div class="btn-group">

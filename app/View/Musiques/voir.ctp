@@ -15,7 +15,9 @@
     </div>
     <div id="playerYoutubeDescription">
         <strong><i class="icon-edit"></i> Description : </strong>
-        <p><?php echo $musique['Musique']['description']; ?></p>
+        <p><?php 
+            echo $musique['Musique']['description']; 
+        ?></p>
     </div>
     <!--<div id="playerYoutubeUrl"><i class="icon-link"></i> Lien direct : <?php echo $this->Html->link($musique['Musique']['url'], $musique['Musique']['url']); ?></div>-->
     
@@ -42,8 +44,10 @@
                 foreach (explode(",", $musique['Musique']['tags']) as $tag) {
                     $tags .= '<span class="label label-info">'.trim($tag).'</span> ';
                 }
+                echo $tags; 
+            }else{
+                echo "Aucun";
             }
-            echo $tags; 
         ?>
     </div>
     

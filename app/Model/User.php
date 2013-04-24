@@ -14,7 +14,6 @@ App::uses('AppModel', 'Model');
  * @property Moderation $Moderation
  * @property Musique $Musique
  * @property Note $Note
- * @property Profil $Profil
  * @property Site $Site
  * @property Video $Video
  */
@@ -272,12 +271,6 @@ class User extends AppModel {
             'exclusive' => '',
             'finderQuery' => '',
             'counterQuery' => ''
-        )
-    );
-    public $hasOne = array(
-        'Profil' => array(
-            'className' => 'Profil',
-            'dependent' => true
         )
     );
 

@@ -23,6 +23,8 @@ class MusiquesController extends AppController {
      */
     public function accueil() {
         $this->Musique->recursive = 0;
+        $this->Musique->order="Musique.modified DESC";
+//        $this->Musique->
         $this->set('musiques', $this->paginate());
     }
 
@@ -51,7 +53,7 @@ class MusiquesController extends AppController {
             
             $this->Musique->create();
             
-            if (isset($this->request->data['Musique']['categorie'])){
+            if (isset($this->request->data['Musique']['categorie']) && $this->request->data['Musique']['categorie'] != ""){
                 $categorie = $this->Musique->Categorie->findByTitre($this->request->data['Musique']['categorie']);
                 if ($categorie == null){
                     $this->Musique->Categorie->create(array(
@@ -65,9 +67,11 @@ class MusiquesController extends AppController {
                     $categorieId = $categorie['Categorie']['id'];
                 }
                 $this->request->data['Musique']['categorie_id'] = $categorieId;
+            }else{
+                $this->request->data['Musique']['categorie_id'] = 1;
             }
             
-            if (isset($this->request->data['Musique']['artiste'])){
+            if (isset($this->request->data['Musique']['artiste']) && $this->request->data['Musique']['artiste'] != ""){
                 $artiste = $this->Musique->Artiste->findByNom($this->request->data['Musique']['artiste']);
                 if ($artiste == null){
                     $this->Musique->Artiste->create(array(
@@ -81,9 +85,11 @@ class MusiquesController extends AppController {
                     $artisteId = $artiste['Artiste']['id'];
                 }
                 $this->request->data['Musique']['artiste_id'] = $artisteId;
+            }else{
+                $this->request->data['Musique']['artiste_id'] = 1;
             }
             
-            if (isset($this->request->data['Musique']['album'])){
+            if (isset($this->request->data['Musique']['album']) && $this->request->data['Musique']['album'] != ""){
                 $album = $this->Musique->Album->findByTitre($this->request->data['Musique']['album']);
                 if ($album == null){
                     $this->Musique->Album->create(array(
@@ -98,6 +104,8 @@ class MusiquesController extends AppController {
                     $albumId = $album['Album']['id'];
                 }
                 $this->request->data['Musique']['album_id'] = $albumId;
+            }else {
+                $this->request->data['Musique']['album_id'] = 1;
             }
             
             if ($this->Musique->save($this->request->data)) {

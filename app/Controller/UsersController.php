@@ -31,15 +31,15 @@ class UsersController extends AppController {
      * @param string $id
      * @return void
      */
-    public function voir($id = null) {
-        if (!$this->User->exists($id)) {
-            throw new NotFoundException(__('Invalid user'));
+    public function profil($pseudo = null) {
+        $user = $this->User->findByPseudo($pseudo);
+        if ($user == null) {
+            throw new NotFoundException(__('Le sélecteur recherché est introuvable'));
         }
-        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-        $this->set('user', $this->User->find('first', $options));
+        $this->set('user', $user);
         App::import('Model', 'Musique');
         $Musique = new Musique;
-        $this->set('musiques', $Musique->find('all', array("conditions" => array('Musique.user_id' => $id))));
+        $this->set('musiques', $Musique->find('all', array("conditions" => array('Musique.user_id' => $user['User']['id']))));
     }
 
     /**
@@ -50,16 +50,15 @@ class UsersController extends AppController {
     public function creer() {
         if ($this->request->is('post')) {
             $this->User->create();
+            
+            if (isset($this->request->data['name']))
+                $this->request->data['pseudo'] = $this->request->data['name'];
+            
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('Inscription enregistrée !'), 'flash/success');
                 $this->Auth->login();
 //                debug($this->User);
-                $this->User->Profil->create(array(
-                    "user_id" => $this->User->id,
-                    "public" => true
-                ));
-                $this->User->Profil->save();
-                $this->redirect("/profil/pseudo/" . $this->Auth->user('pseudo'));
+                $this->redirect("/selecteur/profil/" . $this->Auth->user('pseudo'));
             } else {
                 $this->Session->setFlash(__('Erreur lors de l\'inscription'), 'flash/error');
             }
@@ -137,7 +136,7 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
 //                $this->Session->setFlash(__('Bienvenue')." ". $this->Auth->user('pseudo'), 'flash/success');
-                $this->redirect($this->Auth->redirect("/profil/pseudo/" . $this->Auth->user('pseudo')));
+                $this->redirect($this->Auth->redirect("/selecteur/profil/" . $this->Auth->user('pseudo')));
             } else {
                 $this->Session->setFlash(__('Pseudo ou mot de passe invalide, réessayez'), 'flash/error');
             }

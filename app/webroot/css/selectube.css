@@ -158,7 +158,7 @@ td{
 }
 
 .fb_iframe_widget{
-    text-align: center;
+    /*text-align: center;*/
     display: block;
 }
 
@@ -197,4 +197,13 @@ table#champsRelies{
 }
 .musiques.view div#playerYoutube{
     margin-bottom: 0px;
+}
+#inscriptionFacebook{
+    width: 300px;
+    float: left;
+    margin-right: 50px;
+    margin-bottom: 10px;
+}
+#inscriptionClassique{
+    float: left;
 }

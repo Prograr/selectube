@@ -67,7 +67,8 @@ class ConnectComponent extends Component {
 	*/
 	public $modelFields = array(
 		'password' => 'password',
-		'username' => 'email'
+		'pseudo' => 'name',
+		'email' => 'email'
 	);
 	
 	/**
