@@ -68,7 +68,7 @@ class Html2Helper extends AppHelper {
         $input = $this->Html->tag("div", null, array('class' => 'input-prepend'));
         $input .= $this->Html->tag("label", $options['label'], array('for' => $options['id']));
         $input .= $this->Html->tag("label", '@', array('class' => 'add-on', 'for' => $options['id']));
-        $input .= $this->Form->input($options['fieldName'], array('id' => $options['id'], 'class' => 'add-on', "placeholder" => $options['label'], 'value'=>$options['value'], 'label'=> false, 'div' => false));
+        $input .= $this->Form->input($options['fieldName'], array('id' => $options['id'], 'class' => 'add-on '.$options['class'], "placeholder" => $options['label'], 'value' => $options['value'], 'label'=> false, 'div' => false));
         $input .= $this->Html->tag("/div", null);
 
         return $input;
@@ -84,7 +84,7 @@ class Html2Helper extends AppHelper {
         $input = $this->Html->tag("div", null, array('class' => 'input-prepend'));
         $input .= $this->Html->tag("label", $options['label'], array('for' => $options['id']));
         $input .= $this->Html->tag("label", '<i class="icon-lock"></i> ', array('class' => 'add-on', 'for' => $options['id']));
-        $input .= $this->Form->input($options['fieldName'], array('id' => $options['id'], 'class' => 'add-on', "placeholder" => $options['label'], 'label'=> false, 'div' => false));
+        $input .= $this->Form->input($options['fieldName'], array('id' => $options['id'], 'class' => 'add-on '.$options['class'], "placeholder" => $options['label'], 'label'=> false, 'div' => false));
         $input .= $this->Html->tag("/div", null);
 
         return $input;
@@ -100,7 +100,7 @@ class Html2Helper extends AppHelper {
         $input = $this->Html->tag("div", null, array('class' => 'input-prepend'));
         $input .= $this->Html->tag("label", $options['label'], array('for' => $options['id']));
         $input .= $this->Html->tag("label", '<i class="icon-user"></i> ', array('class' => 'add-on', 'for' => $options['id']));
-        $input .= $this->Form->input($options['fieldName'], array('id' => $options['id'], 'class' => 'add-on', "placeholder" => $options['label'], 'label'=> false, 'div' => false));
+        $input .= $this->Form->input($options['fieldName'], array('id' => $options['id'], 'class' => 'add-on '.$options['class'], "placeholder" => $options['label'], 'label'=> false, 'div' => false));
         $input .= $this->Html->tag("/div", null);
 
         return $input;
