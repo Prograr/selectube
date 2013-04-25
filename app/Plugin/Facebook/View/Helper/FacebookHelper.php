@@ -121,16 +121,16 @@ class FacebookHelper extends AppHelper {
 				'img' => false,
 				'alt' => '',
 				'id' => '',
-				'show-faces' => true,	// fb button only
-				'width' => 200,			// fb button only
-				'max-rows' => 1,			// fb button only
-                                'registration-url' => "/users/inscription", 
-                                'on-login' => "console.log('login')"
+				'show-faces' => true,
+				'width' => 200,
+				'max-rows' => 1,
+//                                'registration-url' => "/users/inscription",
+                                'on-login' => 'login(window.location)'
 			),
 			$options
 		);
 		if((isset($options['redirect']) && $options['redirect']) || $options['custom']){
-			$options['redirect'] = Router::url($options['redirect']);
+			$options['redirect'] =  $this->here; //Router::url($this->base);
 			$onclick = "login('".$options['redirect']."');";
 			if($options['img']){
 				$source = '/Facebook/img/'.$options['img'];
@@ -141,10 +141,10 @@ class FacebookHelper extends AppHelper {
 				'onclick' => $onclick,
 				'escape' => false));
 			}
-			else {
-				return $this->Html->link($options['label'], '#', array(
-					'onclick' => $onclick, 'id' => $options['id'], 'escape' => false));
-			}
+//			else {
+//				return $this->Html->link($options['label'], '#', array(
+//					'onclick' => $onclick, 'id' => $options['id'], 'escape' => false));
+//			}
 		}
 		else {
 			if(!$options['id']){ unset($options['id']); }
@@ -517,9 +517,11 @@ class FacebookHelper extends AppHelper {
 			if (response.authResponse) {
 				// logged in and connected user, someone you know
 				// alert('You are connected');
+                                
 			} else {
 				// no user session available, someone you dont know
 				// alert('You are disconnected');
+//                                login(document.URL);
 			}
 		});
 			   
@@ -544,7 +546,10 @@ class FacebookHelper extends AppHelper {
 				// user is logged in
 				// console.log('Welcome!');
 				if(redirection != null && redirection != ''){
-					top.location.href = redirection;
+//                                    FB.api('/me', function(response) {
+//                                        redirect({url:redirection ,text:'Content de vous revoir ' + response.name +' !', title:'Connexion en cours...' });
+//                                    });
+                                    top.location.href = redirection;
 				}
 			} else {
 				// user could not log in

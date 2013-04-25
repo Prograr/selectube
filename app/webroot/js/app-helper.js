@@ -15,16 +15,16 @@ function notification(title, text, type) {
 function redirect(params) {
     
     var defaults = { title:'Redirection', text:'Vous allez être redirigé...', type:'notice', delais: 2000 }; 
-    $.extend(defaults, params); 
+    params = $.extend(defaults, params); 
     
     $.pnotify({
-        title: title,
-        text: text,
-        type: type,
+        title: params.title,
+        text: params.text,
+        type: params.type,
         styling: 'bootstrap'
     });
     
     setTimeout(function() {
-        window.location.href = url;
-    }, delais);
+        window.location.href = params.url;
+    }, params.delais);
 }
