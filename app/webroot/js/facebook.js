@@ -31,19 +31,15 @@ function login() {
     FB.login(function(response) {
         if (response.authResponse) {
             // connected
-            testAPI();
+            FB.api('/me', function(response) {
+                redirect({url:location.href ,title:'Salut ' + response.name +'!.', text:'Connexion en cours...' });
+            });
         } else {
             // cancelled
         }
     });
 }
 
-function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-        console.log('Good to see you, ' + response.name + '.');
-    });
-}
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id))

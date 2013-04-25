@@ -69,7 +69,7 @@
             <?php
             }else{ // SI CONNECTE
             ?>
-                        <li><a href='/profil/pseudo/<?php echo $this->Session->read('Auth.User.pseudo') ?>'><i class="icon-edit"></i> Mon profil</a></li>
+                        <li><a href='/selecteur/profil/<?php echo $this->Session->read('Auth.User.pseudo') ?>'><i class="icon-edit"></i> Mon profil</a></li>
                         
                         <?php 
 //                            if ($facebookUser == null) {

@@ -123,7 +123,9 @@ class FacebookHelper extends AppHelper {
 				'id' => '',
 				'show-faces' => true,	// fb button only
 				'width' => 200,			// fb button only
-				'max-rows' => 1			// fb button only
+				'max-rows' => 1,			// fb button only
+                                'registration-url' => "/users/inscription", 
+                                'on-login' => "console.log('login')"
 			),
 			$options
 		);

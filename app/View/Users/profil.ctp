@@ -1,24 +1,6 @@
 <div class="profil users view">
     <h2><?php echo h(ucfirst($user['User']['pseudo'])); ?></h2>
     <table class="table table-striped table-bordered">
-        <?php if ($user['User']['nom'] != ""): ?>
-            <tr>		<td><strong><?php echo __('Nom'); ?></strong></td>
-                <td>
-                    <?php echo h($user['User']['nom']); ?>
-                    &nbsp;
-                </td>
-            </tr>
-        <?php endif; ?>
-
-        <?php if ($user['User']['prenom'] != ""): ?>
-            <tr>		<td><strong><?php echo __('Prenom'); ?></strong></td>
-                <td>
-                    <?php echo h($user['User']['prenom']); ?>
-                    &nbsp;
-                </td>
-            </tr>
-        <?php endif; ?>
-
         <tr>		
             <td><strong><?php echo __('Email'); ?></strong></td>
             <td>

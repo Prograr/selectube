@@ -33,7 +33,6 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-
 //    public $theme = "Cakestrap";
     public $helpers = array('Html', 'Form', 'Html2', 'Facebook.Facebook' => array('locale' => 'fr_FR'));
     public $components = array(
@@ -56,36 +55,31 @@ class AppController extends Controller {
 
     public function beforeFilter() {
         $this->Auth->allow('index', 'voir', 'display', 'accueil', 'liste');
-//        $this->Auth->authorize("display");
         //Get all the details on the facebook user
         $this->set('facebookUser', $this->Connect->user());
-        $this->set('user', $this->Auth->user());
-
-        //retrieve only the id from the facebook user
         $this->set('facebook_id', $this->Connect->user('id'));
-
-        //retrieve only the email from the facebook user
-        $this->set('facebook_email', $this->Connect->user('email'));
-        $this->set('facebook_name', $this->Connect->user('name'));
         try {
             $user = $this->Auth->user();
+            $this->set('user', $user);
             $fb_user = $this->Connect->user();
+//                debug($fb_user);
         } catch (FacebookApiException $e) {
-            $this->log($e, 'error');
+            $debug($e);
         }
-        if ($fb_user = $this->Connect->user()) {
-            if (!$this->Auth->loggedIn()) {
-                if (!isset($fb_user['error_code'])) {
-                    $this->loadModel('User');
-                    $this->User->recursive = -1;
-                    if (($user = $this->User->findByFacebookId($fb_user['id'])) ||
-                            ($user = $this->User->findByEmail($fb_user['email'])||
-                                ($user = $this->User->findByPseudo($fb_user['name'])))) {
-                        $this->Auth->login($user);
-                    }
+        if (!$this->Auth->loggedIn() && $fb_user != null && !isset($fb_user['error_code'])) {
+            $this->loadModel('User');
+            $this->User->recursive = -1;
+            $user = $this->User->findByFacebookId($fb_user['id']);
+            if ($user != null){
+                $this->Auth->login($user['User']);
+            }else{
+                $user = $this->User->findByEmail($fb_user['email']);
+                if ($user != null){
+                    $this->Auth->login($user['User']);
                 }
             }
         }
+//                debug($this->Session->read('Auth.User'));
     }
 
     public function isAuthorized($user) {
@@ -100,6 +94,7 @@ class AppController extends Controller {
 
     //Add an email field to be saved along with creation.
     function beforeFacebookSave() {
+        $this->loadModel('User');
         $exists = $this->User->find('first', array(
             'conditions' => array(
                 'OR' => array(
@@ -109,7 +104,7 @@ class AppController extends Controller {
         ));
 
         if(!empty($exists)){
-            $this->log("Utilisateur existant");
+//            $this->log("Utilisateur existant");
             // do however you want to handle your update or whatever. Just make sure you fill in $FBComp->authUser['User'] which is used for authentication
             $this->Connect->authUser = $exists;
             $this->Connect->authUser['User']['facebook_id'] = $this->Connect->user('id');
@@ -122,11 +117,12 @@ class AppController extends Controller {
         }
         else{
             // continue creating new entry
-            $this->log("Création");
+//            $this->log("Création");
             $this->Connect->authUser['User']['email'] = $this->Connect->user('email');
-            $this->Connect->authUser['User']['pseudo'] = $this->Connect->user('name');
+            $this->Connect->authUser['User']['pseudo'] = $this->Connect->user('username');
             $this->Connect->authUser['User']['created'] = gmdate("Y-m-d H:i:s");
             $this->Connect->authUser['User']['facebook_url'] = $this->Connect->user('link');
+            $this->Connect->authUser['User']['facebook_id'] = $this->Connect->user('id');
             return true; // return true to create new entry
         }
         return true; //Must return true or will not save.
@@ -139,6 +135,7 @@ class AppController extends Controller {
 
     function afterFacebookLogin() {
         //Logic to happen after successful facebook login.
+        $this->log("Facebook login. redirect");
         $this->redirect($this->Auth->loginRedirect);
     }
 
