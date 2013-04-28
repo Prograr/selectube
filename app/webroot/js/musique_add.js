@@ -40,8 +40,8 @@ $(document).ready(function() {
     //Initialisations
     var categoryTitles = new Array();
     var categoryIds = new Object();
-    var categoryId = 0;
-    var newCategoryId = 0;
+    var categoryId = 1;
+    var newCategoryId = 1;
     $.getJSON( '/categories/listeAllJson', null,
         function ( jsonData )
         {
@@ -89,7 +89,7 @@ $(document).ready(function() {
             }).responseText;
             
             if (exist === 'false'){
-                if (newCategoryId === 0)
+                if (newCategoryId === 1)
                     $('#icon-edit-categorie i').attr('class', 'icon-plus-sign');
                 else
                     $('#icon-edit-categorie i').attr('class', 'icon-edit');
@@ -103,7 +103,7 @@ $(document).ready(function() {
                 }
             }
         }else{
-            if (newCategoryId === 0)
+            if (newCategoryId === 1)
                 $('#icon-edit-categorie i').attr('class', 'icon-plus-sign');
             else
                 $('#icon-edit-categorie i').attr('class', 'icon-edit');
@@ -116,7 +116,7 @@ $(document).ready(function() {
         //Interdit l'édition de catégorie existante
         if ($('#icon-edit-categorie').hasClass('disabled')) return false;
         
-        if(categoryId !== 0) //Pour plus tard (si admin)
+        if(categoryId !== 1) //Pour plus tard (si admin)
             $('#CategorieId').val(categoryId);
         
         $('#CategorieTitre').val($('#MusiqueCategorie').val());
@@ -203,8 +203,8 @@ $(document).ready(function() {
     //Initialisations
     var artisteNames = new Array();
     var artisteIds = new Object();
-    var artisteId = 0;
-    var newArtisteId = 0;
+    var artisteId = 1;
+    var newArtisteId = 1;
     $.getJSON( '/artistes/listeAllJson', null,
         function ( jsonData )
         {
@@ -252,7 +252,7 @@ $(document).ready(function() {
             }).responseText;
             
             if (exist === 'false'){
-                if (newArtisteId === 0)
+                if (newArtisteId === 1)
                     $('#icon-edit-artiste i').attr('class', 'icon-plus-sign');
                 else
                     $('#icon-edit-artiste i').attr('class', 'icon-edit');
@@ -266,7 +266,7 @@ $(document).ready(function() {
                 }
             }
         }else{
-            if (newArtisteId === 0)
+            if (newArtisteId === 1)
                 $('#icon-edit-artiste i').attr('class', 'icon-plus-sign');
             else
                 $('#icon-edit-artiste i').attr('class', 'icon-edit');
@@ -279,7 +279,7 @@ $(document).ready(function() {
         //Interdit l'édition de catégorie existante
         if ($('#icon-edit-artiste').hasClass('disabled')) return false;
         
-        if(artisteId !== 0) //Pour plus tard (si admin)
+        if(artisteId !== 1) //Pour plus tard (si admin)
             $('#ArtisteId').val(artisteId);
         
         $('#ArtisteNom').val($('#MusiqueArtiste').val());
@@ -363,8 +363,8 @@ $(document).ready(function() {
     //Initialisations
     var albumTitles = new Array();
     var albumIds = new Object();
-    var albumId = 0;
-    var newAlbumId = 0;
+    var albumId = 1;
+    var newAlbumId = 1;
     $.getJSON( '/albums/listeAllJson', null,
         function ( jsonData )
         {
@@ -412,7 +412,7 @@ $(document).ready(function() {
             }).responseText;
             
             if (exist === 'false'){
-                if (newAlbumId === 0)
+                if (newAlbumId === 1)
                     $('#icon-edit-album i').attr('class', 'icon-plus-sign');
                 else
                     $('#icon-edit-album i').attr('class', 'icon-edit');
@@ -426,7 +426,7 @@ $(document).ready(function() {
                 }
             }
         }else{
-            if (newAlbumId === 0)
+            if (newAlbumId === 1)
                 $('#icon-edit-album i').attr('class', 'icon-plus-sign');
             else
                 $('#icon-edit-album i').attr('class', 'icon-edit');
@@ -439,7 +439,7 @@ $(document).ready(function() {
         //Interdit l'édition de catégorie existante
         if ($('#icon-edit-album').hasClass('disabled')) return false;
         
-        if(albumId !== 0) //Pour plus tard (si admin)
+        if(albumId !== 1) //Pour plus tard (si admin)
             $('#AlbumId').val(albumId);
         
         $('#AlbumTitre').val($('#MusiqueAlbum').val());

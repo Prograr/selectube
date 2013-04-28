@@ -89,7 +89,7 @@ class ArtistesController extends AppController {
     public function editRest() {
         unset($this->request->data['Artiste']['categorie']);
         $this->request->data['Artiste']['user_id'] = $this->Session->read("Auth.User.id");
-        if ($this->request->data['Artiste']['id'] == 0 
+        if ($this->request->data['Artiste']['id'] == 1 
                 || !$this->Artiste->exists($this->request->data['Artiste']['id'])) { //Création
             if ($this->request->is('post')) {
                 unset($this->request->data['Artiste']['id']);
@@ -109,7 +109,7 @@ class ArtistesController extends AppController {
                         'id' => $this->data['Artiste']['id']
                     )
                 ));
-                if ($myArtiste != 0 || $this->Session->read("Auth.User.role") == 'admin'){
+                if ($myArtiste != 1 || $this->Session->read("Auth.User.role") == 'admin'){
                     $this->Artiste->id = $this->data['Artiste']['id'];
                     if ($this->Artiste->save($this->request->data['Artiste'])) {
                         echo $this->Artiste->id;

@@ -91,7 +91,7 @@ class AlbumsController extends AppController {
         unset($this->request->data['Album']['artiste']);
         
         $this->request->data['Album']['user_id'] = $this->Session->read("Auth.User.id");
-        if ($this->request->data['Album']['id'] == 0
+        if ($this->request->data['Album']['id'] == 1
                 || !$this->Album->exists($this->request->data['Album']['id'])) { //Création
             if ($this->request->is('post')) {
                 unset($this->request->data['Album']['id']);
@@ -111,7 +111,7 @@ class AlbumsController extends AppController {
                         'id' => $this->data['Album']['id']
                     )
                 ));
-                if ($myAlbum != 0 || $this->Session->read("Auth.User.role") == 'admin'){
+                if ($myAlbum != 1 || $this->Session->read("Auth.User.role") == 'admin'){
                     $this->Album->id = $this->data['Album']['id'];
                     if ($this->Album->save($this->request->data['Album'])) {
                         echo $this->Album->id;

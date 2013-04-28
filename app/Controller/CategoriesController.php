@@ -89,7 +89,7 @@ class CategoriesController extends AppController {
     public function editRest() {
         unset($this->request->data['Categorie']['parent_titre']);
         $this->request->data['Categorie']['user_id'] = $this->Session->read("Auth.User.id");
-        if ($this->request->data['Categorie']['id'] == 0 
+        if ($this->request->data['Categorie']['id'] == 1 
                 || !$this->Category->exists($this->request->data['Categorie']['id'])) { //Création
             if ($this->request->is('post')) {
                 unset($this->request->data['Categorie']['id']);
@@ -111,8 +111,6 @@ class CategoriesController extends AppController {
                 ));
                 if ($myCat != 0 || $this->Session->read("Auth.User.role") == 'admin'){
                     $this->Category->id = $this->data['Categorie']['id'];
-                    if ($this->request->data['Categorie']['parent_id'] == 0)
-                        $this->request->data['Categorie']['parent_id'] = 1;
                     if ($this->Category->save($this->request->data['Categorie'])) {
                         echo $this->Category->id;
                     } else {
