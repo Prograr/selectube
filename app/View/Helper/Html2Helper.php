@@ -13,7 +13,7 @@ class Html2Helper extends AppHelper {
         $creator = $musique['User']['pseudo'];
         $infosSup = "";
         if ($musique['Musique']['description'] != ''){
-            if (count_chars($musique['Musique']['description']) < 500)
+            if (strlen($musique['Musique']['description']) < 500)
                 $infosSup .=  "<p>".$musique['Musique']['description']."</p>"; 
             else
                 $infosSup .=  "<p>".substr($musique['Musique']['description'], 0, 500)."... <a href='/musiques/voir/".$musique['Musique']['id']."'>[Lire la suite...]</a><p>";
@@ -48,7 +48,7 @@ class Html2Helper extends AppHelper {
                 $block .= "<p>".$infosSup."</p>";
                 $block .= "<p class='media-footer'><i class='icon-info-sign'></i> Sélectionné par : ". $this->Html->link(
                     "<i class='icon-user'></i> ".$creator,
-                    "/profil/pseudo/".$creator, 
+                    "/selecteur/profil/".$creator, 
                     array('escape'=>false))." le ". date_format(new DateTime($media['created']), "d/m/Y") .".</p>";
                 if ($child != null){
                     $block .= $child;
