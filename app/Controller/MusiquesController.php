@@ -52,8 +52,6 @@ class MusiquesController extends AppController {
         if ($this->request->is('post')) {
             
             $this->Musique->create();
-            
-            $categorieId = $this->request->data['Musique']['categorie_id'];
             if ($this->request->data['Musique']['categorie'] != ""){
                 if ($this->request->data['Musique']['categorie_id'] == 1){
                     $this->Musique->Categorie->create(array(
@@ -61,19 +59,19 @@ class MusiquesController extends AppController {
                         "titre" => $this->request->data['Musique']['categorie']
                     ));
                     $this->Musique->Categorie->save();
-                    $categorieId = $this->Musique->Categorie->id;
+                    $this->request->data['Musique']['categorie_id'] = $this->Musique->Categorie->id;
                 }
             }
             
-            $artisteId = $this->request->data['Musique']['artiste_id'];
             if ($this->request->data['Musique']['artiste'] != ""){
                 if ($this->request->data['Musique']['artiste_id'] == 1){
                     $this->Musique->Artiste->create(array(
                         "user_id" => $this->Session->read("Auth.User.id"),
+                        "categorie_id" => $this->request->data['Musique']['categorie_id'],
                         "nom" => $this->request->data['Musique']['artiste']
                     ));
                     $this->Musique->Artiste->save();
-                    $artisteId = $this->Musique->Artiste->id;
+                    $this->request->data['Musique']['artiste_id'] = $this->Musique->Artiste->id;
                 }
             }
             
@@ -81,6 +79,8 @@ class MusiquesController extends AppController {
                 if ($this->request->data['Musique']['album_id'] == 1){
                     $this->Musique->Album->create(array(
                         "user_id" => $this->Session->read("Auth.User.id"),
+                        "categorie_id" => $this->request->data['Musique']['categorie_id'],
+                        "artiste_id" => $this->request->data['Musique']['artiste_id'],
                         "titre" => $this->request->data['Musique']['album']
                     ));
                     $this->Musique->Album->save();
