@@ -13,7 +13,7 @@
             <div class="input-prepend input-append">
                 <span class="add-on"><label for="inputUrlYoutube"><i class="icon-music"></i>&nbsp;</label></span>
                 <?php echo $this->Form->input('url', array('id' => 'inputUrlYoutube', 'class' => '', 'label' => false, 'div' => false, 'placeholder' => 'Ex : https://www.youtube.com/watch?v=XXXXXXXXXXX')); ?>
-                <button class="btn" type="button" id="getYoutubeInfos"><i class="icon-download icon-large"></i>&nbsp;</button>
+                <button class="btn" type="submit" id="getYoutubeInfos"><i class="icon-download icon-large"></i>&nbsp;</button>
             </div>
         </div>
         
