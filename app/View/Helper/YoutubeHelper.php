@@ -35,11 +35,11 @@ class YoutubeHelper extends HtmlHelper {
         'loop' => false, // Loops video once its finished 
         'start' => 0, // Start the video at X seconds 
         'version' => 3, // For chromeless player set version to 3 
-        'autoplay' => false, // Automatically starts video when page is loaded 
+        'autoplay' => true, // Automatically starts video when page is loaded 
         'autohide' => false, // Automatically hides controls once the video begins 
         'controls' => true, // Enables / Disables player controls (Chromeless Only) 
         'showinfo' => false, // Enables / Disables information like the title before the video starts playing
-        'disablekb' => false, // Enables / Disables keyboard controls 
+        'disablekb' => true, // Enables / Disables keyboard controls 
         'theme' => 'light' // Dark / Light style themes 
     );
 
