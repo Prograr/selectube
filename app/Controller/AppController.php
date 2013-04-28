@@ -129,6 +129,7 @@ class AppController extends Controller {
     function afterFacebookLogin() {
         //Logic to happen after successful facebook login.
 //        $this->log("Facebook login. redirect");
+        $this->loadModel('User');
         $this->User->id = $this->Session->read('Auth.User.id');
         $this->User->saveField('lastconnect', gmdate("Y-m-d H:i:s"));
         $this->redirect("/musiques");
