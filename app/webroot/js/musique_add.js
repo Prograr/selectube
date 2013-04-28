@@ -190,6 +190,7 @@ $(document).ready(function() {
         });
         $('#MusiqueCategorie').val($('#CategorieTitre').val());
         $('#categorieModal').modal('hide');
+        e.preventDefault();
         return false;
     });
     
@@ -350,6 +351,7 @@ $(document).ready(function() {
         });
         $('#MusiqueArtiste').val($('#ArtisteNom').val());
         $('#artisteModal').modal('hide');
+        e.preventDefault();
         return false;
     });
     
@@ -549,6 +551,7 @@ $(document).ready(function() {
         });
         $('#MusiqueAlbum').val($('#AlbumTitre').val());
         $('#albumModal').modal('hide');
+        e.preventDefault();
         return false;
     });
     

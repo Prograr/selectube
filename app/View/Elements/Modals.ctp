@@ -180,7 +180,7 @@
                 </tr>
             </table>
             <?php
-                echo $this->Form->input('naissance', array('label' => 'Date de naissance / formation', 'dateFormat' => 'dmY', 'minYear' => date('Y') - 1000, 'maxYear' => date('Y') ));
+                echo $this->Form->input('naissance', array('label' => 'Date de naissance / formation', 'dateFormat' => 'DMY', 'minYear' => date('Y') - 1000, 'maxYear' => date('Y') ));
                 echo $this->Form->input('bio', array('label' => "Biographie"));
             ?>
         </div>
