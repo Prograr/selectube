@@ -33,21 +33,21 @@
                         <div class='input-append span12'>
                             <?php echo $this->Form->input('categorie', array('class' => 'span10', 'label' => '<i class="icon-flag"></i> Catégorie', 'type' => 'text', 'autocomplete' => 'off', 'div' => false)); ?>
                             <a href='#' data-toggle="modal" data-target="#categorieModal" class='btn add-on' id='icon-edit-categorie'><i class='icon-plus-sign'></i> </a>
-                            <?php echo $this->Form->hidden('categorie_id', array('value' => '0')); ?>
+                            <?php echo $this->Form->hidden('categorie_id', array('value' => '1')); ?>
                         </div>
                     </td>
                     <td class='span4'>
                         <div class='input-append span12'>
                             <?php echo $this->Form->input('artiste', array('class' => 'span10', 'label' => '<i class="icon-star"></i> Artiste / Groupe', 'type' => 'text', 'autocomplete' => 'off', 'div' => false)); ?>
                             <a href='#' data-toggle="modal" data-target="#artisteModal" class='btn add-on' id='icon-edit-artiste'><i class='icon-plus-sign'></i> </a>
-                            <?php echo $this->Form->hidden('artiste_id', array('value' => '0')); ?>
+                            <?php echo $this->Form->hidden('artiste_id', array('value' => '1')); ?>
                         </div>
                     </td>
                     <td class='span4'>
                         <div class='input-append span12'>
                             <?php echo $this->Form->input('album', array('class' => 'span10', 'label' => '<i class="icon-headphones"></i> Album', 'type' => 'text', 'autocomplete' => 'off', 'div' => false)); ?>
                             <a href='#' data-toggle="modal" data-target="#albumModal" class='btn add-on' id='icon-edit-album'><i class='icon-plus-sign'></i> </a>
-                            <?php echo $this->Form->hidden('album_id', array('value' => '0')); ?>
+                            <?php echo $this->Form->hidden('album_id', array('value' => '1')); ?>
                         </div>
                     </td>
                 </tr>
