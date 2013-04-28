@@ -143,7 +143,7 @@ $connecte = ($this->Session->read('Auth.User.id') != null);
                 <!--LIKE THE PAGE - FACEBOOK-->
                 <div class="fb-like pull-left" id="fb_page_like" data-href="http://selectube.org" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true"></div>
 
-                <p class="pull-right"><strong>© Selectube beta 2013</strong></p>
+                <p class="pull-right"><strong>© Selectube <?php echo Configure::read('version'); ?> 2013 </strong></p>
             </div><!-- #footer .container -->
 
         </div><!-- #main-container -->

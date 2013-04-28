@@ -108,5 +108,6 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
-setlocale(LC_ALL, 'fr_FR');
-Configure::write('Config.language', 'fre');
+
+//Fichier de conf perso
+include_once 'selectube.php';
