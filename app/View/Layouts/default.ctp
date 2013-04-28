@@ -83,7 +83,7 @@ $connecte = ($this->Session->read('Auth.User.id') != null);
         echo $this->Html->script('bootstrap.min');
         echo $this->Html->script('swfobject');
         echo $this->Html->script('youtube');
-        echo $this->Html->script('jquery.pnotify.min');
+        echo $this->Html->script('jquery.pnotify');
         echo $this->Html->script('app-helper');
         echo $this->Html->script('init-app');
         if (!$connecte) 

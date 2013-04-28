@@ -226,4 +226,18 @@ table#champsRelies{
 }
 .modal textarea{
     width: 100%;
+    height: 70px;
+}
+.profil.users.view {
+    margin-bottom: 20px;
+}
+.modal .categories, .modal .categories .modal-footer, 
+.modal .albums, .modal .albums .modal-footer {
+    text-align: center;
+}
+#ajax-loading-top {
+    color: #ccc;
+    margin-top: 14px;
+    margin-left: 5px;
+    min-width: 26px;
 }

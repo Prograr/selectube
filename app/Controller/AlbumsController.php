@@ -90,35 +90,40 @@ class AlbumsController extends AppController {
         unset($this->request->data['Album']['categorie']);
         unset($this->request->data['Album']['artiste']);
         
+        if($this->request->data['Album']['sortie']['year'] == '') 
+                $this->request->data['Album']['sortie']['year'] = date('Y');
+        if($this->request->data['Album']['sortie']['month'] == '') 
+                $this->request->data['Album']['sortie']['month'] = date('m');
+        if($this->request->data['Album']['sortie']['day'] == '') 
+                $this->request->data['Album']['sortie']['day'] = date('d');
+        
         $this->request->data['Album']['user_id'] = $this->Session->read("Auth.User.id");
         if ($this->request->data['Album']['id'] == 1
                 || !$this->Album->exists($this->request->data['Album']['id'])) { //Création
-            if ($this->request->is('post')) {
-                unset($this->request->data['Album']['id']);
-                $this->Album->create($this->request->data['Album']);
-                if ($this->Album->save()) {
+            unset($this->request->data['Album']['id']);
+            $this->Album->create($this->request->data['Album']);
+            if ($this->Album->save()) {
+                echo $this->Album->id;
+            } else {
+                echo 'KO';
+            }
+        }else{ //Modification
+            $myAlbum = $this->Album->find('first', array(
+                'recursive' => -1,
+                'conditions' => array(
+                    'user_id' => $this->Session->read("Auth.User.id"),
+                    'id' => $this->data['Album']['id']
+                )
+            ));
+            if ($myAlbum !== null || $this->Session->read("Auth.User.role") == 'admin'){
+                $this->Album->id = $this->data['Album']['id'];
+                if ($this->Album->save($this->request->data['Album'])) {
                     echo $this->Album->id;
                 } else {
                     echo 'KO';
                 }
-            }
-        }else{ //Modification
-            if ($this->request->is('post') || $this->request->is('put')) {
-                $myAlbum = $this->Album->find('count', array(
-                    'recursive' => -1,
-                    'conditions' => array(
-                        'user_id' => $this->Session->read("Auth.User.id"),
-                        'id' => $this->data['Album']['id']
-                    )
-                ));
-                if ($myAlbum != 1 || $this->Session->read("Auth.User.role") == 'admin'){
-                    $this->Album->id = $this->data['Album']['id'];
-                    if ($this->Album->save($this->request->data['Album'])) {
-                        echo $this->Album->id;
-                    } else {
-                        echo 'KO';
-                    }
-                }
+            }else{
+                echo 'KO';
             }
         }
         exit;

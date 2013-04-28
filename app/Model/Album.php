@@ -33,16 +33,16 @@ class Album extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'annee' => array(
-			'date' => array(
-				'rule' => array('date'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
+//		'sortie' => array(
+//			'date' => array(
+//				'rule' => array('date'),
+//				//'message' => 'Your custom message here',
+//				//'allowEmpty' => false,
+//				//'required' => false,
+//				//'last' => false, // Stop validation after this rule
+//				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+//			),
+//		),
 		'creation' => array(
 			'datetime' => array(
 				'rule' => array('datetime'),

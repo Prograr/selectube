@@ -87,36 +87,43 @@ class ArtistesController extends AppController {
      * @return void
      */
     public function editRest() {
+        $this->log($this->request->data);
         unset($this->request->data['Artiste']['categorie']);
+        if($this->request->data['Artiste']['naissance']['year'] == '') 
+                $this->request->data['Artiste']['naissance']['year'] = date('Y');
+        if($this->request->data['Artiste']['naissance']['month'] == '') 
+                $this->request->data['Artiste']['naissance']['month'] = date('m');
+        if($this->request->data['Artiste']['naissance']['day'] == '') 
+                $this->request->data['Artiste']['naissance']['day'] = date('d');
+        
+        $this->log($this->request->data);
         $this->request->data['Artiste']['user_id'] = $this->Session->read("Auth.User.id");
         if ($this->request->data['Artiste']['id'] == 1 
                 || !$this->Artiste->exists($this->request->data['Artiste']['id'])) { //Création
-            if ($this->request->is('post')) {
-                unset($this->request->data['Artiste']['id']);
-                $this->Artiste->create($this->request->data['Artiste']);
-                if ($this->Artiste->save()) {
+            unset($this->request->data['Artiste']['id']);
+            $this->Artiste->create($this->request->data['Artiste']);
+            if ($this->Artiste->save()) {
+                echo $this->Artiste->id;
+            } else {
+                echo 'KO';
+            }
+        }else{ //Modification
+            $myArtiste = $this->Artiste->find('first', array(
+                'recursive' => -1,
+                'conditions' => array(
+                    'user_id' => $this->Session->read("Auth.User.id"),
+                    'id' => $this->data['Artiste']['id']
+                )
+            ));
+            if ($myArtiste !== null || $this->Session->read("Auth.User.role") == 'admin'){
+                $this->Artiste->id = $this->data['Artiste']['id'];
+                if ($this->Artiste->save($this->request->data['Artiste'])) {
                     echo $this->Artiste->id;
                 } else {
                     echo 'KO';
                 }
-            }
-        }else{ //Modification
-            if ($this->request->is('post') || $this->request->is('put')) {
-                $myArtiste = $this->Artiste->find('count', array(
-                    'recursive' => -1,
-                    'conditions' => array(
-                        'user_id' => $this->Session->read("Auth.User.id"),
-                        'id' => $this->data['Artiste']['id']
-                    )
-                ));
-                if ($myArtiste != 1 || $this->Session->read("Auth.User.role") == 'admin'){
-                    $this->Artiste->id = $this->data['Artiste']['id'];
-                    if ($this->Artiste->save($this->request->data['Artiste'])) {
-                        echo $this->Artiste->id;
-                    } else {
-                        echo 'KO';
-                    }
-                }
+            }else{
+                echo 'KO';
             }
         }
         exit;

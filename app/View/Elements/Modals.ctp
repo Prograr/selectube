@@ -180,7 +180,7 @@
                 </tr>
             </table>
             <?php
-                echo $this->Form->input('naissance', array('label' => 'Date de naissance / formation', 'dateFormat' => 'DMY', 'minYear' => date('Y') - 1000, 'maxYear' => date('Y') ));
+                echo $this->Form->input('naissance', array('empty' => true, 'label' => 'Date de naissance / formation', 'dateFormat' => 'DMY', 'minYear' => date('Y') - 1000, 'maxYear' => date('Y') ));
                 echo $this->Form->input('bio', array('label' => "Biographie"));
             ?>
         </div>
@@ -208,7 +208,7 @@
             echo $this->Form->hidden('id', array('value' => '0'));
             
             echo $this->Html->tag('div', null, array('class' => 'input-prepend'));
-                echo $this->Form->label('titre', 'Titre de l\'album');
+                echo $this->Form->label('titre');
                 echo $this->Html->tag('span', $this->Form->label('titre',$this->Html->tag('i', '', array('class' => 'icon-user'))), array('class' => 'add-on'));
                 echo $this->Form->input('titre', array('label' => false, 'div' => false));
                 echo $this->Html->tag('i', '', array('class' => '', 'id' => 'icon-exist-album'));
@@ -230,7 +230,7 @@
             echo $this->Html->tag('/div');
             echo $this->Form->hidden('categorie_id', array('value' => '1'));
 
-            echo $this->Form->input('sortie', array('label' => 'Date de sortie', 'dateFormat' => 'DMY', 'minYear' => date('Y') - 100, 'maxYear' => date('Y')));
+            echo $this->Form->input('sortie', array('empty' => true, 'label' => 'Date de sortie', 'dateFormat' => 'DMY', 'minYear' => date('Y') - 100, 'maxYear' => date('Y')));
             ?>
         </div>
         <div class="modal-footer">

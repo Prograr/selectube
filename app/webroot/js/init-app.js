@@ -11,4 +11,14 @@ $(document).ready(function() {
 
     //Ajouter le titre de la page courante dans le fil d'ariane
     $('.breadcrumb .active').append(" : "+$('#content h2:first-child').text());
+    jQuery.ajaxSetup({
+        beforeSend: function() {
+           $('#ajax-loading-top i').show();
+        },
+        complete: function(){
+           $('#ajax-loading-top i').hide();
+        },
+        success: function() {}
+      });
+    $('#ajax-loading-top i').hide();
 });

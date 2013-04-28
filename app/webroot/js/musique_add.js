@@ -82,26 +82,26 @@ $(document).ready(function() {
     }).keyup(function(){ //Frappe clavier
         $('#icon-edit-categorie').removeClass('disabled');
         categoryId = newCategoryId;
+        var that = this;
         if ($(this).val() !== ""){
-            var exist = $.ajax({
-             url: "/categories/existRest/"+ $(this).val(),
-             async: false
-            }).responseText;
-            
-            if (exist === 'false'){
-                if (newCategoryId === 1)
-                    $('#icon-edit-categorie i').attr('class', 'icon-plus-sign');
-                else
-                    $('#icon-edit-categorie i').attr('class', 'icon-edit');
-            }else{
-                categoryId = exist;
-                if (categoryIds[$(this).val()] !== newCategoryId){
-                    $('#icon-edit-categorie i').attr('class', 'icon-lock');
-                    $('#icon-edit-categorie').addClass('disabled');
+            $.ajax({
+                url: "/categories/existRest/"+ $(that).val()
+            }).done(function( exist ) {
+                if (exist === 'false'){
+                    if (newCategoryId === 1)
+                        $('#icon-edit-categorie i').attr('class', 'icon-plus-sign');
+                    else
+                        $('#icon-edit-categorie i').attr('class', 'icon-edit');
                 }else{
-                    $('#icon-edit-categorie i').attr('class', 'icon-edit');
+                    categoryId = exist;
+                    if (categoryIds[$(that).val()] !== newCategoryId){
+                        $('#icon-edit-categorie i').attr('class', 'icon-lock');
+                        $('#icon-edit-categorie').addClass('disabled');
+                    }else{
+                        $('#icon-edit-categorie i').attr('class', 'icon-edit');
+                    }
                 }
-            }
+            });
         }else{
             if (newCategoryId === 1)
                 $('#icon-edit-categorie i').attr('class', 'icon-plus-sign');
@@ -148,30 +148,30 @@ $(document).ready(function() {
         }
     }).keyup(function(){
         if ($(this).val() !== ""){
-            var exist = $.ajax({
-             url: "/categories/existRest/"+ $(this).val(),
-             async: false
-            }).responseText;
-            if (exist === 'false'){
-                    $('#icon-exist-parentcategorie').attr('class', 'icon-remove-circle');
-            }else{
-                    $('#icon-exist-parentcategorie').attr('class', 'icon-ok-circle');
-            }
+            $.ajax({
+                url: "/categories/existRest/"+ $(this).val()
+            }).done(function( exist ) {
+                if (exist === 'false'){
+                        $('#icon-exist-parentcategorie').attr('class', 'icon-remove-circle');
+                }else{
+                        $('#icon-exist-parentcategorie').attr('class', 'icon-ok-circle');
+                }
+            });
         }else{
             $('#icon-exist-parentcategorie i').removeAttr('class');
         }
     });
     
-    $('#CategorieParentTitre').keyup(function(e){
-        var exist = $.ajax({
-             url: "/categories/existRest/"+ $(this).val(),
-             async: false
-            }).responseText;
+    $('#CategorieTitre').keyup(function(e){
+        $.ajax({
+            url: "/categories/existRest/"+ $(this).val()
+        }).done(function( exist ) {
             if (exist === 'false'){
                     $('#icon-exist-categorie').attr('class', 'icon-remove-circle');
             }else{
                     $('#icon-exist-categorie').attr('class', 'icon-ok-circle');
             }
+        });
     });
     
     //Envoi formulaire modale nouvelle catégorie
@@ -247,25 +247,25 @@ $(document).ready(function() {
         $('#icon-edit-artiste').removeClass('disabled');
         artisteId = newArtisteId;
         if ($(this).val() !== ""){
-            var exist = $.ajax({
-             url: "/artistes/existRest/"+ $(this).val(),
-             async: false
-            }).responseText;
-            
-            if (exist === 'false'){
-                if (newArtisteId === 1)
-                    $('#icon-edit-artiste i').attr('class', 'icon-plus-sign');
-                else
-                    $('#icon-edit-artiste i').attr('class', 'icon-edit');
-            }else{
-                artisteId = exist;
-                if (artisteIds[$(this).val()] !== newArtisteId){
-                    $('#icon-edit-artiste i').attr('class', 'icon-lock');
-                    $('#icon-edit-artiste').addClass('disabled');
+            var that = this;
+            $.ajax({
+                url: "/artistes/existRest/"+ $(that).val()
+            }).done(function( exist ) {
+                if (exist === 'false'){
+                    if (newArtisteId === 1)
+                        $('#icon-edit-artiste i').attr('class', 'icon-plus-sign');
+                    else
+                        $('#icon-edit-artiste i').attr('class', 'icon-edit');
                 }else{
-                    $('#icon-edit-artiste i').attr('class', 'icon-edit');
+                    artisteId = exist;
+                    if (artisteIds[$(that).val()] !== newArtisteId){
+                        $('#icon-edit-artiste i').attr('class', 'icon-lock');
+                        $('#icon-edit-artiste').addClass('disabled');
+                    }else{
+                        $('#icon-edit-artiste i').attr('class', 'icon-edit');
+                    }
                 }
-            }
+            });
         }else{
             if (newArtisteId === 1)
                 $('#icon-edit-artiste i').attr('class', 'icon-plus-sign');
@@ -275,11 +275,11 @@ $(document).ready(function() {
         $('#MusiqueArtisteId').val(artisteId);
     });
 
-    //Modale Catégorie détails
+    //Modale Artiste détails
     $('#icon-edit-artiste').click(function(e){
-        //Interdit l'édition de catégorie existante
+        //Interdit l'édition d'un artiste existant
         if ($('#icon-edit-artiste').hasClass('disabled')) return false;
-        
+
         if(artisteId !== 1) //Pour plus tard (si admin)
             $('#ArtisteId').val(artisteId);
         
@@ -289,15 +289,16 @@ $(document).ready(function() {
     });
     
     $('#ArtisteNom').keyup(function(e){
-        var exist = $.ajax({
-             url: "/artistes/existRest/"+ $(this).val(),
-             async: false
-            }).responseText;
+        $.ajax({
+             url: "/artistes/existRest/"+ $(this).val()
+        }).done(function( exist ) {
             if (exist === 'false'){
                 $('#icon-exist-artiste').attr('class', 'icon-remove-circle');
             }else{
                 $('#icon-exist-artiste').attr('class', 'icon-ok-circle');
             }
+        });
+        
     });
     //Autocomplete titre catégorie parente (Modale)
     $('#ArtisteCategorie').typeahead({
@@ -321,15 +322,15 @@ $(document).ready(function() {
         }
     }).keyup(function(){
         if ($(this).val() !== ""){
-            var exist = $.ajax({
-             url: "/artistes/existRest/"+ $(this).val(),
-             async: false
-            }).responseText;
-            if (exist === 'false'){
+            $.ajax({
+                url: "/artistes/existRest/"+ $(this).val()
+            }).done(function( exist ) {
+               if (exist === 'false'){
                     $('#icon-exist-categorie-artiste').attr('class', 'icon-remove-circle');
-            }else{
+                }else{
                     $('#icon-exist-categorie-artiste').attr('class', 'icon-ok-circle');
-            }
+                }
+            });
         }else{
             $('#icon-exist-categorie-artiste').removeAttr('class');
         }
@@ -408,25 +409,27 @@ $(document).ready(function() {
         $('#icon-edit-album').removeClass('disabled');
         albumId = newAlbumId;
         if ($(this).val() !== ""){
-            var exist = $.ajax({
-             url: "/albums/existRest/"+ $(this).val(),
-             async: false
-            }).responseText;
-            
-            if (exist === 'false'){
-                if (newAlbumId === 1)
-                    $('#icon-edit-album i').attr('class', 'icon-plus-sign');
-                else
-                    $('#icon-edit-album i').attr('class', 'icon-edit');
-            }else{
-                albumId = exist;
-                if (albumIds[$(this).val()] !== newAlbumId){
-                    $('#icon-edit-album i').attr('class', 'icon-lock');
-                    $('#icon-edit-album').addClass('disabled');
+            var that = this;
+            $.ajax({
+                url: "/albums/existRest/"+ $(that).val()
+            }).done(function( exist ) {
+                if (exist === 'false'){
+                    if (newAlbumId === 1)
+                        $('#icon-edit-album i').attr('class', 'icon-plus-sign');
+                    else
+                        $('#icon-edit-album i').attr('class', 'icon-edit');
                 }else{
-                    $('#icon-edit-album i').attr('class', 'icon-edit');
+                    albumId = exist;
+                    if (albumIds[$(that).val()] !== newAlbumId){
+                        $('#icon-edit-album i').attr('class', 'icon-lock');
+                        $('#icon-edit-album').addClass('disabled');
+                    }else{
+                        $('#icon-edit-album i').attr('class', 'icon-edit');
+                    }
                 }
-            }
+            });
+            
+            
         }else{
             if (newAlbumId === 1)
                 $('#icon-edit-album i').attr('class', 'icon-plus-sign');
@@ -436,14 +439,14 @@ $(document).ready(function() {
         $('#MusiqueAlbumId').val(albumId);
     });
 
-    //Modale Catégorie détails
+    //Modale Album détails
     $('#icon-edit-album').click(function(e){
-        //Interdit l'édition de catégorie existante
+        //Interdit l'édition d'un album existant
         if ($('#icon-edit-album').hasClass('disabled')) return false;
         
         if(albumId !== 1) //Pour plus tard (si admin)
             $('#AlbumId').val(albumId);
-        
+
         $('#AlbumTitre').val($('#MusiqueAlbum').val());
         $('#AlbumCategorie').val($('#MusiqueCategorie').val());
         $('#AlbumCategorieId').val($('#MusiqueCategorieId').val());
@@ -452,15 +455,15 @@ $(document).ready(function() {
     });
     
     $('#AlbumTitre').keyup(function(e){
-        var exist = $.ajax({
-             url: "/albums/existRest/"+ $(this).val(),
-             async: false
-            }).responseText;
+        $.ajax({
+            url: "/albums/existRest/"+ $(this).val()
+        }).done(function( exist ) {
             if (exist === 'false'){
                 $('#icon-exist-album').attr('class', 'icon-remove-circle');
             }else{
                 $('#icon-exist-album').attr('class', 'icon-ok-circle');
             }
+        });
     });
     
     //Autocomplete titre catégorie parente (Modale)
@@ -485,15 +488,15 @@ $(document).ready(function() {
         }
     }).keyup(function(){
         if ($(this).val() !== ""){
-            var exist = $.ajax({
-             url: "/albums/existRest/"+ $(this).val(),
-             async: false
-            }).responseText;
-            if (exist === 'false'){
-                    $('#icon-exist-categorie-album').attr('class', 'icon-remove-circle');
-            }else{
-                    $('#icon-exist-categorie-album').attr('class', 'icon-ok-circle');
-            }
+            $.ajax({
+                url: "/albums/existRest/"+ $(this).val()
+            }).done(function( exist ) {
+                if (exist === 'false'){
+                        $('#icon-exist-categorie-album').attr('class', 'icon-remove-circle');
+                }else{
+                        $('#icon-exist-categorie-album').attr('class', 'icon-ok-circle');
+                }
+            });
         }else{
             $('#icon-exist-categorie-album').removeAttr('class');
         }
@@ -521,15 +524,16 @@ $(document).ready(function() {
         }
     }).keyup(function(){
         if ($(this).val() !== ""){
-            var exist = $.ajax({
-             url: "/albums/existRest/"+ $(this).val(),
-             async: false
-            }).responseText;
-            if (exist === 'false'){
-                    $('#icon-exist-artiste-album').attr('class', 'icon-remove-circle');
-            }else{
-                    $('#icon-exist-artiste-album').attr('class', 'icon-ok-circle');
-            }
+            
+            $.ajax({
+                url: "/albums/existRest/"+ $(this).val()
+            }).done(function( exist ) {
+                if (exist === 'false'){
+                        $('#icon-exist-artiste-album').attr('class', 'icon-remove-circle');
+                }else{
+                        $('#icon-exist-artiste-album').attr('class', 'icon-ok-circle');
+                }
+            });
         }else{
             $('#icon-exist-artiste-album').removeAttr('class');
         }

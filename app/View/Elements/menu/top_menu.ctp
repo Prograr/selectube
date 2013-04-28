@@ -35,16 +35,13 @@
             </form>
 
             <ul class="nav pull-right">
-                <li id="activityMonitor" class="loading-glyph"></li>
+                <?php if (!$this->Session->read('Auth.User') && !isset($facebook_id)){ //SI NON CONNECTE ?>
                 <li>
                     <span style="width: 90px;">
-                     <?php
-                        if (!$this->Session->read('Auth.User') && !isset($facebook_id)){ //SI NON CONNECTE
-                            echo $this->Facebook->login(array('perms' => 'email','show-faces'=> false, "max-rows"=> 0,'size' => 'small','style'=> 'margin-top: 10px;'));
-                        }
-                    ?>
+                            <?php echo $this->Facebook->login(array('perms' => 'email','show-faces'=> false, "max-rows"=> 0,'size' => 'small','style'=> 'margin-top: 10px;'));?>
                     </span>
                 </li>
+                <?php } ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <?php
@@ -86,6 +83,7 @@
                     </ul>
                 </li>
                 
+                <li id="ajax-loading-top" class="loading"><i class="icon-spinner icon-spin icon-large"></i></li>
                 <li class="divider-vertical"></li>
             </ul>
         </div>

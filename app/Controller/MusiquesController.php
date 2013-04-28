@@ -60,6 +60,9 @@ class MusiquesController extends AppController {
                     ));
                     $this->Musique->Categorie->save();
                     $this->request->data['Musique']['categorie_id'] = $this->Musique->Categorie->id;
+                }else{
+                    $this->Musique->Categorie->id = $this->request->data['Musique']['categorie_id'];
+                    $this->Musique->Categorie->saveField('titre', $this->request->data['Musique']['categorie']);
                 }
             }
             
@@ -72,6 +75,9 @@ class MusiquesController extends AppController {
                     ));
                     $this->Musique->Artiste->save();
                     $this->request->data['Musique']['artiste_id'] = $this->Musique->Artiste->id;
+                }else{
+                    $this->Musique->Artiste->id = $this->request->data['Musique']['artiste_id'];
+                    $this->Musique->Artiste->saveField('nom', $this->request->data['Musique']['artiste']);
                 }
             }
             
@@ -85,6 +91,9 @@ class MusiquesController extends AppController {
                     ));
                     $this->Musique->Album->save();
                     $this->request->data['Musique']['album_id'] = $this->Musique->Album->id;
+                }else{
+                    $this->Musique->Album->id = $this->request->data['Musique']['album_id'];
+                    $this->Musique->Album->saveField('titre', $this->request->data['Musique']['album']);
                 }
             }
             
