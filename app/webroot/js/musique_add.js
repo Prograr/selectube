@@ -3,6 +3,18 @@
  * Contact: florianajir@gmail.com
  */
 
+function getYoutubeInfos(){
+    var url = $("#inputUrlYoutube").val();
+    if ( url !== ''){
+        if (getVideoId(url) !== '') { //Url valide
+            getYouTubeInfo(url);
+            $("#fieldset-infos-musique").fadeIn("slow");
+            $("#miniatureYoutube").attr('src', getThumbnail(url, 'small'));
+            $('#divMiniatureYoutube').fadeIn();
+            notification("Vidéo Youtube trouvée", "Vous pouvez remplir les informations supplémentaires et valider.", 'success');
+        }
+    }
+}
 
 $(document).ready(function() {
     
@@ -19,20 +31,13 @@ $(document).ready(function() {
     /*
      * Requête infos youtube
      */
-    $("#getYoutubeInfos").click(function() {
-        if ( $("#inputUrlYoutube").val() !== ''){
-            if (getVideoId($("#inputUrlYoutube").val()) !== '') { //Url valide
-                var url = $("#inputUrlYoutube").val();
-                getYouTubeInfo(url);
-                $("#fieldset-infos-musique").fadeIn("slow");
-                $("#miniatureYoutube").attr('src', getThumbnail(url, 'small'));
-                $('#divMiniatureYoutube').fadeIn();
-                notification("Vidéo Youtube trouvée", "Vous pouvez remplir les informations supplémentaires et valider.", 'success');
-            }
-        }
+    $("#getYoutubeInfos").click(getYoutubeInfos);
+    
+    $('#MusiquePartagerForm').submit(function(){
+        getYoutubeInfos();
+        return false;
     });
-
-
+    
     /*
      * CATEGORIE LIEE
      */
