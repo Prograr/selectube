@@ -8,7 +8,6 @@ App::uses('AppModel', 'Model');
  * @property Album $Album
  * @property Artiste $Artiste
  * @property Category $Category
- * @property Commentaire $Commentaire
  * @property Favori $Favori
  * @property Message $Message
  * @property Moderation $Moderation
@@ -157,19 +156,6 @@ class User extends AppModel {
         ),
         'Category' => array(
             'className' => 'Category',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
-        'Commentaire' => array(
-            'className' => 'Commentaire',
             'foreignKey' => 'user_id',
             'dependent' => false,
             'conditions' => '',
