@@ -84,6 +84,7 @@ class MusiquesController extends AppController {
                         "titre" => $this->request->data['Musique']['album']
                     ));
                     $this->Musique->Album->save();
+                    $this->request->data['Musique']['artiste_id'] = $this->Musique->Album->id;
                 }
             }
             
