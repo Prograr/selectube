@@ -93,9 +93,9 @@ class AlbumsController extends AppController {
         if($this->request->data['Album']['sortie']['year'] == '') 
                 $this->request->data['Album']['sortie']['year'] = date('Y');
         if($this->request->data['Album']['sortie']['month'] == '') 
-                $this->request->data['Album']['sortie']['month'] = date('m');
+                $this->request->data['Album']['sortie']['month'] = '01';
         if($this->request->data['Album']['sortie']['day'] == '') 
-                $this->request->data['Album']['sortie']['day'] = date('d');
+                $this->request->data['Album']['sortie']['day'] = '01';
         
         $this->request->data['Album']['user_id'] = $this->Session->read("Auth.User.id");
         if ($this->request->data['Album']['id'] == 1
