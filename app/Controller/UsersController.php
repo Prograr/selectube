@@ -135,6 +135,8 @@ class UsersController extends AppController {
     public function connexion() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
+                $this->User->id = $this->Session->read('Auth.User.id');
+                $this->User->saveField('lastconnect', gmdate("Y-m-d H:i:s"));
 //                $this->Session->setFlash(__('Bienvenue')." ". $this->Auth->user('pseudo'), 'flash/success');
                 $this->redirect($this->Auth->redirect("/selecteur/profil/" . $this->Auth->user('pseudo')));
             } else {

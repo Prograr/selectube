@@ -56,30 +56,23 @@ class AppController extends Controller {
     public function beforeFilter() {
         $this->Auth->allow('index', 'voir', 'display', 'accueil', 'liste');
         //Get all the details on the facebook user
-        $this->set('facebookUser', $this->Connect->user());
-        $this->set('facebook_id', $this->Connect->user('id'));
         try {
-            $user = $this->Auth->user();
-            $this->set('user', $user);
             $fb_user = $this->Connect->user();
-//                debug($fb_user);
+            $this->set('facebookUser', $fb_user);
+            $this->set('facebook_id', $fb_user['id']);
         } catch (FacebookApiException $e) {
-            debug($e);
+            $this->log($e);
         }
         if (!$this->Auth->loggedIn() && $fb_user != null && !isset($fb_user['error_code'])) {
             $this->loadModel('User');
             $this->User->recursive = -1;
-            $user = $this->User->findByFacebookId($fb_user['id']);
-            if ($user != null){
+            if ($user = $this->User->findByFacebookId($fb_user['id']) 
+                    || $user = $this->User->findByEmail($fb_user['email'])){
                 $this->Auth->login($user['User']);
-            }else{
-                $user = $this->User->findByEmail($fb_user['email']);
-                if ($user != null){
-                    $this->Auth->login($user['User']);
-                }
             }
+        }else if($this->Auth->loggedIn()){
+            $this->set('user', $this->Auth->user());
         }
-//                debug($this->Session->read('Auth.User'));
     }
 
     public function isAuthorized($user) {
@@ -92,7 +85,6 @@ class AppController extends Controller {
         return false;
     }
 
-    //Add an email field to be saved along with creation.
     function beforeFacebookSave() {
         $this->loadModel('User');
         $exists = $this->User->find('first', array(
@@ -107,10 +99,12 @@ class AppController extends Controller {
             // do however you want to handle your update or whatever. Just make sure you fill in $FBComp->authUser['User'] which is used for authentication
             $this->Connect->authUser = $exists;
             $this->Connect->authUser['User']['facebook_id'] = $this->Connect->user('id');
+            $this->Connect->authUser['User']['facebook_url'] = $this->Connect->user('link');
+            $this->Connect->authUser['User']['lastconnect'] = gmdate("Y-m-d H:i:s");
 
             // do this if you want to update the record
-//            $this->id = $exists['User'][$this->primaryKey];
-//            $this->save($this->Connect->authUser);
+            $this->id = $exists['User'][$this->primaryKey];
+            $this->save($this->Connect->authUser);
 
             return false; // return false to stop creating new entry
         }
@@ -119,6 +113,7 @@ class AppController extends Controller {
             $this->Connect->authUser['User']['email'] = $this->Connect->user('email');
             $this->Connect->authUser['User']['pseudo'] = $this->Connect->user('name');
             $this->Connect->authUser['User']['created'] = gmdate("Y-m-d H:i:s");
+            $this->Connect->authUser['User']['lastconnect'] = gmdate("Y-m-d H:i:s");
             $this->Connect->authUser['User']['facebook_url'] = $this->Connect->user('link');
             $this->Connect->authUser['User']['facebook_id'] = $this->Connect->user('id');
             return true; // return true to create new entry
@@ -128,13 +123,15 @@ class AppController extends Controller {
 
     function beforeFacebookLogin($user) {
         //Logic to happen before a facebook login
-        $this->log($user);
+//        $this->log($user);
     }
 
     function afterFacebookLogin() {
         //Logic to happen after successful facebook login.
-        $this->log("Facebook login. redirect");
-        $this->redirect($this->Auth->loginRedirect);
+//        $this->log("Facebook login. redirect");
+        $this->User->id = $this->Session->read('Auth.User.id');
+        $this->User->saveField('lastconnect', gmdate("Y-m-d H:i:s"));
+        $this->redirect("/musiques");
     }
 
 }
