@@ -25,9 +25,12 @@ class ArtistesController extends AppController {
      * @return json artistes au format json pour autocomplete
      */
     public function listeJson($query=null) {
+        if ($query==null){
+            $query = $_GET['query'];
+        }
         $artistes = $this->Artiste->find('list', array(
             'fields' => array('nom'),
-            'conditions' => array('Artiste.nom LIKE' => "%".$_GET['query']."%")));
+            'conditions' => array('Artiste.nom LIKE' => "%".$query."%")));
         $liste = array();
         foreach ($artistes as $key => $value) {
             $liste[] = $value;
@@ -35,6 +38,90 @@ class ArtistesController extends AppController {
         echo json_encode($liste);
         die;
     }
+    
+    /**
+     * listeJson method
+     *
+     * @return json catégories au format json pour autocomplete
+     */
+    public function listeAllJson() {
+        
+        $artistes = $this->Artiste->find('all', array(
+            'fields' => array('id','nom'),
+            'recursive' => -1
+            ));
+        $liste = array();
+        foreach ($artistes as $value) {
+            $liste[] = array(
+                "id" => $value['Artiste']['id'],
+                "name" => $value['Artiste']['nom']
+            );
+        }
+        echo json_encode($liste);
+        die;
+    }
+    
+    /**
+     * existRest method
+     *
+     * @return false si la catégorie n'existe pas, son id sinon
+     */
+    public function existRest($query=null) {
+        if ($query==null){
+            $query = $_GET['query'];
+        }
+        $exist = $this->Artiste->find('first', array(
+            'recursive' => -1,
+            'fields' => array('id'),
+            'conditions' => array('Artiste.nom' => $query)));
+        if ($exist == null)
+            echo "false";
+        else
+            echo $exist['Artiste']['id'];
+        exit;
+    }
+    
+    /**
+     * ajouter method
+     *
+     * @return void
+     */
+    public function editRest() {
+        unset($this->request->data['Artiste']['categorie']);
+        $this->request->data['Artiste']['user_id'] = $this->Session->read("Auth.User.id");
+        if ($this->request->data['Artiste']['id'] == 0 
+                || !$this->Artiste->exists($this->request->data['Artiste']['id'])) { //Création
+            if ($this->request->is('post')) {
+                unset($this->request->data['Artiste']['id']);
+                $this->Artiste->create($this->request->data['Artiste']);
+                if ($this->Artiste->save()) {
+                    echo $this->Artiste->id;
+                } else {
+                    echo 'KO';
+                }
+            }
+        }else{ //Modification
+            if ($this->request->is('post') || $this->request->is('put')) {
+                $myArtiste = $this->Artiste->find('count', array(
+                    'recursive' => -1,
+                    'conditions' => array(
+                        'user_id' => $this->Session->read("Auth.User.id"),
+                        'id' => $this->data['Artiste']['id']
+                    )
+                ));
+                if ($myArtiste != 0 || $this->Session->read("Auth.User.role") == 'admin'){
+                    $this->Artiste->id = $this->data['Artiste']['id'];
+                    if ($this->Artiste->save($this->request->data['Artiste'])) {
+                        echo $this->Artiste->id;
+                    } else {
+                        echo 'KO';
+                    }
+                }
+            }
+        }
+        exit;
+    }
+    
     /**
      * voir method
      *
@@ -44,7 +131,7 @@ class ArtistesController extends AppController {
      */
     public function voir($id = null) {
         if (!$this->Artiste->exists($id)) {
-            throw new NotFoundException(__('Invalid artiste'));
+            throw new NotFoundException(__('Artiste introuvable'));
         }
         $options = array('conditions' => array('Artiste.' . $this->Artiste->primaryKey => $id));
         $this->set('artiste', $this->Artiste->find('first', $options));
@@ -60,15 +147,15 @@ class ArtistesController extends AppController {
         if ($this->request->is('post')) {
             $this->Artiste->create();
             if ($this->Artiste->save($this->request->data)) {
-                $this->Session->setFlash(__('The artiste has been saved'));
+                $this->Session->setFlash(__('L\'artiste à été enregistré'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The artiste could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('Erreur lors de l\'enregistrement.'));
             }
         }
-        $categories = $this->Artiste->Categorie->find('list');
+        $artistes = $this->Artiste->Artiste->find('list');
         $users = $this->Artiste->User->find('list');
-        $this->set(compact('categories', 'users'));
+        $this->set(compact('artistes', 'users'));
     }
 
     /**
@@ -84,18 +171,18 @@ class ArtistesController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Artiste->save($this->request->data)) {
-                $this->Session->setFlash(__('The artiste has been saved'));
+                $this->Session->setFlash(__('L\'artiste à été enregistré'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The artiste could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('Erreur lors de l\'enregistrement.'));
             }
         } else {
             $options = array('conditions' => array('Artiste.' . $this->Artiste->primaryKey => $id));
             $this->request->data = $this->Artiste->find('first', $options);
         }
-        $categories = $this->Artiste->Categorie->find('list');
+        $artistes = $this->Artiste->Artiste->find('list');
         $users = $this->Artiste->User->find('list');
-        $this->set(compact('categories', 'users'));
+        $this->set(compact('artistes', 'users'));
     }
 
     /**
@@ -113,10 +200,10 @@ class ArtistesController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Artiste->delete()) {
-            $this->Session->setFlash(__('Artiste deleted'));
+            $this->Session->setFlash(__('Artiste supprimé'));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Artiste was not deleted'));
+        $this->Session->setFlash(__('Erreur lors de la suppression de l\'artiste'));
         $this->redirect(array('action' => 'index'));
     }
 

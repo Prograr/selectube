@@ -83,3 +83,162 @@
         <a class="btn" data-dismiss="modal" aria-hidden="true">Fermer</a>
     </div>
 </div>
+
+<!--Catégorie Edition-->
+<div class="modal hide fade" id="categorieModal" tabindex="-1" role="dialog" aria-labelledby="categorieModalLabel" aria-hidden="true">
+    <div class="categories form">
+        <div class="modal-header">
+            <a type="button" class="close" data-dismiss="modal" aria-hidden="true">×</a>
+            <h3 id="categoriesModalLabel"><?php echo __('Catégorie'); ?></h3>
+        </div>
+        <div class="modal-body">
+            <?php 
+            echo $this->Form->create('Categorie', array('action' => 'editRest'));
+
+            echo $this->Html->tag('div', null, array('class' => 'input-prepend'));
+                echo $this->Form->label('titre');
+                echo $this->Html->tag('span', $this->Form->label('titre',$this->Html->tag('i', '', array('class' => 'icon-folder-open-alt'))), array('class' => 'add-on'));
+                echo $this->Form->input('titre', array('label' => false, 'div' => false));
+                echo $this->Html->tag('i', '', array('class' => '', 'id' => 'icon-exist-categorie'));
+            echo $this->Html->tag('/div');
+
+            echo $this->Html->tag('div', null, array('class' => 'input-prepend'));
+                echo $this->Form->label('parent_titre', 'Sous-Catégorie de');
+                echo $this->Html->tag('span', $this->Form->label('parent_titre',$this->Html->tag('i', '', array('class' => 'icon-sitemap'))), array('class' => 'add-on'));
+                echo $this->Form->input('parent_titre', array('label' => false, 'div' => false));
+                echo $this->Html->tag('i', '', array('class' => '', 'id' => 'icon-exist-parentcategorie'));
+            echo $this->Html->tag('/div');
+
+            echo $this->Form->hidden('id', array('value' => '0'));
+            echo $this->Form->hidden('parent_id', array('value' => '1'));
+
+            echo $this->Html->tag('div', null, array('class' => 'input-prepend'));
+                echo $this->Form->label('tags', 'Tags (séparer par des virgules)');
+                echo $this->Html->tag('span', $this->Form->label('tags',$this->Html->tag('i', '', array('class' => 'icon-tags'))), array('class' => 'add-on'));
+                echo $this->Form->input('tags', array('label' => false, 'div' => false));
+            echo $this->Html->tag('/div');
+            ?>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
+            <?php
+            echo $this->Form->button("<i class='icon-save'></i> " . __('Enregistrer'), array('class' => 'btn btn-primary', 'type' =>'submit'));
+            echo $this->Form->end();
+            ?>
+        </div>
+    </div>
+</div>
+
+<!--Artiste Edition-->
+<div class="modal hide fade" id="artisteModal" tabindex="-1" role="dialog" aria-labelledby="artisteModalLabel" aria-hidden="true">
+    <div class="artistes form">
+        <div class="modal-header">
+            <a type="button" class="close" data-dismiss="modal" aria-hidden="true">×</a>
+            <h3 id="artistesModalLabel"><?php echo __('Artiste'); ?></h3>
+        </div>
+        <div class="modal-body">
+            <?php 
+            echo $this->Form->create('Artiste', array('action' => 'editRest'));
+
+            echo $this->Form->hidden('id', array('value' => '0'));
+            
+            echo $this->Html->tag('div', null, array('class' => 'input-prepend'));
+                echo $this->Form->label('nom');
+                echo $this->Html->tag('span', $this->Form->label('nom',$this->Html->tag('i', '', array('class' => 'icon-user'))), array('class' => 'add-on'));
+                echo $this->Form->input('nom', array('label' => false, 'div' => false));
+                echo $this->Html->tag('i', '', array('class' => '', 'id' => 'icon-exist-artiste'));
+            echo $this->Html->tag('/div');
+            
+            echo $this->Html->tag('div', null, array('class' => 'input-prepend'));
+                echo $this->Form->label('categorie', 'Catégorie');
+                echo $this->Html->tag('span', $this->Form->label('categorie',$this->Html->tag('i', '', array('class' => 'icon-sitemap'))), array('class' => 'add-on'));
+                echo $this->Form->input('categorie', array('label' => false, 'div' => false, 'type' => 'text'));
+                echo $this->Html->tag('i', '', array('class' => '', 'id' => 'icon-exist-categorie-artiste'));
+            echo $this->Html->tag('/div');
+            
+            echo $this->Form->hidden('categorie_id', array('value' => '1'));
+            ?>
+            <table>
+                <tr>
+                    <?php
+                    echo $this->Html->tag('td', null);
+                        echo $this->Html->tag('div', null, array('class' => 'input-prepend'));
+                            echo $this->Form->label('pays');
+                            echo $this->Html->tag('span', $this->Form->label('pays',$this->Html->tag('i', '', array('class' => 'icon-flag'))), array('class' => 'add-on'));
+                            echo $this->Form->input('pays', array('label' => false, 'div' => false));
+                        echo $this->Html->tag('/div');
+                    echo $this->Html->tag('/td');
+            
+                    echo $this->Html->tag('td', null);
+                        echo $this->Html->tag('div', null, array('class' => 'input-prepend'));
+                            echo $this->Form->label('ville');
+                            echo $this->Html->tag('span', $this->Form->label('ville',$this->Html->tag('i', '', array('class' => 'icon-home'))), array('class' => 'add-on'));
+                            echo $this->Form->input('ville', array('label' => false, 'div' => false));
+                        echo $this->Html->tag('/div');
+                    echo $this->Html->tag('/td');
+                    ?>
+                </tr>
+            </table>
+            <?php
+                echo $this->Form->input('naissance', array('label' => 'Date de naissance / formation', 'dateFormat' => 'dmY', 'minYear' => date('Y') - 1000, 'maxYear' => date('Y') ));
+                echo $this->Form->input('bio', array('label' => "Biographie"));
+            ?>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
+            <?php
+            echo $this->Form->button("<i class='icon-save'></i> " . __('Enregistrer'), array('class' => 'btn btn-primary', 'type' =>'submit'));
+            echo $this->Form->end();
+            ?>
+        </div>
+    </div>
+</div>
+
+<!--Album Edition-->
+<div class="modal hide fade" id="albumModal" tabindex="-1" role="dialog" aria-labelledby="albumModalLabel" aria-hidden="true">
+    <div class="albums form">
+        <div class="modal-header">
+            <a type="button" class="close" data-dismiss="modal" aria-hidden="true">×</a>
+            <h3 id="albumsModalLabel"><?php echo __('Album'); ?></h3>
+        </div>
+        <div class="modal-body">
+            <?php 
+            echo $this->Form->create('Album', array('action' => 'editRest'));
+
+            echo $this->Form->hidden('id', array('value' => '0'));
+            
+            echo $this->Html->tag('div', null, array('class' => 'input-prepend'));
+                echo $this->Form->label('titre', 'Titre de l\'album');
+                echo $this->Html->tag('span', $this->Form->label('titre',$this->Html->tag('i', '', array('class' => 'icon-user'))), array('class' => 'add-on'));
+                echo $this->Form->input('titre', array('label' => false, 'div' => false));
+                echo $this->Html->tag('i', '', array('class' => '', 'id' => 'icon-exist-album'));
+            echo $this->Html->tag('/div');
+            
+            echo $this->Html->tag('div', null, array('class' => 'input-prepend'));
+                echo $this->Form->label('artiste', 'Artiste / Groupe');
+                echo $this->Html->tag('span', $this->Form->label('artiste',$this->Html->tag('i', '', array('class' => 'icon-user'))), array('class' => 'add-on'));
+                echo $this->Form->input('artiste', array('label' => false, 'div' => false, 'type' => 'text'));
+                echo $this->Html->tag('i', '', array('class' => '', 'id' => 'icon-exist-artiste-album'));
+            echo $this->Html->tag('/div');
+            echo $this->Form->hidden('artiste_id', array('value' => '1'));
+            
+            echo $this->Html->tag('div', null, array('class' => 'input-prepend'));
+                echo $this->Form->label('categorie', 'Catégorie');
+                echo $this->Html->tag('span', $this->Form->label('categorie',$this->Html->tag('i', '', array('class' => 'icon-sitemap'))), array('class' => 'add-on'));
+                echo $this->Form->input('categorie', array('label' => false, 'div' => false, 'type' => 'text'));
+                echo $this->Html->tag('i', '', array('class' => '', 'id' => 'icon-exist-categorie-album'));
+            echo $this->Html->tag('/div');
+            echo $this->Form->hidden('categorie_id', array('value' => '1'));
+
+            echo $this->Form->input('sortie', array('label' => 'Date de sortie', 'dateFormat' => 'DMY', 'minYear' => date('Y') - 100, 'maxYear' => date('Y')));
+            ?>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
+            <?php
+            echo $this->Form->button("<i class='icon-save'></i> " . __('Enregistrer'), array('class' => 'btn btn-primary', 'type' =>'submit'));
+            echo $this->Form->end();
+            ?>
+        </div>
+    </div>
+</div>

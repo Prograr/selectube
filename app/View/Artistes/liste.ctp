@@ -28,7 +28,7 @@
         <small>
             <?php
             echo $this->Paginator->counter(array(
-                'format' => __('Page {:page} / {:pages}, {:current} élements sur un total de {:count}, musiques {:start} à {:end}.')
+                'format' => __('Page {:page} / {:pages}, {:current} artistes sur un total de {:count}, éléments {:start} à {:end}.')
             ));
             ?>			
         </small>

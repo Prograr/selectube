@@ -25,15 +25,103 @@ class CategoriesController extends AppController {
      * @return json catégories au format json pour autocomplete
      */
     public function listeJson($query=null) {
+        if ($query==null){
+            $query = $_GET['query'];
+        }
         $categories = $this->Category->find('list', array(
             'fields' => array('titre'),
-            'conditions' => array('Category.titre LIKE' => "%".$_GET['query']."%")));
+            'conditions' => array('Category.titre LIKE' => "%".$query."%")));
         $liste = array();
         foreach ($categories as $key => $value) {
             $liste[] = $value;
         }
         echo json_encode($liste);
         die;
+    }
+    
+    /**
+     * listeJson method
+     *
+     * @return json catégories au format json pour autocomplete
+     */
+    public function listeAllJson() {
+        
+        $categories = $this->Category->find('all', array(
+            'fields' => array('id','titre'),
+            'recursive' => -1
+            ));
+        $liste = array();
+        foreach ($categories as $value) {
+            $liste[] = array(
+                "id" => $value['Category']['id'],
+                "title" => $value['Category']['titre']
+            );
+        }
+        echo json_encode($liste);
+        die;
+    }
+    
+    /**
+     * existRest method
+     *
+     * @return false si la catégorie n'existe pas, son id sinon
+     */
+    public function existRest($query=null) {
+        if ($query==null){
+            $query = $_GET['query'];
+        }
+        $exist = $this->Category->find('first', array(
+            'recursive' => -1,
+            'fields' => array('id'),
+            'conditions' => array('Category.titre' => $query)));
+        if ($exist == null)
+            echo "false";
+        else
+            echo $exist['Category']['id'];
+        exit;
+    }
+    
+    /**
+     * ajouter method
+     *
+     * @return void
+     */
+    public function editRest() {
+        unset($this->request->data['Categorie']['parent_titre']);
+        $this->request->data['Categorie']['user_id'] = $this->Session->read("Auth.User.id");
+        if ($this->request->data['Categorie']['id'] == 0 
+                || !$this->Category->exists($this->request->data['Categorie']['id'])) { //Création
+            if ($this->request->is('post')) {
+                unset($this->request->data['Categorie']['id']);
+                $this->Category->create($this->request->data['Categorie']);
+                if ($this->Category->save()) {
+                    echo $this->Category->id;
+                } else {
+                    echo 'KO';
+                }
+            }
+        }else{ //Modification
+            if ($this->request->is('post') || $this->request->is('put')) {
+                $myCat = $this->Category->find('count', array(
+                    'recursive' => -1,
+                    'conditions' => array(
+                        'user_id' => $this->Session->read("Auth.User.id"),
+                        'id' => $this->data['Categorie']['id']
+                    )
+                ));
+                if ($myCat != 0 || $this->Session->read("Auth.User.role") == 'admin'){
+                    $this->Category->id = $this->data['Categorie']['id'];
+                    if ($this->request->data['Categorie']['parent_id'] == 0)
+                        $this->request->data['Categorie']['parent_id'] = 1;
+                    if ($this->Category->save($this->request->data['Categorie'])) {
+                        echo $this->Category->id;
+                    } else {
+                        echo 'KO';
+                    }
+                }
+            }
+        }
+        exit;
     }
 
     /**

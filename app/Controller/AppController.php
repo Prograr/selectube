@@ -64,7 +64,7 @@ class AppController extends Controller {
             $fb_user = $this->Connect->user();
 //                debug($fb_user);
         } catch (FacebookApiException $e) {
-            $debug($e);
+            debug($e);
         }
         if (!$this->Auth->loggedIn() && $fb_user != null && !isset($fb_user['error_code'])) {
             $this->loadModel('User');
@@ -104,7 +104,6 @@ class AppController extends Controller {
         ));
 
         if(!empty($exists)){
-//            $this->log("Utilisateur existant");
             // do however you want to handle your update or whatever. Just make sure you fill in $FBComp->authUser['User'] which is used for authentication
             $this->Connect->authUser = $exists;
             $this->Connect->authUser['User']['facebook_id'] = $this->Connect->user('id');
@@ -117,9 +116,8 @@ class AppController extends Controller {
         }
         else{
             // continue creating new entry
-//            $this->log("Création");
             $this->Connect->authUser['User']['email'] = $this->Connect->user('email');
-            $this->Connect->authUser['User']['pseudo'] = $this->Connect->user('username');
+            $this->Connect->authUser['User']['pseudo'] = $this->Connect->user('name');
             $this->Connect->authUser['User']['created'] = gmdate("Y-m-d H:i:s");
             $this->Connect->authUser['User']['facebook_url'] = $this->Connect->user('link');
             $this->Connect->authUser['User']['facebook_id'] = $this->Connect->user('id');

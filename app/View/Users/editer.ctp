@@ -5,20 +5,6 @@
         <h2><?php echo __('Modifier mes informations'); ?></h2>
 
         <div class="control-group">
-            <?php echo $this->Form->label('nom', 'nom', array('class' => 'control-label')); ?>
-            <div class="controls">
-                <?php echo $this->Form->input('nom', array('class' => 'span12')); ?>
-            </div><!-- .controls -->
-        </div><!-- .control-group -->
-
-        <div class="control-group">
-            <?php echo $this->Form->label('prenom', 'prenom', array('class' => 'control-label')); ?>
-            <div class="controls">
-                <?php echo $this->Form->input('prenom', array('class' => 'span12')); ?>
-            </div><!-- .controls -->
-        </div><!-- .control-group -->
-
-        <div class="control-group">
             <?php echo $this->Form->label('pseudo', 'pseudo', array('class' => 'control-label')); ?>
             <div class="controls">
                 <?php echo $this->Form->input('pseudo', array('class' => 'span12')); ?>
@@ -35,7 +21,7 @@
         <div class="control-group">
             <?php echo $this->Form->label('password', 'Mot de passe actuel', array('class' => 'control-label')); ?>
             <div class="controls">
-                <?php echo $this->Form->input('password', array('class' => 'span12')); ?>
+                <?php echo $this->Form->input('password', array('class' => 'span12', 'value'=>'')); ?>
             </div><!-- .controls -->
         </div><!-- .control-group -->
 

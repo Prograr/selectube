@@ -4,8 +4,29 @@
     <p>
         <strong>Catégorie : </strong>
         <?php echo $this->Html->link($artiste['Categorie']['titre'], array('controller' => 'categories', 'action' => 'voir', $artiste['Categorie']['id']), array('class' => '')); ?>
-
     </p>
+    
+    
+    <?php if (isset($artiste['Artiste']['pays'])){ ?>
+    <p>
+        <strong><?php echo __('Pays'); ?> : </strong>
+        <?php echo h($artiste['Artiste']['pays']); ?>
+    </p>
+    <?php } ?>
+    
+    <?php if (isset($artiste['Artiste']['ville'])){ ?>
+    <p>
+        <strong><?php echo __('Ville'); ?> : </strong>
+        <?php echo h($artiste['Artiste']['ville']); ?>
+    </p>
+    <?php } ?>
+    
+    <?php if (isset($artiste['Artiste']['naissance'])){ ?>
+    <p>
+        <strong><?php echo __('Naissance'); ?> : </strong>
+        <?php echo h($this->Time->format('d/m/Y', $artiste['Artiste']['naissance'])); ?>
+    </p>
+    <?php } ?>
     
 </div><!-- .view -->
 

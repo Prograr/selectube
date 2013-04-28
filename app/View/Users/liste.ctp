@@ -19,7 +19,7 @@
                 <td><?php echo h($user['User']['role']); ?>&nbsp;</td>
                 <td><?php echo h($user['User']['created']); ?>&nbsp;</td>
                 <td class="actions">
-                    <?php echo $this->Html->link(__('Voir'), array('action' => 'voir', $user['User']['id']), array('class' => 'btn btn-mini')); ?>
+                    <?php echo $this->Html->link(__('Voir'), array('action' => 'profil', $user['User']['id']), array('class' => 'btn btn-mini')); ?>
                     <?php echo $this->Html->link(__('Modifier'), array('action' => 'editer', $user['User']['id']), array('class' => 'btn btn-mini')); ?>
                 </td>
             </tr>
@@ -29,7 +29,7 @@
     <p><small>
             <?php
             echo $this->Paginator->counter(array(
-                'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
+                'format' => __('Page {:page} sur {:pages}, affichage de {:current} selecteurs sur un total de {:count}, utilisateurs {:start} à {:end}')
             ));
             ?>			</small></p>
 

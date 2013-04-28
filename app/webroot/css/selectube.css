@@ -22,6 +22,9 @@ body{
 .input-append, .input-prepend {
     display: block;
 }
+.input-append input, .input-prepend input {
+    height: 30px;
+}
 
 div.input-prepend input.add-on, div.input-append input.add-on{
     /*padding: 14px;*/
@@ -34,7 +37,7 @@ div.input-prepend input.add-on, div.input-append input.add-on{
 
 label{
     margin-bottom: 5px;
-    margin-top: 5px;
+    /*margin-top: 5px;*/
 }
 .add-on label, label.add-on{
     margin-top: 0px;
@@ -206,4 +209,21 @@ table#champsRelies{
 }
 #inscriptionClassique{
     float: left;
+}
+.musiques.form .input-append a.btn{
+    padding-top: 7px;
+    padding-bottom: 1px;
+}
+#musique-related{
+    margin:0; 
+    min-height: 60px;
+}
+.modal .add-on label{
+    margin-top: 4px;
+}
+.modal select{
+    width: auto;
+}
+.modal textarea{
+    width: 100%;
 }

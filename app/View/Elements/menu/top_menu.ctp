@@ -47,12 +47,11 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <?php 
+                        <?php
                         $fb_avatar = "<i class='icon-user'></i> ";
                         if(isset($facebook_id)) 
-                            $fb_avatar = $this->Facebook->picture($facebook_id, array('size' => 'square', 'width' => '18px', 'style'=>'padding:0px;'));
-                        ?>
-                        <?php
+                            $fb_avatar = $this->Facebook->picture($facebook_id, array('size' => 'square','facebook-logo' => false, 'width' => '32px', 'style'=>'float:left; margin-top: -5px; margin-right: 10px;'));
+              
                         if ($this->Session->read('Auth.User')) //SI  CONNECTE
                             echo "<span id='menu_moncompte'>".$fb_avatar." ".$this->Session->read('Auth.User.pseudo')."</span>";
                         else

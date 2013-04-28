@@ -53,59 +53,38 @@ class MusiquesController extends AppController {
             
             $this->Musique->create();
             
-            if (isset($this->request->data['Musique']['categorie']) && $this->request->data['Musique']['categorie'] != ""){
-                $categorie = $this->Musique->Categorie->findByTitre($this->request->data['Musique']['categorie']);
-                if ($categorie == null){
+            $categorieId = $this->request->data['Musique']['categorie_id'];
+            if ($this->request->data['Musique']['categorie'] != ""){
+                if ($this->request->data['Musique']['categorie_id'] == 0){
                     $this->Musique->Categorie->create(array(
                         "user_id" => $this->Session->read("Auth.User.id"),
                         "titre" => $this->request->data['Musique']['categorie']
                     ));
-                    
                     $this->Musique->Categorie->save();
                     $categorieId = $this->Musique->Categorie->id;
-                }else{
-                    $categorieId = $categorie['Categorie']['id'];
                 }
-                $this->request->data['Musique']['categorie_id'] = $categorieId;
-            }else{
-                $this->request->data['Musique']['categorie_id'] = 1;
             }
             
-            if (isset($this->request->data['Musique']['artiste']) && $this->request->data['Musique']['artiste'] != ""){
-                $artiste = $this->Musique->Artiste->findByNom($this->request->data['Musique']['artiste']);
-                if ($artiste == null){
+            $artisteId = $this->request->data['Musique']['artiste_id'];
+            if ($this->request->data['Musique']['artiste'] != ""){
+                if ($this->request->data['Musique']['artiste_id'] == 0){
                     $this->Musique->Artiste->create(array(
                         "user_id" => $this->Session->read("Auth.User.id"),
-                        "nom" => $this->request->data['Musique']['artiste'],
-                        "categorie_id" => $categorieId
+                        "nom" => $this->request->data['Musique']['artiste']
                     ));
                     $this->Musique->Artiste->save();
                     $artisteId = $this->Musique->Artiste->id;
-                }else{
-                    $artisteId = $artiste['Artiste']['id'];
                 }
-                $this->request->data['Musique']['artiste_id'] = $artisteId;
-            }else{
-                $this->request->data['Musique']['artiste_id'] = 1;
             }
             
-            if (isset($this->request->data['Musique']['album']) && $this->request->data['Musique']['album'] != ""){
-                $album = $this->Musique->Album->findByTitre($this->request->data['Musique']['album']);
-                if ($album == null){
+            if ($this->request->data['Musique']['album'] != ""){
+                if ($this->request->data['Musique']['album_id'] == 0){
                     $this->Musique->Album->create(array(
                         "user_id" => $this->Session->read("Auth.User.id"),
-                        "titre" => $this->request->data['Musique']['album'],
-                        "categorie_id" => $categorieId,
-                        "artiste_id" => $artisteId
+                        "titre" => $this->request->data['Musique']['album']
                     ));
                     $this->Musique->Album->save();
-                    $albumId = $this->Musique->Album->id;
-                }else{
-                    $albumId = $album['Album']['id'];
                 }
-                $this->request->data['Musique']['album_id'] = $albumId;
-            }else {
-                $this->request->data['Musique']['album_id'] = 1;
             }
             
             if ($this->Musique->save($this->request->data)) {

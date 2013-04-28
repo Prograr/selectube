@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
     facebook_url VARCHAR(255),
     score SMALLINT DEFAULT 1,
     `role` VARCHAR(20) NOT NULL DEFAULT 'normal',
+    actif BOOLEAN DEFAULT false,
     created DATETIME DEFAULT NULL,
     lastconnect DATETIME DEFAULT NULL,
     PRIMARY KEY (id)
@@ -24,9 +25,9 @@ CREATE TABLE IF NOT EXISTS categories (
     modified DATETIME DEFAULT NULL,
     PRIMARY KEY (id),
     INDEX (user_id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     INDEX (parent_id),
-    FOREIGN KEY (parent_id) REFERENCES categories(id)
+    FOREIGN KEY (parent_id) REFERENCES categories(id) ON DELETE CASCADE
 )ENGINE = INNODB;
 
 CREATE TABLE IF NOT EXISTS artistes (
@@ -43,16 +44,16 @@ CREATE TABLE IF NOT EXISTS artistes (
     modified DATETIME DEFAULT NULL,
     PRIMARY KEY (id),
     INDEX (user_id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     INDEX (categorie_id),
-    FOREIGN KEY (categorie_id) REFERENCES categories(id)
+    FOREIGN KEY (categorie_id) REFERENCES categories(id) ON DELETE CASCADE
 )ENGINE = INNODB;
 
 CREATE TABLE IF NOT EXISTS albums (
     id INT UNSIGNED AUTO_INCREMENT,
     titre VARCHAR(64) NOT NULL,
     artiste_id INT UNSIGNED,
-    annee DATE,
+    sortie DATE,
     jaquette VARCHAR(255) DEFAULT NULL,
     categorie_id INT UNSIGNED,
     user_id INT UNSIGNED,
@@ -60,11 +61,11 @@ CREATE TABLE IF NOT EXISTS albums (
     modified DATETIME DEFAULT NULL,
     PRIMARY KEY (id),
     INDEX (user_id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     INDEX (artiste_id),
-    FOREIGN KEY (artiste_id) REFERENCES artistes(id),
+    FOREIGN KEY (artiste_id) REFERENCES artistes(id) ON DELETE CASCADE,
     INDEX (categorie_id),
-    FOREIGN KEY (categorie_id) REFERENCES categories(id)
+    FOREIGN KEY (categorie_id) REFERENCES categories(id) ON DELETE CASCADE
 )ENGINE = INNODB;
 
 CREATE TABLE IF NOT EXISTS musiques (
@@ -81,13 +82,13 @@ CREATE TABLE IF NOT EXISTS musiques (
     modified DATETIME DEFAULT NULL,
     PRIMARY KEY (id),
     INDEX (user_id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     INDEX (artiste_id),
-    FOREIGN KEY (artiste_id) REFERENCES artistes(id),
+    FOREIGN KEY (artiste_id) REFERENCES artistes(id) ON DELETE CASCADE,
     INDEX (album_id),
-    FOREIGN KEY (album_id) REFERENCES albums(id),
+    FOREIGN KEY (album_id) REFERENCES albums(id) ON DELETE CASCADE,
     INDEX (categorie_id),
-    FOREIGN KEY (categorie_id) REFERENCES categories(id)
+    FOREIGN KEY (categorie_id) REFERENCES categories(id) ON DELETE CASCADE
 )ENGINE = INNODB;
 
 -- CREATE TABLE IF NOT EXISTS videos (
@@ -102,9 +103,9 @@ CREATE TABLE IF NOT EXISTS musiques (
 --     modified DATETIME DEFAULT NULL,
 --     PRIMARY KEY (id),
 --     INDEX (user_id),
---     FOREIGN KEY (user_id) REFERENCES users(id),
+--     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
 --     INDEX (categorie_id),
---     FOREIGN KEY (categorie_id) REFERENCES categories(id)
+--     FOREIGN KEY (categorie_id) REFERENCES categories(id) ON DELETE CASCADE
 -- )ENGINE = INNODB;
 
 -- CREATE TABLE IF NOT EXISTS followers (
@@ -114,9 +115,9 @@ CREATE TABLE IF NOT EXISTS musiques (
 --     created DATETIME DEFAULT NULL,
 --     PRIMARY KEY (id),
 --     INDEX (suivi_id),
---     FOREIGN KEY (suivi_id) REFERENCES users(id),
+--     FOREIGN KEY (suivi_id) REFERENCES users(id) ON DELETE CASCADE,
 --     INDEX (suiveur_id),
---     FOREIGN KEY (suiveur_id) REFERENCES users(id)
+--     FOREIGN KEY (suiveur_id) REFERENCES users(id) ON DELETE CASCADE
 -- )ENGINE = INNODB;
 
 -- CREATE TABLE IF NOT EXISTS favoris (
@@ -127,7 +128,7 @@ CREATE TABLE IF NOT EXISTS musiques (
 --     created DATETIME DEFAULT NULL,
 --     PRIMARY KEY (id),
 --     INDEX (user_id),
---     FOREIGN KEY (user_id) REFERENCES users(id)
+--     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 -- )ENGINE = INNODB;
 
 -- CREATE TABLE IF NOT EXISTS sites (
@@ -142,9 +143,9 @@ CREATE TABLE IF NOT EXISTS musiques (
 --     modified DATETIME DEFAULT NULL,
 --     PRIMARY KEY (id),
 --     INDEX (user_id),
---     FOREIGN KEY (user_id) REFERENCES users(id),
+--     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
 --     INDEX (categorie_id),
---     FOREIGN KEY (categorie_id) REFERENCES categories(id)
+--     FOREIGN KEY (categorie_id) REFERENCES categories(id) ON DELETE CASCADE
 -- )ENGINE = INNODB;
 
 -- CREATE TABLE IF NOT EXISTS notes (
@@ -157,7 +158,7 @@ CREATE TABLE IF NOT EXISTS musiques (
 --     modified DATETIME DEFAULT NULL,
 --     PRIMARY KEY (id),
 --     INDEX (user_id),
---     FOREIGN KEY (user_id) REFERENCES users(id)
+--     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 -- )ENGINE = INNODB;
 
 -- CREATE TABLE IF NOT EXISTS moderations (
@@ -170,7 +171,7 @@ CREATE TABLE IF NOT EXISTS musiques (
 --     modified DATETIME DEFAULT NULL,
 --     PRIMARY KEY (id),
 --     INDEX (user_id),
---     FOREIGN KEY (user_id) REFERENCES users(id)
+--     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 -- )ENGINE = INNODB;
 
 -- CREATE TABLE IF NOT EXISTS messages (
@@ -183,7 +184,7 @@ CREATE TABLE IF NOT EXISTS musiques (
 --     created DATETIME DEFAULT NULL,
 --     PRIMARY KEY (id),
 --     INDEX (user_id),
---     FOREIGN KEY (user_id) REFERENCES users(id),
+--     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
 --     INDEX (destinataire_id),
---     FOREIGN KEY (destinataire_id) REFERENCES users(id)
+--     FOREIGN KEY (destinataire_id) REFERENCES users(id) ON DELETE CASCADE
 -- )ENGINE = INNODB;

@@ -12,7 +12,7 @@
             <?php echo $this->Form->label('url', "Adresse du lien"); ?>
             <div class="input-prepend input-append">
                 <span class="add-on"><label for="inputUrlYoutube"><i class="icon-music"></i>&nbsp;</label></span>
-                <?php echo $this->Form->input('url', array('id' => 'inputUrlYoutube', 'class' => '', 'label' => false, 'div' => false, 'placeholder' => 'Ex : https://www.youtube.com/watch?v=eFzfTh6dGd5')); ?>
+                <?php echo $this->Form->input('url', array('id' => 'inputUrlYoutube', 'class' => '', 'label' => false, 'div' => false, 'placeholder' => 'Ex : https://www.youtube.com/watch?v=XXXXXXXXXXX')); ?>
                 <button class="btn" type="button" id="getYoutubeInfos"><i class="icon-download icon-large"></i>&nbsp;</button>
             </div>
         </div>
@@ -26,22 +26,34 @@
         <?php echo $this->Form->input('titre', array('class' => 'span12', 'label' => '<i class="icon-file"></i> Titre')); ?>
 
         <?php echo $this->Form->input('description', array('class' => 'span12', 'label' => '<i class="icon-pencil"></i> Description', 'type' => 'textarea')); ?>
-
-        <table class="span12" id="champsRelies">
-            <tr>
-                <td>
-                    <?php echo $this->Form->input('categorie', array('class' => 'span12', 'label' => '<i class="icon-flag"></i> Catégorie', 'type' => 'text', 'autocomplete' => 'off')); ?>
-                </td>
-                <td>
-                    <?php echo $this->Form->input('artiste', array('class' => 'span12', 'label' => '<i class="icon-star"></i> Artiste / Groupe', 'type' => 'text', 'autocomplete' => 'off')); ?>
-                </td>
-                <td>
-                    <?php echo $this->Form->input('album', array('class' => 'span12', 'label' => '<i class="icon-headphones"></i> Album', 'type' => 'text', 'autocomplete' => 'off')); ?>
-                </td>
-            </tr>
-        </table>
-
-        <?php echo $this->Form->input('tags', array('class' => 'span12', 'label' => '<i class="icon-tags"></i> Mots-clés (séparer par des virgules)')); ?>
+        <div id='musique-related'>
+            <table class="span12" id="champsRelies">
+                <tr>
+                    <td class='span4'>
+                        <div class='input-append span12'>
+                            <?php echo $this->Form->input('categorie', array('class' => 'span10', 'label' => '<i class="icon-flag"></i> Catégorie', 'type' => 'text', 'autocomplete' => 'off', 'div' => false)); ?>
+                            <a href='#' data-toggle="modal" data-target="#categorieModal" class='btn add-on' id='icon-edit-categorie'><i class='icon-plus-sign'></i> </a>
+                            <?php echo $this->Form->hidden('categorie_id', array('value' => '0')); ?>
+                        </div>
+                    </td>
+                    <td class='span4'>
+                        <div class='input-append span12'>
+                            <?php echo $this->Form->input('artiste', array('class' => 'span10', 'label' => '<i class="icon-star"></i> Artiste / Groupe', 'type' => 'text', 'autocomplete' => 'off', 'div' => false)); ?>
+                            <a href='#' data-toggle="modal" data-target="#artisteModal" class='btn add-on' id='icon-edit-artiste'><i class='icon-plus-sign'></i> </a>
+                            <?php echo $this->Form->hidden('artiste_id', array('value' => '0')); ?>
+                        </div>
+                    </td>
+                    <td class='span4'>
+                        <div class='input-append span12'>
+                            <?php echo $this->Form->input('album', array('class' => 'span10', 'label' => '<i class="icon-headphones"></i> Album', 'type' => 'text', 'autocomplete' => 'off', 'div' => false)); ?>
+                            <a href='#' data-toggle="modal" data-target="#albumModal" class='btn add-on' id='icon-edit-album'><i class='icon-plus-sign'></i> </a>
+                            <?php echo $this->Form->hidden('album_id', array('value' => '0')); ?>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <?php echo $this->Form->input('tags', array('class' => 'span12', 'label' => '<i class="icon-tags"></i> Mots-clés (séparer par des virgules)', 'div' => array('style'=>'margin-top:5px;'))); ?>
 
         <?php echo $this->Form->button('<i class="icon-ok-sign"></i> Partager', array('class' => 'btn btn-large btn-primary pull-right', 'id'=>'bouton_partager', 'type' => 'submit')); ?>
         <?php echo $this->Form->end(); ?>

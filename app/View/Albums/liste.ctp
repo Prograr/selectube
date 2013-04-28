@@ -18,7 +18,7 @@
                 <td>
                     <?php echo $this->Html->link($album['Artiste']['nom'], array('controller' => 'artistes', 'action' => 'view', $album['Artiste']['id'])); ?>
                 </td>
-                <td><?php echo h($album['Album']['annee']); ?>&nbsp;</td>
+                <td><?php echo h($album['Album']['sortie']); ?>&nbsp;</td>
                 <td>
                     <?php echo $this->Html->link($album['Categorie']['id'], array('controller' => 'categories', 'action' => 'view', $album['Categorie']['id'])); ?>
                 </td>
@@ -34,7 +34,7 @@
     <p><small>
             <?php
             echo $this->Paginator->counter(array(
-                'format' => __('Page {:page} / {:pages}, {:current} élements sur un total de {:count}, musiques {:start} à {:end}.')
+                'format' => __('Page {:page} / {:pages}, {:current} albums sur un total de {:count}, éléments {:start} à {:end}.')
             ));
             ?>			</small></p>
 

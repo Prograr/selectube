@@ -18,16 +18,19 @@ class AlbumsController extends AppController {
         $this->Album->recursive = 0;
         $this->set('albums', $this->paginate());
     }
-
+    
     /**
      * listeJson method
      *
-     * @return liste albums au format json pour autocomplete
+     * @return json albums au format json pour autocomplete
      */
     public function listeJson($query=null) {
+        if ($query==null){
+            $query = $_GET['query'];
+        }
         $albums = $this->Album->find('list', array(
             'fields' => array('titre'),
-            'conditions' => array('Album.titre LIKE' => "%".$_GET['query']."%")));
+            'conditions' => array('Album.titre LIKE' => "%".$query."%")));
         $liste = array();
         foreach ($albums as $key => $value) {
             $liste[] = $value;
@@ -35,6 +38,93 @@ class AlbumsController extends AppController {
         echo json_encode($liste);
         die;
     }
+    
+    /**
+     * listeJson method
+     *
+     * @return json albums au format json pour autocomplete
+     */
+    public function listeAllJson() {
+        
+        $albums = $this->Album->find('all', array(
+            'fields' => array('id','titre'),
+            'recursive' => -1
+            ));
+        $liste = array();
+        foreach ($albums as $value) {
+            $liste[] = array(
+                "id" => $value['Album']['id'],
+                "titre" => $value['Album']['titre']
+            );
+        }
+        echo json_encode($liste);
+        die;
+    }
+    
+    /**
+     * existRest method
+     *
+     * @return false si l'album n'existe pas, son id sinon
+     */
+    public function existRest($query=null) {
+        if ($query==null){
+            $query = $_GET['query'];
+        }
+        $exist = $this->Album->find('first', array(
+            'recursive' => -1,
+            'fields' => array('id'),
+            'conditions' => array('Album.titre' => $query)));
+        if ($exist == null)
+            echo "false";
+        else
+            echo $exist['Album']['id'];
+        exit;
+    }
+    
+    /**
+     * ajouter method
+     *
+     * @return void
+     */
+    public function editRest() {
+        unset($this->request->data['Album']['categorie']);
+        unset($this->request->data['Album']['artiste']);
+        
+        $this->request->data['Album']['user_id'] = $this->Session->read("Auth.User.id");
+        if ($this->request->data['Album']['id'] == 0
+                || !$this->Album->exists($this->request->data['Album']['id'])) { //Création
+            if ($this->request->is('post')) {
+                unset($this->request->data['Album']['id']);
+                $this->Album->create($this->request->data['Album']);
+                if ($this->Album->save()) {
+                    echo $this->Album->id;
+                } else {
+                    echo 'KO';
+                }
+            }
+        }else{ //Modification
+            if ($this->request->is('post') || $this->request->is('put')) {
+                $myAlbum = $this->Album->find('count', array(
+                    'recursive' => -1,
+                    'conditions' => array(
+                        'user_id' => $this->Session->read("Auth.User.id"),
+                        'id' => $this->data['Album']['id']
+                    )
+                ));
+                if ($myAlbum != 0 || $this->Session->read("Auth.User.role") == 'admin'){
+                    $this->Album->id = $this->data['Album']['id'];
+                    if ($this->Album->save($this->request->data['Album'])) {
+                        echo $this->Album->id;
+                    } else {
+                        echo 'KO';
+                    }
+                }
+            }
+        }
+        exit;
+    }
+    
+    
     /**
      * voir method
      *

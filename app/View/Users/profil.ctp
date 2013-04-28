@@ -38,6 +38,9 @@
         </tr>			
     </table><!-- .table table-striped table-bordered -->
 
+    <?php if ($user['User']['id'] == $this->Session->read('Auth.User.id')){
+       echo  $this->Html->link("Modifier",array('action'=>'editer', $this->Session->read('Auth.User.id')),array('class'=>'btn', 'style'=>'float;'));
+    }?>
 </div><!-- .view -->
 
 <div class="related">
