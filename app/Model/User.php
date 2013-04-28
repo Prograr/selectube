@@ -104,7 +104,6 @@ class User extends AppModel {
         'role' => array(
             'valid' => array(
                 'rule' => array('inList', array('admin', 'normal')),
-                'message' => 'Merci de rentrer un rôle valide',
                 'allowEmpty' => false
             )
         ),
@@ -128,6 +127,19 @@ class User extends AppModel {
      * @var array
      */
     public $hasMany = array(
+        'Musique' => array(
+            'className' => 'Musique',
+            'foreignKey' => 'user_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        ),
         'Album' => array(
             'className' => 'Album',
             'foreignKey' => 'user_id',
@@ -167,97 +179,97 @@ class User extends AppModel {
             'finderQuery' => '',
             'counterQuery' => ''
         ),
-        'Favori' => array(
-            'className' => 'Favori',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
-        'Message' => array(
-            'className' => 'Message',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
-        'Moderation' => array(
-            'className' => 'Moderation',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
-        'Musique' => array(
-            'className' => 'Musique',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
-        'Note' => array(
-            'className' => 'Note',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
-        'Site' => array(
-            'className' => 'Site',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        ),
-        'Video' => array(
-            'className' => 'Video',
-            'foreignKey' => 'user_id',
-            'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
-        )
+//        'Commentaire' => array(
+//            'className' => 'Commentaire',
+//            'foreignKey' => 'user_id',
+//            'dependent' => false,
+//            'conditions' => '',
+//            'fields' => '',
+//            'order' => '',
+//            'limit' => '',
+//            'offset' => '',
+//            'exclusive' => '',
+//            'finderQuery' => '',
+//            'counterQuery' => ''
+//        ),
+//        'Favori' => array(
+//            'className' => 'Favori',
+//            'foreignKey' => 'user_id',
+//            'dependent' => false,
+//            'conditions' => '',
+//            'fields' => '',
+//            'order' => '',
+//            'limit' => '',
+//            'offset' => '',
+//            'exclusive' => '',
+//            'finderQuery' => '',
+//            'counterQuery' => ''
+//        ),
+//        'Message' => array(
+//            'className' => 'Message',
+//            'foreignKey' => 'user_id',
+//            'dependent' => false,
+//            'conditions' => '',
+//            'fields' => '',
+//            'order' => '',
+//            'limit' => '',
+//            'offset' => '',
+//            'exclusive' => '',
+//            'finderQuery' => '',
+//            'counterQuery' => ''
+//        ),
+//        'Moderation' => array(
+//            'className' => 'Moderation',
+//            'foreignKey' => 'user_id',
+//            'dependent' => false,
+//            'conditions' => '',
+//            'fields' => '',
+//            'order' => '',
+//            'limit' => '',
+//            'offset' => '',
+//            'exclusive' => '',
+//            'finderQuery' => '',
+//            'counterQuery' => ''
+//        ),
+//        'Note' => array(
+//            'className' => 'Note',
+//            'foreignKey' => 'user_id',
+//            'dependent' => false,
+//            'conditions' => '',
+//            'fields' => '',
+//            'order' => '',
+//            'limit' => '',
+//            'offset' => '',
+//            'exclusive' => '',
+//            'finderQuery' => '',
+//            'counterQuery' => ''
+//        ),
+//        'Site' => array(
+//            'className' => 'Site',
+//            'foreignKey' => 'user_id',
+//            'dependent' => false,
+//            'conditions' => '',
+//            'fields' => '',
+//            'order' => '',
+//            'limit' => '',
+//            'offset' => '',
+//            'exclusive' => '',
+//            'finderQuery' => '',
+//            'counterQuery' => ''
+//        ),
+//        'Video' => array(
+//            'className' => 'Video',
+//            'foreignKey' => 'user_id',
+//            'dependent' => false,
+//            'conditions' => '',
+//            'fields' => '',
+//            'order' => '',
+//            'limit' => '',
+//            'offset' => '',
+//            'exclusive' => '',
+//            'finderQuery' => '',
+//            'counterQuery' => ''
+//        )
     );
 
     public function beforeSave($options = array()) {
