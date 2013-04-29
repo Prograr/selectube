@@ -60,19 +60,25 @@ class AppController extends Controller {
             $fb_user = $this->Connect->user();
             $this->set('facebookUser', $fb_user);
             $this->set('facebook_id', $fb_user['id']);
+//            $this->log($fb_user);
         } catch (FacebookApiException $e) {
-            $this->log($e);
+            $this->log('FacebookApiException : '.$e);
         }
-        if (!$this->Auth->loggedIn() && $fb_user != null && !isset($fb_user['error_code'])) {
-            $this->loadModel('User');
-            $this->User->recursive = -1;
-            if ($user = $this->User->findByFacebookId($fb_user['id']) 
-                    || $user = $this->User->findByEmail($fb_user['email'])){
-                $this->Auth->login($user['User']);
-            }
-        }else if($this->Auth->loggedIn()){
-            $this->set('user', $this->Auth->user());
-        }
+//        if (!$this->Auth->loggedIn() && $fb_user != null && !isset($fb_user['error_code'])) {
+//            $this->loadModel('User');
+//            $this->User->recursive = -1;
+//            $user = $this->User->find('first', array('recursive' => -1, 'conditions' => array(
+//                'OR' => array( 'email' => $fb_user['email'], 'facebook_id' => $fb_user['id'] )
+//            )));
+//            if (!empty($user)){
+//                $this->log('login selectube');
+////                $this->log($user);
+//                $this->Auth->login($user['User']);
+//                $this->log("login :".$this->Session->read('Auth.User.id'));
+//            }
+//        }else if($this->Auth->loggedIn()){
+//            $this->set('user', $this->Auth->user());
+//        }
     }
 
     public function isAuthorized($user) {
@@ -80,55 +86,62 @@ class AppController extends Controller {
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
-
         // Refus par défaut
         return false;
     }
 
     function beforeFacebookSave() {
+        try {
+            $fb_user = $this->Connect->user();
+        } catch (FacebookApiException $e) {
+            $this->log('FacebookApiException : '.$e);
+        }
         $this->loadModel('User');
         $exists = $this->User->find('first', array(
             'conditions' => array(
                 'OR' => array(
-                    'email' => $this->Connect->user('email')
+                    'email' => $fb_user['email'],
+                    'facebook_id' => $fb_user['id']
                 )
             )
         ));
 
         if(!empty($exists)){
-            // do however you want to handle your update or whatever. Just make sure you fill in $FBComp->authUser['User'] which is used for authentication
+            $this->log('Mise à jour utilisateur à partir des données Facebook');
+//            // do however you want to handle your update or whatever. Just make sure you fill in $FBComp->authUser['User'] which is used for authentication
             $this->Connect->authUser = $exists;
             $this->Connect->authUser['User']['facebook_id'] = $this->Connect->user('id');
             $this->Connect->authUser['User']['facebook_url'] = $this->Connect->user('link');
+//            $this->Connect->authUser['User']['pseudo'] = $this->Connect->user('name');
             $this->Connect->authUser['User']['lastconnect'] = gmdate("Y-m-d H:i:s");
-
-            // do this if you want to update the record
-            $this->id = $exists['User'][$this->primaryKey];
-            $this->save($this->Connect->authUser);
-
+//
+//            // do this if you want to update the record
+            $this->User->id = $exists['User']['id'];
+            $this->User->save($this->Connect->authUser);
+//
+            $this->Auth->login($this->Connect->authUser['User']);
             return false; // return false to stop creating new entry
         }
         else{
-            // continue creating new entry
+            $this->log('Création utilisateur avec les données Facebook');
+//            // continue creating new entry
             $this->Connect->authUser['User']['email'] = $this->Connect->user('email');
             $this->Connect->authUser['User']['pseudo'] = $this->Connect->user('name');
             $this->Connect->authUser['User']['created'] = gmdate("Y-m-d H:i:s");
             $this->Connect->authUser['User']['lastconnect'] = gmdate("Y-m-d H:i:s");
             $this->Connect->authUser['User']['facebook_url'] = $this->Connect->user('link');
             $this->Connect->authUser['User']['facebook_id'] = $this->Connect->user('id');
-            return true; // return true to create new entry
+            $this->User->create($this->Connect->authUser);
+            $this->User->save();
+            $this->Connect->authUser['User']['id'] = $this->User->id;
+            $this->Auth->login($this->Connect->authUser['User']);
+            return false; // return true to create new entry
         }
-        return true; //Must return true or will not save.
-    }
-
-    function beforeFacebookLogin($user) {
-        //Logic to happen before a facebook login
-//        $this->log($user);
     }
 
     function afterFacebookLogin() {
+        $this->log("update last connect");
         //Logic to happen after successful facebook login.
-//        $this->log("Facebook login. redirect");
         $this->loadModel('User');
         $this->User->id = $this->Session->read('Auth.User.id');
         $this->User->saveField('lastconnect', gmdate("Y-m-d H:i:s"));

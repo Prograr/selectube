@@ -1,5 +1,8 @@
 <div class="users form">
     <h2>Rejoindre la communauté</h2>
+    <?php
+    if (isset($facebookUser) && $facebookUser != null){
+    ?>
     <div id='inscriptionFacebook'>
         <h3>Inscription via Facebook</h3>
         <?php
@@ -10,9 +13,10 @@
             )); 
         ?>
     </div>
+    <?php } ?>
     <!--<div class="span1"></div>-->
     <div id="inscriptionClassique">
-        <h3>Inscription normale</h3>
+        <h3>Formulaire d'inscription</h3>
         <?php echo $this->Form->create(); ?>
         <fieldset>
             <?php

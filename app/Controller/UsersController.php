@@ -10,7 +10,7 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController {
 
     public function beforeFilter() {
-        parent::beforeFilter();
+//        parent::beforeFilter();
         $this->Auth->allow('inscription', 'creer', 'facebook');
     }
 
@@ -85,7 +85,12 @@ class UsersController extends AppController {
             }
         }
     }
-
+    function inscriptionFacebook(){
+        if($user = $this->Connect->registrationData()){
+            //We have a registered user, look at it and do something with it.
+            print_r($user);
+        }
+    }
     /**
      * edit method
      *
