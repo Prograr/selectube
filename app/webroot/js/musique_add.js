@@ -34,8 +34,10 @@ $(document).ready(function() {
     $("#getYoutubeInfos").click(getYoutubeInfos);
     
     $('#MusiquePartagerForm').submit(function(){
-        getYoutubeInfos();
-        return false;
+        if ($('#fieldset-infos-musique').css('display') === "none"){
+            getYoutubeInfos();
+            return false;
+        }
     });
     
     /*
