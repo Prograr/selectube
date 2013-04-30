@@ -13,7 +13,7 @@
 //    echo $this->Facebook->share(); 
     ?>
     </div>
-    <div id="playerYoutubeDescription">
+    <div id="playerYoutubeDescription" class="musique-meta">
         <strong><i class="icon-edit"></i> Description : </strong>
         <p><?php 
             echo $musique['Musique']['description']; 
@@ -21,22 +21,22 @@
     </div>
     <!--<div id="playerYoutubeUrl"><i class="icon-link"></i> Lien direct : <?php echo $this->Html->link($musique['Musique']['url'], $musique['Musique']['url']); ?></div>-->
     
-    <div id="playerYoutubeCategorie">
+    <div id="playerYoutubeCategorie" class="musique-meta">
         <strong><i class="icon-folder-open"></i> Catégorie : </strong>
                 <?php echo $this->Html->link($musique['Categorie']['titre'], array('controller' => 'categories', 'action' => 'voir', $musique['Categorie']['id']), array('class' => '')); ?>
     </div>
     
-    <div id="playerYoutubeArtiste">
+    <div id="playerYoutubeArtiste" class="musique-meta">
         <strong><i class="icon-star"></i> Artiste : </strong>
         <?php echo $this->Html->link($musique['Artiste']['nom'], array('controller' => 'artistes', 'action' => 'voir', $musique['Artiste']['id']), array('class' => '')); ?>
     </div>
     
-    <div id="playerYoutubeAlbum">
+    <div id="playerYoutubeAlbum" class="musique-meta">
         <strong><i class="icon-headphones"></i> Album : </strong>
         <?php echo $this->Html->link($musique['Album']['titre'], array('controller' => 'albums', 'action' => 'voir', $musique['Album']['id']), array('class' => '')); ?>
     </div>
     
-    <div id="playerYoutubeTags">
+    <div id="playerYoutubeTags" class="musique-meta">
         <strong><i class="icon-tags"></i> Mots-clés : </strong>
         <?php 
             if ($musique['Musique']['tags'] != ''){
@@ -51,7 +51,7 @@
         ?>
     </div>
     
-    <div id="playerYoutubeDate">
+    <div id="playerYoutubeDate" class="musique-meta">
                 <?php 
                 echo "<i class=\"icon-share-alt\"></i> Partagé le ".h($this->Html2->print_date($musique['Musique']['created']));
                 if ($musique['Musique']['created'] !== $musique['Musique']['modified'])
