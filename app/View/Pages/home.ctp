@@ -1,11 +1,12 @@
 <div class="hero-unit" id="home">
     <h1>Selectube</h1>
-    <p>Les meilleures musiques et vidéos youtube sélectionnées par un groupe très sélect de fins mélomans.</p>
-    <p>Appréciez le catalogue selectube et rejoignez l'équipe pour partager vos découvertes à vos amis et à la communauté.
+    <p>Groupe de partage de Musiques.</p>
+    <p>Découvrez et faites découvrir à vos amis vos meilleurs morceaux du moment</p>
+    <p>Plus vous êtes actif, plus vous profitez des privilèges</p> 
     <div class="container-fluid" id='boutons-accueil'>
         <div class="row-fluid">
             <div class="span4">
-                <a href="/musiques" class='lien-accueil' id="lien-musique">
+                <a href="/musiques" class='lien-accueil' id="lien-musique" data-toggle="popover" data-content="Musique">
                     <i class='icon-music icone-home'></i>
                 </a>
             </div>
