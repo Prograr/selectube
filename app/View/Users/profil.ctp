@@ -45,10 +45,10 @@
 
 <div class="related">
 
-    <?php if (!empty($user['Musique'])): ?>
+    <?php if (!empty($musiques)): ?>
         <h3><?php echo __('Musiques partagées'); ?></h3>
         <?php
-        foreach ($user['Musique'] as $musique) {
+        foreach ($musiques as $musique) {
             echo $this->Html2->media($musique);
         }
         ?>

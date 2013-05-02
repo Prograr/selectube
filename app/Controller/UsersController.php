@@ -32,8 +32,7 @@ class UsersController extends AppController {
      * @return void
      */
     public function profil($pseudo = null) {
-         $user = $this->User->find('first', array('recursive' => 2, 'conditions' => array(
-             'OR' => array('pseudo' => $pseudo, 'id' => $pseudo))));
+         $user = $this->User->findByIdOrPseudo($pseudo);
         
         if ($user == null) {
             throw new NotFoundException(__('Le sélecteur recherché est introuvable'));
