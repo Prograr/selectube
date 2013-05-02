@@ -19,6 +19,7 @@ $cakeDescription = __d('cake_dev', 'Selectube: Amitié-Partage');
 $connecte = ($this->Session->read('Auth.User.id') != null);
 
 ?>
+<!doctype html>
 <?= $this->Facebook->html(); ?>
     <head>
         <?php echo $this->Html->charset(); ?>
