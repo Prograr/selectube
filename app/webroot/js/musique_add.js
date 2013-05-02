@@ -34,7 +34,8 @@ $(document).ready(function() {
     $("#getYoutubeInfos").click(getYoutubeInfos);
     
     $('#MusiquePartagerForm').submit(function(){
-        if ($('#fieldset-infos-musique').css('display') === "none"){
+        if ($('#fieldset-infos-musique').is(":visible") ) {
+//        if ($('#fieldset-infos-musique').css('display') === "none"){
             getYoutubeInfos();
             return false;
         }
