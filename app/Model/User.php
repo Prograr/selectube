@@ -119,8 +119,6 @@ class User extends AppModel {
         ),
     );
 
-    //The Associations below have been created with all possible keys, those that are not needed can be removed
-
     /**
      * hasMany associations
      *
@@ -131,144 +129,61 @@ class User extends AppModel {
             'className' => 'Musique',
             'foreignKey' => 'user_id',
             'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
         ),
         'Album' => array(
             'className' => 'Album',
             'foreignKey' => 'user_id',
             'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
         ),
         'Artiste' => array(
             'className' => 'Artiste',
             'foreignKey' => 'user_id',
             'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
         ),
         'Category' => array(
             'className' => 'Category',
             'foreignKey' => 'user_id',
             'dependent' => false,
-            'conditions' => '',
-            'fields' => '',
-            'order' => '',
-            'limit' => '',
-            'offset' => '',
-            'exclusive' => '',
-            'finderQuery' => '',
-            'counterQuery' => ''
         ),
+        'Preference' => array(
+            'className' => 'Preference',
+            'foreignKey' => 'user_id',
+            'dependent' => true
+        )
 //        'Commentaire' => array(
 //            'className' => 'Commentaire',
 //            'foreignKey' => 'user_id',
-//            'dependent' => false,
-//            'conditions' => '',
-//            'fields' => '',
-//            'order' => '',
-//            'limit' => '',
-//            'offset' => '',
-//            'exclusive' => '',
-//            'finderQuery' => '',
-//            'counterQuery' => ''
+//            'dependent' => true,
 //        ),
 //        'Favori' => array(
 //            'className' => 'Favori',
 //            'foreignKey' => 'user_id',
-//            'dependent' => false,
-//            'conditions' => '',
-//            'fields' => '',
-//            'order' => '',
-//            'limit' => '',
-//            'offset' => '',
-//            'exclusive' => '',
-//            'finderQuery' => '',
-//            'counterQuery' => ''
+//            'dependent' => true,
 //        ),
 //        'Message' => array(
 //            'className' => 'Message',
 //            'foreignKey' => 'user_id',
 //            'dependent' => false,
-//            'conditions' => '',
-//            'fields' => '',
-//            'order' => '',
-//            'limit' => '',
-//            'offset' => '',
-//            'exclusive' => '',
-//            'finderQuery' => '',
-//            'counterQuery' => ''
 //        ),
 //        'Moderation' => array(
 //            'className' => 'Moderation',
 //            'foreignKey' => 'user_id',
-//            'dependent' => false,
-//            'conditions' => '',
-//            'fields' => '',
-//            'order' => '',
-//            'limit' => '',
-//            'offset' => '',
-//            'exclusive' => '',
-//            'finderQuery' => '',
-//            'counterQuery' => ''
+//            'dependent' => true,
 //        ),
 //        'Note' => array(
 //            'className' => 'Note',
 //            'foreignKey' => 'user_id',
 //            'dependent' => false,
-//            'conditions' => '',
-//            'fields' => '',
-//            'order' => '',
-//            'limit' => '',
-//            'offset' => '',
-//            'exclusive' => '',
-//            'finderQuery' => '',
-//            'counterQuery' => ''
 //        ),
 //        'Site' => array(
 //            'className' => 'Site',
 //            'foreignKey' => 'user_id',
 //            'dependent' => false,
-//            'conditions' => '',
-//            'fields' => '',
-//            'order' => '',
-//            'limit' => '',
-//            'offset' => '',
-//            'exclusive' => '',
-//            'finderQuery' => '',
-//            'counterQuery' => ''
 //        ),
 //        'Video' => array(
 //            'className' => 'Video',
 //            'foreignKey' => 'user_id',
 //            'dependent' => false,
-//            'conditions' => '',
-//            'fields' => '',
-//            'order' => '',
-//            'limit' => '',
-//            'offset' => '',
-//            'exclusive' => '',
-//            'finderQuery' => '',
-//            'counterQuery' => ''
 //        )
     );
 
