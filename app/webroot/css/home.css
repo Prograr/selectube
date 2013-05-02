@@ -28,12 +28,9 @@ h1 {
     text-decoration: none;
     text-shadow: 0px 0px 50px #777;
     color: #fff;
-/*    -webkit-transform: rotate(15deg);
-    -moz-transform: rotate(15deg);
-    -ms-transform: rotate(15deg);
-    -o-transform: rotate(15deg);
-    transform: rotate(15deg);*/
-    /*text-shadow: 0 0 4px white, 0 -5px 4px #FFFF33, 2px -10px 6px #FFDD33, -2px -15px 11px #FF8800, 2px -25px 18px #FF2200;*/
+}
+#lien-video, #lien-site {
+    opacity: 0.3;
 }
 .text-enflamme{
     -webkit-text-shadow: 0 0 4px white, 0 -5px 4px #FFFF33, 2px -10px 6px #FFDD33, -2px -15px 11px #FF8800, 2px -25px 18px #FF2200;
