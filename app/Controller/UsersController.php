@@ -32,7 +32,7 @@ class UsersController extends AppController {
      * @return void
      */
     public function profil($pseudo = null) {
-        if (is_int($pseudo)){
+        if (is_numeric($pseudo)){
             $user = $this->User->findById($pseudo);
         }else{
             $user = $this->User->findByPseudo($pseudo);
