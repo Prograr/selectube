@@ -10,8 +10,11 @@ root {
 
 body{
     padding-top: 40px;
-    /*background-color: #ccc;*/
-    /*background-image: url("../img/bg-black-linen.png");*/
+    background-color: #333;
+    background-image: url("../img/bg-black-linen.png");
+}
+#content{
+    background-color: white;
 }
 
 .input-prepend input.add-on, .input-append input.add-on {
