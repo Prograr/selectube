@@ -32,16 +32,14 @@ class UsersController extends AppController {
      * @return void
      */
     public function profil($pseudo = null) {
-        if (is_numeric($pseudo)){
-            $user = $this->User->findById($pseudo);
-        }else{
-            $user = $this->User->findByPseudo($pseudo);
-        }
+         $user = $this->User->find('first', array('recursive' => 2, 'conditions' => array(
+             'OR' => array('pseudo' => $pseudo, 'id' => $pseudo))));
+        
         if ($user == null) {
             throw new NotFoundException(__('Le sélecteur recherché est introuvable'));
         }
         $this->set('user', $user);
-        $this->set('musiques', $this->User->Musique->find('all', array('recursive' => -1,"conditions" => array('Musique.user_id' => $user['User']['id']))));
+        $this->set('musiques', $this->User->Musique->find('all', array('recursive' => 0,"conditions" => array('Musique.user_id' => $user['User']['id']))));
     }
 
     /**
