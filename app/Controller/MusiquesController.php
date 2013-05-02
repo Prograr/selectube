@@ -99,7 +99,7 @@ class MusiquesController extends AppController {
             
             if ($this->Musique->save($this->request->data)) {
                 $this->Session->setFlash(__('Merci de votre contribution'), 'flash/success');
-                $this->redirect(array('action' => 'voir', $this->Musique->id));
+                $this->redirect(array('action' => 'accueil'));
             } else {
                 $this->Session->setFlash(__('Un bug est survenu'));
             }
