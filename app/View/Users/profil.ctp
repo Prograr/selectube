@@ -45,7 +45,7 @@
 
 <div class="related">
 
-    <?php if (!empty($user['Musique'])): ?>
+    <?php if (!empty($musiques)): ?>
         <h3><?php echo __('Musiques partagées'); ?></h3>
         <?php
         foreach ($musiques as $musique) {

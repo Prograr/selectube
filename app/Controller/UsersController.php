@@ -41,9 +41,7 @@ class UsersController extends AppController {
             throw new NotFoundException(__('Le sélecteur recherché est introuvable'));
         }
         $this->set('user', $user);
-        App::import('Model', 'Musique');
-        $Musique = new Musique;
-        $this->set('musiques', $Musique->find('all', array("conditions" => array('Musique.user_id' => $user['User']['id']))));
+        $this->set('musiques', $this->User->Musique->find('all', array('recursive' => -1,"conditions" => array('Musique.user_id' => $user['User']['id']))));
     }
 
     /**
