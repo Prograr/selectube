@@ -14,6 +14,18 @@ CREATE TABLE IF NOT EXISTS users (
     PRIMARY KEY (id)
 )ENGINE = INNODB;
 
+CREATE TABLE IF NOT EXISTS user_preferences(
+    id INT UNSIGNED AUTO_INCREMENT,
+    user_id INT UNSIGNED,
+    name VARCHAR,
+    type BOOL,
+    value_int INT NULL,
+    value_str VARCHAR NULL,
+    PRIMARY KEY (id),
+    INDEX (user_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+)ENGINE = INNODB;
+
 CREATE TABLE IF NOT EXISTS categories (
     id INT UNSIGNED AUTO_INCREMENT,
     user_id INT UNSIGNED,
