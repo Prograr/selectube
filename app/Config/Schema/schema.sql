@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS albums (
 CREATE TABLE IF NOT EXISTS musiques (
     id INT UNSIGNED AUTO_INCREMENT,
     user_id INT UNSIGNED,
-    titre VARCHAR(64) NOT NULL,
+    titre VARCHAR(255) NOT NULL,
     description TEXT,
     artiste_id INT UNSIGNED default 1,
     album_id INT UNSIGNED default 1,
