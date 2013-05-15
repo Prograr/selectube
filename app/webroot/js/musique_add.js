@@ -33,11 +33,13 @@ $(document).ready(function() {
      */
     $("#getYoutubeInfos").click(getYoutubeInfos);
     
-    $('#MusiquePartagerForm').submit(function(){
-        if ($('#fieldset-infos-musique').is(":visible") ) {
-//        if ($('#fieldset-infos-musique').css('display') === "none"){
+    $('#MusiquePartagerForm').submit(function(e){
+        if ( $("#MusiqueTitre").val() === "" ) {
+            e.preventDefault();
             getYoutubeInfos();
             return false;
+        }else{
+            return true;
         }
     });
     
